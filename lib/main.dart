@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:teacher_app/redirect.dart';
 import 'package:teacher_app/screens/home_screen.dart';
 import 'package:teacher_app/states/login_state.dart';
 import 'package:teacher_app/states/user_state.dart';
@@ -27,7 +28,7 @@ class TeacherApp extends StatelessWidget {
             DefaultMaterialLocalizations.delegate,
             DefaultWidgetsLocalizations.delegate,
           ],
-          home: HomeScreen(),
+          home: Redirect(),
           routes: <String, WidgetBuilder>{
             '/home': (context) => HomeScreen(),
             // 'buyer_home': (context) => BuyerHomeScreen(),

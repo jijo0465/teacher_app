@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
+import 'package:teacher_app/components/digi_appbar.dart';
+import 'package:teacher_app/components/digi_menu_card.dart';
 import 'package:teacher_app/screens/login_screen.dart';
 import 'package:teacher_app/states/login_state.dart';
 
@@ -11,12 +13,22 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<LoginState>(
       builder: (BuildContext context, LoginState value, Widget child) {
-        if(value.status == Status.Unauthenticated){
+        if (value.status == Status.Unauthenticated) {
           return LoginScreen();
-        }
-        else{
+        } else {
           return Scaffold(
-            appBar: AppBar(title:Text('Teacher App')),
+            body: Container(
+              child: Column(
+                children: <Widget>[
+                  DigiAppbar(),
+                  DigiMenuCard(
+                      menuIcon: Icons.accessibility_new,
+                      title: 'Bus No',
+                      subtitle: '15',
+                      value: 'Track School Bus'),
+                ],
+              ),
+            ),
           );
         }
       },
