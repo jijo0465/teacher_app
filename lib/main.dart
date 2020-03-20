@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teacher_app/redirect.dart';
+import 'package:teacher_app/screens/attendance_screen.dart';
+import 'package:teacher_app/screens/bus_tracking_screen.dart';
+import 'package:teacher_app/screens/contact_parent_screen.dart';
 import 'package:teacher_app/screens/home_screen.dart';
+import 'package:teacher_app/screens/remark_screen.dart';
+import 'package:teacher_app/screens/reward_screen.dart';
+import 'package:teacher_app/screens/settings_screen.dart';
 import 'package:teacher_app/states/login_state.dart';
 import 'package:teacher_app/states/user_state.dart';
-
+import 'package:teacher_app/screens/upcoming_exam_screen.dart';
+import 'package:teacher_app/screens/update_student_profile.dart';
+import 'package:teacher_app/screens/update_from_parents.dart';
+import 'package:teacher_app/states/teacher_state.dart';
 void main() => runApp(TeacherApp());
 
 class TeacherApp extends StatelessWidget {
@@ -14,8 +23,8 @@ class TeacherApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider<LoginState>(
               create: (_) => LoginState.instance()),
-          ChangeNotifierProvider<UserState>(
-              create: (_) => UserState.instance()),
+          ChangeNotifierProvider<TeacherState>(
+              create: (_) => TeacherState.instance()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -31,7 +40,15 @@ class TeacherApp extends StatelessWidget {
           home: Redirect(),
           routes: <String, WidgetBuilder>{
             '/home': (context) => HomeScreen(),
-            // 'buyer_home': (context) => BuyerHomeScreen(),
+            '/settings': (context) => SettingsScreen(),
+            '/attendance': (context) => AttendanceScreen(),
+            '/track_bus': (context) => BusTrackingScreen(),
+            '/contact_parents': (context) => ContactParentScreen(),
+            '/rewards': (context) => RewardScreen(),
+            '/remarks':(context) => RemarkScreen(),
+            '/upcoming_exams':(context) => UpcomingExams(),
+            '/update_student_profile':(context)=> UpdateStudentProfile(),
+            '/update_from_parents':(context)=> UpdateFromParents(),
             // 'login': (context) => PhoneLoginScreen(),
             // 'owner_form': (context)=> OwnerFormScreen(),
             // 'buyer_form': (context)=> BuyerFormScreen(),

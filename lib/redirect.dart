@@ -25,7 +25,7 @@ class _RedirectState extends State<Redirect> {
   Widget build(BuildContext context) {
     return Consumer<LoginState>(
         builder: (BuildContext context, LoginState value, Widget child) {
-      if(!_loginStatus){
+      if(_loginStatus!=null){
         SharedPreferences.getInstance().then((prefs) {
         _loginStatus = prefs.getBool('loggedIn');
         if (_loginStatus == true) {

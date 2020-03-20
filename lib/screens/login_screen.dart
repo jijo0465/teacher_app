@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teacher_app/states/login_state.dart';
+import 'package:teacher_app/models/teacher.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key key}) : super(key: key);
 
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  String _id;
+  String _password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,12 +25,35 @@ class LoginScreen extends StatelessWidget {
             Container(
               child: Text('Login Screen'),
             ),
+            Container(
+              padding: EdgeInsets.all(12),
+              child: TextFormField(
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: 'Paren Id',
+                ),
+                onChanged: (value) => _id = value,
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(12),
+              child: TextFormField(
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                ),
+                onChanged: (value) {
+                  _password = value;
+                },
+              ),
+            ),
             Consumer<LoginState>(
               builder: (context, value, child) {
                 return RaisedButton(
                     child: Text('Log in'),
-                    onPressed: () {
-                      value.signIn('a', 'b');
+                    onPressed: () async{
+                      Teacher teacher=await value.signIn(_id, _password);
                     });
               },
             )

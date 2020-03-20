@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:teacher_app/screens/home_screen.dart';
 
 class DigiAppbar extends StatelessWidget {
-  const DigiAppbar({Key key}) : super(key: key);
+  final VoidCallback onPressed;
+  const DigiAppbar({Key key, this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,21 +12,27 @@ class DigiAppbar extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.only(top: 35),
           color: Colors.blue[800],
-          height: 200,
+          height: 180,
           width: double.infinity,
           child: Column(
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
+                  Container(child: IconButton(
+                    onPressed: onPressed,
+                    icon:Icon(Icons.dashboard),color: Colors.white,
+                  ),
+
+                  ),
                   Container(
                       padding: EdgeInsets.only(left: 12),
                       child: Text(
                         'Christ Nagar',
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 16,
                             color: Colors.white,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w300),
                       )),
                   Container(
                     padding: EdgeInsets.only(right: 12),
@@ -38,9 +46,7 @@ class DigiAppbar extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(
-                height: 12,
-              ),
+              
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -49,7 +55,7 @@ class DigiAppbar extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         'Hi Rachel',
-                        style: TextStyle(fontSize: 25, color: Colors.white),
+                        style: TextStyle(fontSize: 20, color: Colors.white),
                       )),
                   Container(
                     width: 40,
