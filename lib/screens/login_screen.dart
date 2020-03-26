@@ -16,50 +16,147 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login Page'),
-      ),
-      body: Center(
-        child: Column(
+        resizeToAvoidBottomPadding: false,
+        body: Column(
           children: <Widget>[
-            Container(
-              child: Text('Login Screen'),
+            SizedBox(
+              height: 100,
             ),
             Container(
-              padding: EdgeInsets.all(12),
-              child: TextFormField(
-                textInputAction: TextInputAction.next,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: 'Paren Id',
-                ),
-                onChanged: (value) => _id = value,
+              height: 100,
+              width: 100,
+              child: Card(
+                elevation: 1,
+                color: Colors.white,
+                child: Image.asset('assets/images/logo.jpg')
               ),
             ),
+            SizedBox(
+              height: 50,
+            ),
             Container(
-              padding: EdgeInsets.all(12),
-              child: TextFormField(
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                ),
-                onChanged: (value) {
-                  _password = value;
-                },
+              child: Text(
+                'Sign In',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
               ),
             ),
-            Consumer<LoginState>(
-              builder: (context, value, child) {
-                return RaisedButton(
-                    child: Text('Log in'),
-                    onPressed: () async{
-                      Teacher teacher=await value.signIn(_id, _password);
-                    });
-              },
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              height: 50,
+              width: 300,
+              child: TextFormField(
+                decoration: InputDecoration(
+                  labelText: "Teacher Id",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: const BorderSide(color: Colors.blue)),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              height: 50,
+              width: 300,
+              child: TextFormField(
+                decoration: InputDecoration(
+                  labelText: "Password",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: const BorderSide(color: Colors.blue)),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 120),
+              child: Container(
+                  child: FlatButton(
+                      onPressed: () {},
+                      child: Text(
+                        'forgot password?',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w300, color: Colors.blue),
+                      ))),
+            ),
+            Container(
+                width: 300,
+                child: RaisedButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Sign In',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600, color: Colors.white),
+                  ),
+                  color: Colors.pink[200],
+                  elevation: 6,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(18.0)),
+                )),
+            SizedBox(height: 35),
+            Padding(
+              padding: const EdgeInsets.only(left: 75),
+              child: Container(
+                  child: Row(
+                children: <Widget>[
+                  Text('don\'t have an account?'),
+                  Container(
+                      child: FlatButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Register',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w300,
+                                color: Colors.blue),
+                          )))
+                ],
+              )),
             )
           ],
-        ),
-      ),
-    );
+        )
+        // Center(
+        //   child: Column(
+        //     children: <Widget>[
+        //       Container(
+        //         child: Text('Login Screen'),
+        //       ),
+        //       Container(
+        //         padding: EdgeInsets.all(12),
+        //         child: TextFormField(
+        //           textInputAction: TextInputAction.next,
+        //           keyboardType: TextInputType.number,
+        //           decoration: InputDecoration(
+        //             labelText: 'Paren Id',
+        //           ),
+        //           onChanged: (value) => _id = value,
+        //         ),
+        //       ),
+        //       Container(
+        //         padding: EdgeInsets.all(12),
+        //         child: TextFormField(
+        //           textInputAction: TextInputAction.next,
+        //           decoration: InputDecoration(
+        //             labelText: 'Password',
+        //           ),
+        //           onChanged: (value) {
+        //             _password = value;
+        //           },
+        //         ),
+        //       ),
+        //       Consumer<LoginState>(
+        //         builder: (context, value, child) {
+        //           return RaisedButton(
+        //               child: Text('Log in'),
+        //               onPressed: () async{
+        //                 Teacher teacher=await value.signIn(_id, _password);
+        //               });
+        //         },
+        //       )
+        //     ],
+        //   ),
+        // ),
+        );
   }
 }

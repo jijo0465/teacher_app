@@ -158,14 +158,14 @@ class _UpdateStudentProfileState extends State<UpdateStudentProfile> {
                           ),
                           Row(
                             children: <Widget>[
-                              Text('class                              '),
+                              Text('Class                              '),
                               Container(width: 150, child: TextFormField()),
                               
                             ],
                           ),
                           Row(
                             children: <Widget>[
-                              Text('div                                  '),
+                              Text('Div                                  '),
                               Container(
                                 width: 150,
                                 child: TextFormField(),
