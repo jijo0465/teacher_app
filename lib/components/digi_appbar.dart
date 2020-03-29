@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:teacher_app/screens/home_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:teacher_app/states/teacher_state.dart';
 
 class DigiAppbar extends StatelessWidget {
   final VoidCallback onPressed;
@@ -19,11 +20,12 @@ class DigiAppbar extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Container(child: IconButton(
-                    onPressed: onPressed,
-                    icon:Icon(Icons.dashboard),color: Colors.white,
-                  ),
-
+                  Container(
+                    child: IconButton(
+                      onPressed: onPressed,
+                      icon: Icon(Icons.dashboard),
+                      color: Colors.white,
+                    ),
                   ),
                   Container(
                       padding: EdgeInsets.only(left: 12),
@@ -46,16 +48,20 @@ class DigiAppbar extends StatelessWidget {
                   )
                 ],
               ),
-              
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
                       padding: EdgeInsets.only(left: 12),
                       alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Hi Rachel',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      child: Consumer<TeacherState>(
+                        builder: (BuildContext context, TeacherState value,
+                            Widget child) {
+                          return Text(
+                            'Hi ${value.teacherName} !',
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          );
+                        },
                       )),
                   Container(
                     width: 40,
@@ -68,8 +74,7 @@ class DigiAppbar extends StatelessWidget {
                             'assets/images/sir.jpg',
                           ),
                         ),
-                        shape: BoxShape.circle
-                        ),
+                        shape: BoxShape.circle),
                   )
                 ],
               )

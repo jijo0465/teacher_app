@@ -41,7 +41,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             drawerController.close();
           },
         ),
-       
       ],
     );
   }
@@ -86,10 +85,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   TextStyle(color: Colors.white, fontSize: 20),
                             ),
                             RaisedButton(
-                              child: Text('Signout'),
-                              onPressed: (){
-                                value.signOut();
-                            })
+                                child: Text('Signout'),
+                                onPressed: () {
+                                  value.signOut();
+                                })
                           ],
                         ),
                       ),
@@ -209,7 +208,6 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           Positioned(top: 140, child: DigiPeriodCard()),
-          
         ],
       ),
     );

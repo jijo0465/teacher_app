@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teacher_app/states/login_state.dart';
 import 'package:teacher_app/models/teacher.dart';
+import 'package:teacher_app/services/digi_auth.dart';
+import 'package:teacher_app/states/teacher_state.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key key}) : super(key: key);
@@ -48,13 +50,25 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
               ),
             ),
-            Consumer<LoginState>(
-              builder: (context, value, child) {
-                return RaisedButton(
-                    child: Text('Log in'),
-                    onPressed: () async{
-                      Teacher teacher=await value.signIn(_id, _password);
-                    });
+            Consumer<TeacherState>(
+              builder:
+                  (BuildContext context, TeacherState teacherState, Widget child) {
+                return Consumer<LoginState>(
+                  builder: (context, value, child) {
+                    return RaisedButton(
+                        child: Text('Log in'),
+                        onPressed: () async {
+                          value.setStatus(Status.Authenticating);
+
+                          Teacher teacher =
+                              await DigiAuth().signIn(_id, _password);
+                          if (teacher != null) {
+                            teacherState.setTeacher(teacher);
+                            value.setStatus(Status.Authenticated);
+                          }
+                        });
+                  },
+                );
               },
             )
           ],
