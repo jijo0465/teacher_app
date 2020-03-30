@@ -20,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
         body: Column(
           children: <Widget>[
             SizedBox(
-              height: 100,
+              height: 70,
             ),
             Container(
               height: 100,
@@ -41,10 +41,10 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 30,
             ),
             Container(
-              height: 50,
+              height: 40,
               width: 300,
               child: TextFormField(
                 decoration: InputDecoration(
@@ -56,10 +56,10 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             Container(
-              height: 50,
+              height: 40,
               width: 300,
               child: TextFormField(
                 decoration: InputDecoration(
@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 120),
+              padding: const EdgeInsets.only(left: 180),
               child: Container(
                   child: FlatButton(
                       onPressed: () {},
@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(18.0)),
                 )),
-            SizedBox(height: 35),
+            SizedBox(height: 40),
             Padding(
               padding: const EdgeInsets.only(left: 75),
               child: Container(
