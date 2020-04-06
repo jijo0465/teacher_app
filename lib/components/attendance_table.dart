@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lite_rolling_switch/lite_rolling_switch.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+  
 
 class AttendanceTable extends StatefulWidget {
   const AttendanceTable({Key key}) : super(key: key);
@@ -14,78 +17,125 @@ class _AttendanceTableState extends State<AttendanceTable> {
   bool val4 = false;
   @override
   Widget build(BuildContext context) {
+    final TextStyle textStyle = TextStyle(
+        fontSize: 12, fontWeight: FontWeight.w400, color: Colors.white);
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Container(
-          height: 400,
-          padding: EdgeInsets.all(12),
-          color: Colors.blue[200],
-          child: DataTable(columns: [
-            DataColumn(label: Text('Roll No')),
-            DataColumn(label: Text('Name')),
-            DataColumn(label: Text('Attendance'))
-          ], rows: [
-            DataRow(cells: [
-              DataCell(Text('47')),
-              DataCell(Text('Monk Paru')),
-              DataCell(
-                  Checkbox(
-                     activeColor: Colors.green,
-                    value: val1,
-                    onChanged: (value) {
-                      setState(() {
-                        val1 = value;
-                      });
+      child: DataTable(columnSpacing: 25, columns: [
+        DataColumn(
+            label: Text(
+          'Roll No',
+          style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+              color: Colors.white),
+        )),
+        DataColumn(
+            label: Text('Name',
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                    color: Colors.white))),
+        DataColumn(
+            label: Container(
+              padding: EdgeInsets.only(left:25),
+              child: Text('Attendance',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                      color: Colors.white)),
+            ))
+      ], rows: [
+        DataRow(cells: [
+          DataCell(Text('47', style: textStyle)),
+          DataCell(Text('Monk Paru', style: textStyle)),
+          DataCell(
+            Container(
+              
+              child: Transform.scale(
+                            child: LiteRollingSwitch(
+                    value: true,
+                    textOn: 'Present',
+                    textOff: 'Absent',
+                    textSize: 18,
+                    colorOn: Colors.green,
+                    colorOff: Colors.red,
+                    iconOn: Icons.thumb_up,
+                    iconOff: Icons.thumb_down,
+                    onChanged: (bool state) {
+                      print('turned ${(state) ? 'on' : 'off'}');
                     },
-                  ),
-                  showEditIcon: true),
-            ]),
-            DataRow(cells: [
-              DataCell(Text('47')),
-              DataCell(Text('Monk Paru')),
-              DataCell(
-                  Checkbox(
-                    activeColor: Colors.green,
-                    value: val2,
-                    onChanged: (value) {
-                      setState(() {
-                        val2 = value;
-                      });
+                  ), scale: 0.5,
+              ),
+            ),
+              ),
+        ]),
+        DataRow(cells: [
+          DataCell(Text('47', style: textStyle)),
+          DataCell(Text('Monk Paru', style: textStyle)),
+          DataCell(
+              Transform.scale(
+                              child: LiteRollingSwitch(
+                    value: true,
+                    textOn: 'Present',
+                    textOff: 'Absent',
+                    textSize: 18,
+                    colorOn: Colors.green,
+                    colorOff: Colors.red,
+                    iconOn: Icons.thumb_up,
+                    iconOff: Icons.thumb_down,
+                    onChanged: (bool state) {
+                      print('turned ${(state) ? 'on' : 'off'}');
                     },
-                  ),
-                  showEditIcon: true),
-            ]),
-            DataRow(cells: [
-              DataCell(Text('47')),
-              DataCell(Text('Monk Paru')),
-              DataCell(
-                  Checkbox(
-                     activeColor: Colors.green,
-                    value: val3,
-                    onChanged: (value) {
-                      setState(() {
-                        val3 = value;
-                      });
+                  ), scale: 0.5,
+              ),
+             ),
+        ]),
+        DataRow(cells: [
+          DataCell(Text('47', style: textStyle)),
+          DataCell(Text('Monk Paru', style: textStyle)),
+          DataCell(
+              Transform.scale(
+                              child: LiteRollingSwitch(
+                    value: true,
+                    textOn: 'Present',
+                    textOff: 'Absent',
+                    textSize: 18,
+                    colorOn: Colors.green,
+                    colorOff: Colors.red,
+                    iconOn: Icons.thumb_up,
+                    iconOff: Icons.thumb_down,
+                    onChanged: (bool state) {
+                      print('turned ${(state) ? 'on' : 'off'}');
                     },
-                  ),
-                  showEditIcon: true),
-            ]),
-            DataRow(cells: [
-              DataCell(Text('47')),
-              DataCell(Text('Monk Paru')),
-              DataCell(
-                  Checkbox(
-                     activeColor: Colors.green,
-                    value: val4,
-                    onChanged: (value) {
-                      setState(() {
-                        val4 = value;
-                      });
+                  ), scale: 0.5,
+              ),
+              ),
+        ]),
+        DataRow(
+          cells: [
+          DataCell(Text('47', style: textStyle)),
+          DataCell(Text('Monk Paru', style: textStyle)),
+          DataCell(
+              Transform.scale(
+                              child: LiteRollingSwitch(
+                    value: true,
+                    textOn: 'Present',
+                    textOff: 'Absent',
+                    textSize: 18,
+                    colorOn: Colors.green,
+                    colorOff: Colors.red,
+                    iconOn: Icons.thumb_up,
+                    iconOff: Icons.thumb_down,
+                    onChanged: (bool state) {
+                      print('turned ${(state) ? 'on' : 'off'}');
                     },
-                  ),
-                  showEditIcon: true),
-            ]),
-          ])),
+                  ), scale: 0.5,
+                
+              ),
+              ),
+        ]),
+      ]),
     );
   }
 }

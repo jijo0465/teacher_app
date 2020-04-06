@@ -4,10 +4,13 @@ import 'package:teacher_app/redirect.dart';
 import 'package:teacher_app/screens/attendance_screen.dart';
 import 'package:teacher_app/screens/bus_tracking_screen.dart';
 import 'package:teacher_app/screens/contact_parent_screen.dart';
+import 'package:teacher_app/screens/forgot_password_screen.dart';
 import 'package:teacher_app/screens/home_screen.dart';
+import 'package:teacher_app/screens/new_password_screen.dart';
 import 'package:teacher_app/screens/remark_screen.dart';
 import 'package:teacher_app/screens/reward_screen.dart';
 import 'package:teacher_app/screens/settings_screen.dart';
+import 'package:teacher_app/screens/teacher_profile_screen.dart';
 import 'package:teacher_app/states/login_state.dart';
 import 'package:teacher_app/states/user_state.dart';
 import 'package:teacher_app/screens/upcoming_exam_screen.dart';
@@ -49,6 +52,9 @@ class TeacherApp extends StatelessWidget {
             '/upcoming_exams':(context) => UpcomingExams(),
             '/update_student_profile':(context)=> UpdateStudentProfile(),
             '/update_from_parents':(context)=> UpdateFromParents(),
+            '/teacher_profile':(context) => TeacherProfileScreen(),
+            '/forgot_password':(context) => ForgotPasswordScreen(),
+            '/new_password':(context) => NewPasswordScreen()
             // 'login': (context) => PhoneLoginScreen(),
             // 'owner_form': (context)=> OwnerFormScreen(),
             // 'buyer_form': (context)=> BuyerFormScreen(),

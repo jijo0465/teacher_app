@@ -19,11 +19,12 @@ class DigiAppbar extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Container(child: IconButton(
-                    onPressed: onPressed,
-                    icon:Icon(Icons.dashboard),color: Colors.white,
-                  ),
-
+                  Container(
+                    child: IconButton(
+                      onPressed: onPressed,
+                      icon: Icon(Icons.dashboard),
+                      color: Colors.white,
+                    ),
                   ),
                   Container(
                       padding: EdgeInsets.only(left: 12),
@@ -46,7 +47,6 @@ class DigiAppbar extends StatelessWidget {
                   )
                 ],
               ),
-              
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -57,19 +57,26 @@ class DigiAppbar extends StatelessWidget {
                         'Hi Rachel',
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       )),
-                  Container(
-                    width: 40,
-                    height: 40,
-                    margin: EdgeInsets.only(right: 12),
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: AssetImage(
-                            'assets/images/sir.jpg',
-                          ),
-                        ),
-                        shape: BoxShape.circle
-                        ),
+                  Hero(
+                    tag: 'Teacher profile',
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).pushNamed('/teacher_profile');
+                      },
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        margin: EdgeInsets.only(right: 12),
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage(
+                                'assets/images/rachel.png',
+                              ),
+                            ),
+                            shape: BoxShape.circle),
+                      ),
+                    ),
                   )
                 ],
               )

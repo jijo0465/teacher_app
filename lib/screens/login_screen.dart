@@ -74,7 +74,9 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.only(left: 180),
               child: Container(
                   child: FlatButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/forgot_password');
+                      },
                       child: Text(
                         'forgot password?',
                         style: TextStyle(
@@ -82,6 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ))),
             ),
             Container(
+            height: 40,
                 width: 300,
                 child: RaisedButton(
                   onPressed: () {},
