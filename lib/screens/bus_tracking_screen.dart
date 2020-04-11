@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teacher_app/components/digicampus_appbar.dart';
 
 class BusTrackingScreen extends StatelessWidget {
   const BusTrackingScreen({Key key}) : super(key: key);
@@ -6,9 +7,6 @@ class BusTrackingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Track Bus'),
-      ),
       body: Stack(
         children: <Widget>[
           Container(
@@ -26,7 +24,13 @@ class BusTrackingScreen extends StatelessWidget {
                 child: Text('Contact driver'),
               ),
             ),
-          )
+          ),
+           DigiCampusAppbar(
+                icon: Icons.close,
+                onDrawerTapped: () {
+                  Navigator.of(context).pop();
+                },
+              ),
         ],
       ),
     );

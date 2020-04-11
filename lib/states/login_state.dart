@@ -1,32 +1,34 @@
-import 'dart:convert';
-
 import 'package:flutter/widgets.dart';
-import 'package:teacher_app/models/teacher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
 
 enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 
-class LoginState with ChangeNotifier {
-  SharedPreferences _prfs;
-  static Status _status = Status.Uninitialized;
 
-  // LoginState.instance() :  _pawAuth = PawAuth(){
-  //   auth.onAuthStateChanged.listen(_onAuthStateChanged);
-  // }
+class LoginState with ChangeNotifier {
+  static Status _status = Status.Uninitialized;
+  SharedPreferences _prfs;
+
   LoginState.instance();
 
   Status get status => _status;
+
+  Future<bool> signIn(String parentId, String password) async {
+    _status = Status.Authenticated;
+    notifyListeners();
+    _prfs = await SharedPreferences.getInstance();
+    _prfs.setBool('loggedIn',true);     
+    return true;
+  }
 
   Future signOut() async {
     _status = Status.Unauthenticated;
     notifyListeners();
     _prfs = await SharedPreferences.getInstance();
-    _prfs.setBool('loggedIn', false);
+    _prfs.setBool('loggedIn',false);  
   }
-
-  setStatus(Status _statusUpdate) {
+  Future<bool> setStatus(Status _statusUpdate) async {
     _status = _statusUpdate;
     notifyListeners();
+    return true;
   }
 }
