@@ -141,16 +141,9 @@ class _RewardScreenState extends State<RewardScreen> {
                     : Expanded(
                         child: RewardTable(),
                       ),
-                RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(10.0)),
-                    color: Colors.blue[800],
-                    onPressed: () {},
-                    child: Text(
-                      'submit',
-                      style: TextStyle(color: Colors.white),
-                    ))
+               
               ])),
+              
             ),
             DigiCampusAppbar(
               icon: Icons.close,
@@ -158,6 +151,21 @@ class _RewardScreenState extends State<RewardScreen> {
                 Navigator.of(context).pop();
               },
             ),
+             Padding(
+               padding: const EdgeInsets.fromLTRB(12, 550, 12, 0),
+               child: Container(
+                 width: 350,
+                 child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(10.0)),
+                        color: Colors.blue[800],
+                        onPressed: () {},
+                        child: Text(
+                          'submit',
+                          style: TextStyle(color: Colors.white),
+                        )),
+               ),
+             )
           ],
         ),
       ),

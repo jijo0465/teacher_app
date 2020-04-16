@@ -18,7 +18,7 @@ class _RewardTableState extends State<RewardTable> {
         children: <Widget>[
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: Card(color: Colors.lime[200],
+            child: Card(color: Colors.deepOrange[200],
             shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                               child: DataTable(
@@ -31,7 +31,7 @@ class _RewardTableState extends State<RewardTable> {
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
-                          color: Colors.brown),
+                          color: Colors.black),
                     )),
                     DataColumn(
                         label: Text(
@@ -39,7 +39,7 @@ class _RewardTableState extends State<RewardTable> {
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
-                          color: Colors.brown),
+                          color: Colors.black),
                     )),
                     DataColumn(
                         label: Text(
@@ -47,7 +47,7 @@ class _RewardTableState extends State<RewardTable> {
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
-                          color: Colors.brown),
+                          color: Colors.black),
                     )),
                     DataColumn(
                         label: Text(
@@ -55,7 +55,7 @@ class _RewardTableState extends State<RewardTable> {
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
-                          color: Colors.brown),
+                          color: Colors.black),
                     ))
                   ],
                   rows: List<DataRow>.generate(6, (index) {
@@ -65,12 +65,12 @@ class _RewardTableState extends State<RewardTable> {
                       DataCell(Text(
                         (index + 1).toString(),
                         style: TextStyle(
-                          color: Colors.brown,
+                          color: Colors.black,
                         fontWeight: FontWeight.w600),
                       )),
                       DataCell(Text(
                         'Jijo',
-                        style: TextStyle(color: Colors.brown,fontWeight: FontWeight.w600),
+                        style: TextStyle(color: Colors.black,fontWeight: FontWeight.w600),
                       )),
                       DataCell(Container(
                         child: DigiRating(
@@ -87,7 +87,7 @@ class _RewardTableState extends State<RewardTable> {
                           children: <Widget>[
                             SizedBox(height: 20),
                             Container(
-                              color: Colors.white,
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
                               width: 200,
                               child: TextFormField(
                                 focusNode: focusNodeList.elementAt(index),
@@ -95,7 +95,7 @@ class _RewardTableState extends State<RewardTable> {
                                   hintText: 'comments',
                                   border: OutlineInputBorder(
                                       borderRadius:
-                                          BorderRadius.circular(0.0),
+                                          BorderRadius.circular(12.0),
                                       borderSide: const BorderSide(
                                           color: Colors.black)),
                                 ),

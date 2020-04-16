@@ -17,107 +17,89 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomPadding: false,
-        body: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 70,
-            ),
-            Container(
-              height: 100,
-              width: 100,
-              child: Card(
-                elevation: 1,
-                color: Colors.white,
-                child: Image.asset('assets/images/logo.jpg')
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 70,
               ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Container(
-              child: Text(
-                'Sign In',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+              Container(
+                height: 100,
+                width: 100,
+                child: Card(
+                    elevation: 1,
+                    color: Colors.white,
+                    child: Image.asset('assets/images/logo.jpg')),
               ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              height: 40,
-              width: 300,
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: "Teacher Id",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      borderSide: const BorderSide(color: Colors.blue)),
+              SizedBox(
+                height: 50,
+              ),
+              Container(
+                child: Text(
+                  'Sign In',
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              height: 40,
-              width: 300,
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: "Password",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      borderSide: const BorderSide(color: Colors.blue)),
-                ),
+              SizedBox(
+                height: 30,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 180),
-              child: Container(
-                  child: FlatButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/forgot_password');
-                      },
-                      child: Text(
-                        'forgot password?',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w300, color: Colors.blue),
-                      ))),
-            ),
-            Container(
-            height: 40,
+              Container(
+                height: 40,
                 width: 300,
-                child: RaisedButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Sign In',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600, color: Colors.white),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "Teacher Id",
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: const BorderSide(color: Colors.blue)),
                   ),
-                  color: Colors.pink[200],
-                  elevation: 6,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(18.0)),
-                )),
-            SizedBox(height: 40),
-            Padding(
-              padding: const EdgeInsets.only(left: 75),
-              child: Container(
-                  child: Row(
-                children: <Widget>[
-                  Text('don\'t have an account?'),
-                  Container(
-                      child: FlatButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Register',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w300,
-                                color: Colors.blue),
-                          )))
-                ],
-              )),
-            )
-          ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 40,
+                width: 300,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: "Password",
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        borderSide: const BorderSide(color: Colors.blue)),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 180),
+                child: Container(
+                    child: FlatButton(
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/forgot_password');
+                        },
+                        child: Text(
+                          'forgot password?',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300, color: Colors.blue),
+                        ))),
+              ),
+              Container(
+                  height: 40,
+                  width: 300,
+                  child: RaisedButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Sign In',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, color: Colors.white),
+                    ),
+                    color: Colors.pink[200],
+                    elevation: 6,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(18.0)),
+                  )),
+            ],
+          ),
         )
         // Center(
         //   child: Column(
