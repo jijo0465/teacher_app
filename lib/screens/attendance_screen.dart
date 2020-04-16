@@ -18,23 +18,41 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
         children: <Widget>[
           SingleChildScrollView(
             child: Column(
-          
               children: <Widget>[
-                SizedBox(height: 120,),
+                SizedBox(
+                  height: 120,
+                ),
                 AttendanceCard(),
-                AttendanceTable(),
+                SizedBox(height: 20),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.blue[400],
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(50),
+                          topRight: Radius.circular(50))
+                  ),
+                    height: 400,
+                    padding: EdgeInsets.all(12),
+                    child: AttendanceTable()),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(10.0)),
+                        color: Colors.blue[800],
                         onPressed: () {},
                         child: Text(
-                          'history',
-                          style: TextStyle(fontSize: 20),
+                          'History',
+                          style: TextStyle(fontSize: 16, color: Colors.white),
                         )),
                     RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(10.0)),
+                      color: Colors.blue[800],
                       onPressed: () {},
-                      child: Text('Update', style: TextStyle(fontSize: 20)),
+                      child: Text('Update',
+                          style: TextStyle(fontSize: 16, color: Colors.white)),
                     )
                   ],
                 ),
@@ -42,13 +60,12 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
             ),
           ),
           DigiCampusAppbar(
-                icon: Icons.close,
-                onDrawerTapped: () {
-                  Navigator.of(context).pop();
-                },
-              ),
+            icon: Icons.close,
+            onDrawerTapped: () {
+              Navigator.of(context).pop();
+            },
+          ),
         ],
-        
       ),
     );
   }

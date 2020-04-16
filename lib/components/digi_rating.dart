@@ -19,7 +19,7 @@ class DigiRating extends StatelessWidget {
                     itemPadding: EdgeInsets.all(4),
                     itemBuilder: (context, _) => Icon(
                       Icons.star,
-                      color: Colors.amber,
+                      color: Colors.amber[700],
                     ),
                     onRatingUpdate: valueChanged,
                   ),

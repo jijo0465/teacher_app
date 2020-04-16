@@ -18,8 +18,8 @@ class DigiMenuCard extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child:Container(
-              height: 100,
-              width: 100,
+        height: 140,
+        width: 140,
               decoration: BoxDecoration(
                 color: Colors.amber,
                 borderRadius: new BorderRadius.circular(8.0),
@@ -30,9 +30,9 @@ class DigiMenuCard extends StatelessWidget {
                     fit: BoxFit.fill),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black54,
-                    offset: Offset(0.0, 1.0), //(x,y)
-                    blurRadius: 4.0,
+                    color: Colors.white,
+                    offset: Offset(0.0, 0.0), //(x,y)
+                    blurRadius: 0.0,
                   ),
                 ],
               ),

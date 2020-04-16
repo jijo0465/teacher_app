@@ -1,28 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:teacher_app/states/login_state.dart';
-import 'package:teacher_app/models/teacher.dart';
-import 'package:teacher_app/services/digi_auth.dart';
-import 'package:teacher_app/states/teacher_state.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key key}) : super(key: key);
+class ForgotPasswordScreen extends StatelessWidget {
+  const ForgotPasswordScreen({Key key}) : super(key: key);
 
-  @override
-  _LoginScreenState createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  String _id;
-  String _password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Login Page'),
-      // ),
-      body: Center(
-        child: Column(
+        resizeToAvoidBottomPadding: false,
+        body: Column(
           children: <Widget>[
             SizedBox(
               height: 70,
@@ -31,17 +16,16 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 100,
               width: 100,
               child: Card(
-                elevation: 1,
-                color: Colors.white,
-                child: Image.asset('assets/images/logo.jpg')
-              ),
+                  elevation: 1,
+                  color: Colors.white,
+                  child: Image.asset('assets/images/logo.jpg')),
             ),
             SizedBox(
               height: 50,
             ),
             Container(
               child: Text(
-                'Sign In',
+                'Forgot Password',
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
               ),
             ),
@@ -52,12 +36,12 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 40,
               width: 300,
               child: TextFormField(
-                textInputAction: TextInputAction.next,
-                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: 'Paren Id',
+                  labelText: "Teacher Id",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: const BorderSide(color: Colors.blue)),
                 ),
-                onChanged: (value) => _id = value,
               ),
             ),
             SizedBox(
@@ -67,37 +51,30 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 40,
               width: 300,
               child: TextFormField(
-                textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
-                  labelText: 'Password',
+                  labelText: "Date of Birth",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: const BorderSide(color: Colors.blue)),
                 ),
-                onChanged: (value) {
-                  _password = value;
-                },
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 180),
-              child: Container(
-                  child: FlatButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/forgot_password');
-                      },
-                      child: Text(
-                        'forgot password?',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w300, color: Colors.blue),
-                      ))),
+            SizedBox(
+              height: 30,
             ),
             Container(
-            height: 40,
+                height: 40,
                 width: 300,
                 child: RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/new_password');
+                  },
                   child: Text(
-                    'Sign In',
+                    'submit',
                     style: TextStyle(
-                        fontWeight: FontWeight.w600, color: Colors.white),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white),
                   ),
                   color: Colors.pink[200],
                   elevation: 6,
@@ -124,8 +101,6 @@ class _LoginScreenState extends State<LoginScreen> {
               )),
             )
           ],
-        ),
-      ),
-    );
+        ));
   }
 }

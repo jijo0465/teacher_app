@@ -5,56 +5,67 @@ class AttendanceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle textStyle = TextStyle(fontSize: 22,fontWeight: FontWeight.w600);
+    final TextStyle textStyle =
+        TextStyle(fontSize: 18, fontWeight: FontWeight.w600);
     return Container(
-      child:Card(
-                margin: EdgeInsets.all(12),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
-                color: Colors.lightBlueAccent,
-                elevation: 10,
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
+        width: 300,
+        height: 150,
+        child: Card(
+            margin: EdgeInsets.all(12),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+                side: BorderSide(color: Colors.grey)),
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.only(left: 12),
-                              child: Text('Total Strength',style: textStyle,),
-                            ),
-                            Container(
-                                padding: EdgeInsets.only(left: 12),
-                                child: Text(': 45',style: textStyle))
-                          ],
+                        Container(
+                          padding: EdgeInsets.only(left: 30),
+                          child: Text(
+                            'Total Strength',
+                            style: textStyle,
+                          ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.only(left:12),
-                              child: Text('Total Present',style: textStyle),
-                            ),
-                            Container(child: Text(': 40',style: textStyle))
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.only(left:12),
-                              child: Text('Total Absent',style: textStyle),
-                            ),
-                            Container(child: Text(': 05',style: textStyle))
-                          ],
-                        ),
-                        
+                        Container(
+                            padding: EdgeInsets.only(right: 40),
+                            child: Text(': 45', style: textStyle))
                       ],
                     ),
-                  ),
-                )));
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.only(left: 30),
+                          child: Text('Total Present', style: textStyle),
+                        ),
+                        Container(
+                            padding: EdgeInsets.only(right: 40),
+                            child: Text(': 40', style: textStyle))
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.only(left: 30),
+                          child: Text('Total Absent', style: textStyle),
+                        ),
+                        Container(
+                            padding: EdgeInsets.only(right: 40),
+                            child: Text(': 05', style: textStyle))
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            )));
   }
 }

@@ -23,7 +23,7 @@ class DigiCampusAppbar extends StatelessWidget {
             ),
           ),
           Text(
-            'DigiCampus',
+            'DIGICAMPUS',
             style: TextStyle(
                 letterSpacing: 1,
                 color: Colors.white,
