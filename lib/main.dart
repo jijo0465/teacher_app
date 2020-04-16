@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teacher_app/redirect.dart';
+import 'package:teacher_app/screens/approve_leave_request.dart';
 import 'package:teacher_app/screens/attendance_screen.dart';
 import 'package:teacher_app/screens/bus_tracking_screen.dart';
 import 'package:teacher_app/screens/contact_parent_screen.dart';
 import 'package:teacher_app/screens/forgot_password_screen.dart';
 import 'package:teacher_app/screens/home_screen.dart';
+import 'package:teacher_app/screens/leave_request_screen.dart';
 import 'package:teacher_app/screens/new_password_screen.dart';
+import 'package:teacher_app/screens/remark_history_screen.dart';
 import 'package:teacher_app/screens/remark_screen.dart';
 import 'package:teacher_app/screens/reward_screen.dart';
 import 'package:teacher_app/screens/settings_screen.dart';
 import 'package:teacher_app/screens/teacher_profile_screen.dart';
+import 'package:teacher_app/screens/update_homework.dart';
+import 'package:teacher_app/screens/update_test_paper.dart';
 import 'package:teacher_app/states/login_state.dart';
 import 'package:teacher_app/states/user_state.dart';
 import 'package:teacher_app/screens/upcoming_exam_screen.dart';
@@ -54,7 +59,12 @@ class TeacherApp extends StatelessWidget {
             '/update_from_parents':(context)=> UpdateFromParents(),
             '/teacher_profile':(context) => TeacherProfileScreen(),
             '/forgot_password':(context) => ForgotPasswordScreen(),
-            '/new_password':(context) => NewPasswordScreen()
+            '/new_password':(context) => NewPasswordScreen(),
+            '/update_test_paper':(context) =>UpdateTestPaper(),
+            '/update_homework':(context) =>UpdateHomework(),
+            '/remark_history':(context) =>RemarkHistory(),
+            '/leave_request':(context) =>LeaveRequest(),
+            '/approve_leave_request':(context) =>ApproveLeaveRequest()
             // 'login': (context) => PhoneLoginScreen(),
             // 'owner_form': (context)=> OwnerFormScreen(),
             // 'buyer_form': (context)=> BuyerFormScreen(),

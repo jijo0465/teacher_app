@@ -263,15 +263,15 @@ class _ContactParentScreenState extends State<ContactParentScreen> {
                               Column(
                                 children: <Widget>[
                                   Container(
-                                      padding: EdgeInsets.only(left: 20),
+                                      padding: EdgeInsets.only(left: 30),
                                       child:
                                           Text(':<line1>', style: textStyle)),
                                   Container(
-                                      padding: EdgeInsets.only(left: 20),
+                                      padding: EdgeInsets.only(left: 30),
                                       child:
                                           Text(':<line2>', style: textStyle)),
                                   Container(
-                                    padding: EdgeInsets.only(left: 20),
+                                    padding: EdgeInsets.only(left: 30),
                                     child: Text(':<line3>', style: textStyle),
                                   )
                                 ],
@@ -285,7 +285,7 @@ class _ContactParentScreenState extends State<ContactParentScreen> {
                                 child: Text('Contact No.', style: textStyle),
                               ),
                               Container(
-                                padding: EdgeInsets.only(left: 20),
+                                padding: EdgeInsets.only(left: 24),
                                 child: Text(':<Number>', style: textStyle),
                               )
                             ],

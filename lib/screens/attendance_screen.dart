@@ -25,6 +25,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                 AttendanceCard(),
                 SizedBox(height: 20),
                 Container(
+                  width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     color: Colors.blue[400],
                       borderRadius: BorderRadius.only(

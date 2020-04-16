@@ -54,6 +54,7 @@ class _AttendanceTableState extends State<AttendanceTable> {
               
               child: Transform.scale(
                             child: LiteRollingSwitch(
+                              animationDuration: Duration(milliseconds: 250),
                     value: true,
                     textOn: 'Present',
                     textOff: 'Absent',
@@ -76,6 +77,7 @@ class _AttendanceTableState extends State<AttendanceTable> {
           DataCell(
               Transform.scale(
                               child: LiteRollingSwitch(
+                                animationDuration: Duration(milliseconds: 250),
                     value: true,
                     textOn: 'Present',
                     textOff: 'Absent',
@@ -97,6 +99,7 @@ class _AttendanceTableState extends State<AttendanceTable> {
           DataCell(
               Transform.scale(
                               child: LiteRollingSwitch(
+                                animationDuration: Duration(milliseconds: 250),
                     value: true,
                     textOn: 'Present',
                     textOff: 'Absent',
@@ -119,6 +122,7 @@ class _AttendanceTableState extends State<AttendanceTable> {
           DataCell(
               Transform.scale(
                               child: LiteRollingSwitch(
+                                animationDuration: Duration(milliseconds: 250),
                     value: true,
                     textOn: 'Present',
                     textOff: 'Absent',

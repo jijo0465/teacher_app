@@ -230,7 +230,7 @@ class _RemarkScreenState extends State<RemarkScreen> {
                                             borderSide: BorderSide(
                                                 color: Colors.black)),
                                         border: OutlineInputBorder(
-                                          borderRadius:
+                                            borderRadius:
                                                 BorderRadius.circular(12.0),
                                             borderSide: BorderSide(
                                                 color: Colors.blue))),
@@ -252,18 +252,22 @@ class _RemarkScreenState extends State<RemarkScreen> {
                               ],
                             ),
                           ),
-                          RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      new BorderRadius.circular(10.0)),
-                              color: Colors.blue[800],
-                              onPressed: () {},
-                              child: Text(
-                                'submit',
-                                style: TextStyle(color: Colors.white),
-                              ))
+                          Container(
+                            width: 100,
+                            child: RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        new BorderRadius.circular(10.0)),
+                                color: Colors.blue[800],
+                                onPressed: () {},
+                                child: Text(
+                                  'submit',
+                                  style: TextStyle(color: Colors.white),
+                                )),
+                          )
                         ],
                       ),
+                SizedBox(height: 20),
               ],
             ),
           ),
@@ -272,6 +276,23 @@ class _RemarkScreenState extends State<RemarkScreen> {
             onDrawerTapped: () {
               Navigator.of(context).pop();
             },
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(100, 500, 100, 0),
+            child: Container(
+              width: 200,
+              child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(10.0)),
+                  color: Colors.blue[800],
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/remark_history');
+                  },
+                  child: Text(
+                    'View History',
+                    style: TextStyle(color: Colors.white),
+                  )),
+            ),
           ),
         ],
       ),

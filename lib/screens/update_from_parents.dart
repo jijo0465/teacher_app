@@ -41,7 +41,7 @@ class UpdateFromParents extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                   elevation: 2,
-                  color: Colors.grey[300],
+                  color: Colors.white,
                   child: Column(
                     children: <Widget>[
                       Container(
@@ -95,7 +95,7 @@ class UpdateFromParents extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                   elevation: 2,
-                  color: Colors.grey[300],
+                  color: Colors.white,
                   child: Column(
                     children: <Widget>[
                       Container(
@@ -150,7 +150,7 @@ class UpdateFromParents extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                   elevation: 2,
-                  color: Colors.grey[300],
+                  color: Colors.white,
                   child: Column(
                     children: <Widget>[
                       Container(
