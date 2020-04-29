@@ -26,36 +26,43 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                 SizedBox(height: 20),
                 Container(
                   width: MediaQuery.of(context).size.width,
+                  height:MediaQuery.of(context).size.height,
                   decoration: BoxDecoration(
                     color: Colors.blue[400],
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(50),
                           topRight: Radius.circular(50))
                   ),
-                    height: 400,
+                   
                     padding: EdgeInsets.all(12),
-                    child: AttendanceTable()),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    RaisedButton(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left:16),
+                      child: AttendanceTable(),
+                    )),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12,),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(10.0)),
+                          color: Colors.blue[800],
+                          onPressed: () {},
+                          child: Text(
+                            'History',
+                            style: TextStyle(fontSize: 16, color: Colors.white),
+                          )),
+                      RaisedButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(10.0)),
                         color: Colors.blue[800],
                         onPressed: () {},
-                        child: Text(
-                          'History',
-                          style: TextStyle(fontSize: 16, color: Colors.white),
-                        )),
-                    RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(10.0)),
-                      color: Colors.blue[800],
-                      onPressed: () {},
-                      child: Text('Update',
-                          style: TextStyle(fontSize: 16, color: Colors.white)),
-                    )
-                  ],
+                        child: Text('Update',
+                            style: TextStyle(fontSize: 16, color: Colors.white)),
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),

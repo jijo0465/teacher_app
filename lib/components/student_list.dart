@@ -16,7 +16,7 @@ class _StudentListState extends State<StudentList> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
-          child: DataTable(columnSpacing: 25, columns: [
+      child: DataTable(columnSpacing: 28, columns: [
         DataColumn(
             label: Text(
           'Roll No',
@@ -25,107 +25,89 @@ class _StudentListState extends State<StudentList> {
         )),
         DataColumn(
             label: Text('Name',
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14,
-                    color: Colors.black))),
+                style: TextStyle(fontSize: 14, color: Colors.black))),
         DataColumn(
             label: Container(
           padding: EdgeInsets.only(left: 25),
           child: Text('select',
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                  color: Colors.black)),
+              style: TextStyle(fontSize: 14, color: Colors.black)),
         ))
       ], rows: [
         DataRow(cells: [
-          DataCell(Text('01',
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                  color: Colors.black))),
+          DataCell(
+              Text('01', style: TextStyle(fontSize: 14, color: Colors.black))),
           DataCell(Text('Aaromal',
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                  color: Colors.black))),
-          DataCell(Container(
-              child: Checkbox(
-            value: _val1,
-            onChanged: (bool value) {
-              setState(() {
-                _val1 = value;
-              });
-            },
-            activeColor: Colors.blue,
-          )))
+              style: TextStyle(fontSize: 14, color: Colors.black))),
+          DataCell(Padding(
+            padding: const EdgeInsets.only(left: 14),
+            child: Container(
+                child: Checkbox(
+              value: _val1,
+              onChanged: (bool value) {
+                setState(() {
+                  _val1 = value;
+                });
+              },
+              activeColor: Colors.blue,
+            )),
+          ))
         ]),
         DataRow(cells: [
-          DataCell(Text('02',
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                  color: Colors.black))),
+          DataCell(
+              Text('02', style: TextStyle(fontSize: 14, color: Colors.black))),
           DataCell(Text('Abhijith',
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                  color: Colors.black))),
-          DataCell(Container(
-              child: Checkbox(
-            value: _val2,
-            onChanged: (bool value) {
-              setState(() {
-                _val2 = value;
-              });
-            },
-            activeColor: Colors.blue,
-          )))
+              style: TextStyle(fontSize: 14, color: Colors.black))),
+          DataCell(Padding(
+            padding: const EdgeInsets.only(left: 14),
+            child: Container(
+                child: Checkbox(
+              value: _val2,
+              onChanged: (bool value) {
+                setState(() {
+                  _val2 = value;
+                });
+              },
+              activeColor: Colors.blue,
+            )),
+          ))
         ]),
         DataRow(cells: [
-          DataCell(Text('03',
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                  color: Colors.black))),
+          DataCell(
+              Text('03', style: TextStyle(fontSize: 14, color: Colors.black))),
           DataCell(Text('Abhil',
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                  color: Colors.black))),
-          DataCell(Container(
-              child: Checkbox(
-            value: _val3,
-            onChanged: (bool value) {
-              setState(() {
-                _val3 = value;
-              });
-            },
-            activeColor: Colors.blue,
-          )))
+              style: TextStyle(fontSize: 14, color: Colors.black))),
+          DataCell(Padding(
+            padding: const EdgeInsets.only(left: 14),
+            child: Container(
+                child: Checkbox(
+              value: _val3,
+              onChanged: (bool value) {
+                setState(() {
+                  _val3 = value;
+                });
+              },
+              activeColor: Colors.blue,
+            )),
+          ))
         ]),
         DataRow(cells: [
-          DataCell(Text('04',
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                  color: Colors.black))),
+          DataCell(
+              Text('04', style: TextStyle(fontSize: 14, color: Colors.black))),
           DataCell(Text('Abhirag',
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                  color: Colors.black))),
-          DataCell(Container(
-              child: Checkbox(
-            value: _val4,
-            onChanged: (bool value) {
-              setState(() {
-                _val4 = value;
-              });
-            },
-            activeColor: Colors.blue,
-          )))
+              style: TextStyle(fontSize: 14, color: Colors.black))),
+          DataCell(Padding(
+            padding: const EdgeInsets.only(left: 14),
+            child: Container(
+                child: Checkbox(
+              value: _val4,
+              onChanged: (bool value) {
+                setState(() {
+                  _val4 = value;
+                });
+              },
+              activeColor: Colors.blue,
+            )),
+          ))
         ]),
       ]),
     );

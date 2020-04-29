@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         DrawerItem(
           text: Text(
             'SETTINGS',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.white, fontFamily: "Poppins"),
           ),
           icon: Icon(Icons.settings, color: Colors.white),
           onPressed: () async {
@@ -145,128 +145,171 @@ class _HomePageState extends State<HomePage> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      SizedBox(height: 20),
+                      SizedBox(height: 30),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Container(
-                            child: DigiMenuCard(
-                              onPressed: () {
-                                Navigator.of(context).pushNamed('/attendance');
-                              },
-                              imagePath: 'assets/images/attendance.png',
-                            ),
+                            children: <Widget>[
+                              SizedBox(width: 10,),
+                              Expanded(flex: 1,
+                                  child: Container(
+                                  child: DigiMenuCard(
+                                     height: MediaQuery.of(context).size.height * 0.3,
+                                    
+                                    onPressed: () {
+                                      Navigator.of(context).pushNamed('/attendance');
+                                    },
+                                    imagePath: 'assets/images/check_attendance.png',
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              Expanded(flex: 1,
+                                  child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      child: DigiMenuCard(
+                                        height:
+                                            MediaQuery.of(context).size.height * 0.15,
+                                       
+                                        onPressed: () {
+                                          Navigator.of(context)
+                      .pushNamed('/track_bus');
+                                        },
+                                        imagePath:
+                                            'assets/images/track_schoolbus.png',
+                                      ),
+                                    ),
+                                    
+                                    DigiMenuCard(
+                                       height:
+                                           MediaQuery.of(context).size.height * 0.15,
+                                     
+                                      onPressed: () {
+                                        Navigator.of(context).pushNamed('/rewards');
+                                      },
+                                      imagePath: 'assets/images/give_rewards.png',
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(width: 10,)
+                            ],
                           ),
-                          Container(
-                            child: DigiMenuCard(
-                              onPressed: () {
-                                Navigator.of(context).pushNamed('/track_bus');
-                              },
-                              imagePath: 'assets/images/schoolbus.png',
-                            ),
+                      SizedBox(height: 5),
+                      Row(
+                        children: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              Container(
+                                child: DigiMenuCard(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.13,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.35,
+                                  onPressed: () {
+                                    Navigator.of(context)
+                                        .pushNamed('/contact_parents');
+                                  },
+                                  imagePath:
+                                      'assets/images/contact_parents.png',
+                                ),
+                              ),
+                              DigiMenuCard(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.28,
+                                width: MediaQuery.of(context).size.width * 0.35,
+                                onPressed: () {
+                                  Navigator.of(context)
+                                      .pushNamed('/upcoming_exams');
+                                },
+                                imagePath: 'assets/images/upcoming_exams.png',
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: <Widget>[
+                              Container(
+                                child: DigiMenuCard(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.28,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.35,
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed('/remarks');
+                                  },
+                                  imagePath: 'assets/images/write_remarks.png',
+                                ),
+                              ),
+                              DigiMenuCard(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.13,
+                                width: MediaQuery.of(context).size.width * 0.35,
+                                onPressed: () {
+                                  Navigator.of(context)
+                                      .pushNamed('/update_from_parents');
+                                },
+                                imagePath: 'assets/images/premark.png',
+                              ),
+                            ],
                           ),
                         ],
                       ),
                       SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Container(
-                            child: DigiMenuCard(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed('/contact_parents');
-                              },
-                              imagePath: 'assets/images/parent.png',
-                            ),
-                          ),
-                          DigiMenuCard(
-                            onPressed: () {
-                              Navigator.of(context).pushNamed('/rewards');
-                            },
-                            imagePath: 'assets/images/rewards.png',
-                          ),
-                        ],
+                      DigiMenuCard(
+                        height: MediaQuery.of(context).size.height * 0.13,
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed('/update_student_profile');
+                        },
+                        imagePath: 'assets/images/student_profile.png',
                       ),
                       SizedBox(height: 5),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Container(
-                            child: DigiMenuCard(
-                              onPressed: () {
-                                Navigator.of(context).pushNamed('/remarks');
-                              },
-                              imagePath: 'assets/images/remark.png',
-                            ),
-                          ),
-                          DigiMenuCard(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed('/upcoming_exams');
-                            },
-                            imagePath: 'assets/images/exam.png',
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           DigiMenuCard(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed('/update_student_profile');
-                            },
-                            imagePath: 'assets/images/student.png',
-                          ),
-                          DigiMenuCard(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed('/update_from_parents');
-                            },
-                            imagePath: 'assets/images/premark.png',
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          DigiMenuCard(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed('/update_test_paper');
-                            },
-                            imagePath: 'assets/images/premark.png',
-                          ),
-                          DigiMenuCard(
+                            height: MediaQuery.of(context).size.height * 0.28,
+                            width: MediaQuery.of(context).size.width * 0.35,
                             onPressed: () {
                               Navigator.of(context)
                                   .pushNamed('/update_homework');
                             },
-                            imagePath: 'assets/images/premark.png',
+                            imagePath: 'assets/images/update_homework.png',
+                          ),
+                          Column(
+                            children: <Widget>[
+                              DigiMenuCard(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.13,
+                                width: MediaQuery.of(context).size.width * 0.35,
+                                onPressed: () {
+                                  Navigator.of(context)
+                                      .pushNamed('/update_test_paper');
+                                },
+                                imagePath: 'assets/images/update_testpaper.png',
+                              ),
+                              DigiMenuCard(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.13,
+                                width: MediaQuery.of(context).size.width * 0.35,
+                                onPressed: () {
+                                  Navigator.of(context)
+                                      .pushNamed('/approve_leave_request');
+                                },
+                                imagePath: 'assets/images/approve_leave.png',
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                      SizedBox(height:5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          DigiMenuCard(
-                            onPressed: () {
-                              Navigator.of(context).pushNamed('/leave_request');
-                            },
-                            imagePath: 'assets/images/premark.png',
-                          ),
-                          DigiMenuCard(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed('/approve_leave_request');
-                            },
-                            imagePath: 'assets/images/premark.png',
-                          ),
-                        ],
+                      SizedBox(height: 5),
+                      DigiMenuCard(
+                        height:
+                                    MediaQuery.of(context).size.height * 0.13,
+                                width: MediaQuery.of(context).size.width * 0.35,
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/leave_request');
+                        },
+                        imagePath: 'assets/images/leave_request.png',
                       )
                     ],
                   ),
