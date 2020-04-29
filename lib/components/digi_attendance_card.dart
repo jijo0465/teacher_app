@@ -8,8 +8,8 @@ class AttendanceCard extends StatelessWidget {
     final TextStyle textStyle =
         TextStyle(fontSize: 18, fontWeight: FontWeight.w600);
     return Container(
-        width: 300,
-        height: 150,
+        width: MediaQuery.of(context).size.width*0.8,
+        
         child: Stack(
           children: <Widget>[
             Container(

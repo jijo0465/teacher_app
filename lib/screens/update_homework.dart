@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:teacher_app/components/digicampus_appbar.dart';
 import 'package:teacher_app/components/homework_card.dart';
 import 'package:teacher_app/components/student_list.dart';
@@ -24,183 +26,189 @@ class _UpdateHomeworkState extends State<UpdateHomework> {
       body: Stack(
         children: <Widget>[
           SingleChildScrollView(
-                      child: Column(
-                children: <Widget>[
-                  SizedBox(height: 110),
-                  Row(
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: 110),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Container(
+                        height: 30,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          border: Border.all(
+                              color: Colors.blue,
+                              style: BorderStyle.solid,
+                              width: 0.80),
+                        ),
+                        padding: EdgeInsets.only(left: 20),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                              icon: Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.blue,
+                              ),
+                              value: grade,
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text('Class '),
+                                  value: 0,
+                                ),
+                                DropdownMenuItem(
+                                    child: Text('Class I'), value: 1),
+                                DropdownMenuItem(
+                                    child: Text('Class II'), value: 2),
+                                DropdownMenuItem(
+                                    child: Text('Class III'), value: 3),
+                                DropdownMenuItem(
+                                    child: Text('Class IV'), value: 4),
+                              ],
+                              onChanged: (value) {
+                                division = 0;
+                                setState(() {
+                                  grade = value;
+                                });
+                              }),
+                        )),
+                    Container(
+                        height: 30,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          border: Border.all(
+                              color: Colors.blue,
+                              style: BorderStyle.solid,
+                              width: 0.80),
+                        ),
+                        padding: EdgeInsets.only(left: 20),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                              icon: Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.blue,
+                              ),
+                              value: division,
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text('Div '),
+                                  value: 0,
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('A'),
+                                  value: 1,
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('B'),
+                                  value: 2,
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('C'),
+                                  value: 3,
+                                ),
+                                DropdownMenuItem(
+                                  child: Text('D'),
+                                  value: 4,
+                                ),
+                              ],
+                              onChanged: (value) {
+                                setState(() {
+                                  division = value;
+                                });
+                              }),
+                        )),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Container(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       Container(
-              height: 30,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
-                border: Border.all(
-                    color: Colors.blue,
-                    style: BorderStyle.solid,
-                    width: 0.80),
-              ),
-              padding: EdgeInsets.only(left: 20),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton(
-                    icon: Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.blue,
-                    ),
-                    value: grade,
-                    items: [
-                      DropdownMenuItem(
-                        child: Text('Class '),
-                        value: 0,
-                      ),
-                      DropdownMenuItem(
-                          child: Text('Class I'), value: 1),
-                      DropdownMenuItem(
-                          child: Text('Class II'), value: 2),
-                      DropdownMenuItem(
-                          child: Text('Class III'), value: 3),
-                      DropdownMenuItem(
-                          child: Text('Class IV'), value: 4),
-                    ],
-                    onChanged: (value) {
-                      division = 0;
-                      setState(() {
-                        grade = value;
-                      });
-                    }),
-              )),
+                          child: Text(
+                              value ? 'Selected students' : 'All students',
+                              style: TextStyle(fontSize: 16))),
                       Container(
-              height: 30,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
-                border: Border.all(
-                    color: Colors.blue,
-                    style: BorderStyle.solid,
-                    width: 0.80),
-              ),
-              padding: EdgeInsets.only(left: 20),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton(
-                    icon: Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.blue,
-                    ),
-                    value: division,
-                    items: [
-                      DropdownMenuItem(
-                        child: Text('Div '),
-                        value: 0,
-                      ),
-                      DropdownMenuItem(
-                        child: Text('A'),
-                        value: 1,
-                      ),
-                      DropdownMenuItem(
-                        child: Text('B'),
-                        value: 2,
-                      ),
-                      DropdownMenuItem(
-                        child: Text('C'),
-                        value: 3,
-                      ),
-                      DropdownMenuItem(
-                        child: Text('D'),
-                        value: 4,
-                      ),
-                    ],
-                    onChanged: (value) {
-                      setState(() {
-                        division = value;
-                      });
-                    }),
-              )),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Container(
-              width: 150,
-              height: 40,
-              child:
-                  Text(value?'Selected students':'All students', style: TextStyle(fontSize: 16))),
-                      Container(
-            width: 70,
-            height: 30,
-            child: Switch(
-              value: value,
-              onChanged: (val) {
-                
-                setState(() {
-                  value = val;
-                });
-              },
-              activeTrackColor: Colors.grey[400],
-              activeColor: Colors.green,
-            ),
+                        child: CupertinoSwitch(
+                          value: value,
+                          onChanged: (val) {
+                            setState(() {
+                              value = val;
+                            });
+                          },
+                          activeColor: Colors.blue,
+                        ),
                       )
                     ],
                   ),
-                  Container(
-                    height: 30,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.0),
-                      border: Border.all(
-              color: Colors.blue,
-              style: BorderStyle.solid,
-              width: 0.80),
+                ),
+                SizedBox(height: 20),
+                Container(
+                  height: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    border: Border.all(
+                        color: Colors.blue,
+                        style: BorderStyle.solid,
+                        width: 0.80),
+                  ),
+                  padding: EdgeInsets.only(left: 20),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton(
+                        icon: Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.blue,
+                        ),
+                        value: work,
+                        items: [
+                          DropdownMenuItem(child: Text('Homework'), value: 0),
+                          DropdownMenuItem(child: Text('Assignment'), value: 1),
+                        ],
+                        onChanged: (value) {
+                          setState(() {
+                            work = value;
+                          });
+                        }),
+                  ),
+                ),
+                SizedBox(height: 30),
+                Container(
+                  width: 300,
+                  child: TextFormField(
+                      minLines: 2,
+                      maxLines: 5,
+                      decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                              borderSide: BorderSide(color: Colors.black)),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                              borderSide: BorderSide(color: Colors.blue)))),
+                ),
+                SizedBox(height: 20),
+                value
+                    ? Padding(
+                        padding: const EdgeInsets.only(left: 12, right: 12),
+                        child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: StudentList()),
+                      )
+                    : Container(),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(10.0)),
+                    color: Colors.blue[800],
+                    onPressed: () {},
+                    child: Text(
+                      'Update',
+                      style: TextStyle(color: Colors.white),
                     ),
-                    padding: EdgeInsets.only(left: 20),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-              icon: Icon(
-                Icons.arrow_drop_down,
-                color: Colors.blue,
-              ),
-              value: work,
-              items: [
-                DropdownMenuItem(child: Text('Homework'), value: 0),
-                DropdownMenuItem(child: Text('Assignment'), value: 1),
+                  ),
+                )
               ],
-              onChanged: (value) {
-                setState(() {
-                  work = value;
-                });
-              }),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Container(
-                    width: 300,
-                    child: TextFormField(
-            minLines: 2,
-            maxLines: 5,
-            decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                    borderSide: BorderSide(color: Colors.black)),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                    borderSide: BorderSide(color: Colors.blue)))),
-                  ),
-                  SizedBox(height: 20),
-                  value?Container(
-                    width: 400,
-                    child:StudentList()):Container(),
-                ],
-              ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(140, 530, 140, 0),
-            child: RaisedButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(10.0)),
-              color: Colors.blue[800],
-              onPressed: () {},
-              child: Text(
-                'Update',
-                style: TextStyle(color: Colors.white),
-              ),
             ),
           ),
           DigiCampusAppbar(

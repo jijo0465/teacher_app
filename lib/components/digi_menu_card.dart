@@ -7,8 +7,10 @@ class DigiMenuCard extends StatelessWidget {
       this.title,
       this.subtitle,
       this.value,
-      this.onPressed, this.imagePath})
+      this.onPressed, this.imagePath, this.height, this.width})
       : super(key: key);
+   final double height; 
+   final double width;  
   final IconData menuIcon;
   final String title, subtitle, value;
   final VoidCallback onPressed;
@@ -18,10 +20,10 @@ class DigiMenuCard extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child:Container(
-        height: 140,
-        width: 140,
+        height: height,
+        width: width,
               decoration: BoxDecoration(
-                color: Colors.amber,
+                color: Colors.white,
                 borderRadius: new BorderRadius.circular(8.0),
                 image: DecorationImage(
                     image: AssetImage(

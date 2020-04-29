@@ -9,7 +9,6 @@ import 'package:teacher_app/screens/forgot_password_screen.dart';
 import 'package:teacher_app/screens/home_screen.dart';
 import 'package:teacher_app/screens/leave_request_screen.dart';
 import 'package:teacher_app/screens/new_password_screen.dart';
-import 'package:teacher_app/screens/remark_history_screen.dart';
 import 'package:teacher_app/screens/remark_screen.dart';
 import 'package:teacher_app/screens/reward_screen.dart';
 import 'package:teacher_app/screens/settings_screen.dart';
@@ -22,6 +21,7 @@ import 'package:teacher_app/screens/upcoming_exam_screen.dart';
 import 'package:teacher_app/screens/update_student_profile.dart';
 import 'package:teacher_app/screens/update_from_parents.dart';
 import 'package:teacher_app/states/teacher_state.dart';
+
 void main() => runApp(TeacherApp());
 
 class TeacherApp extends StatelessWidget {
@@ -39,7 +39,7 @@ class TeacherApp extends StatelessWidget {
           theme: ThemeData(
               primaryColor: Theme.of(context).primaryColor,
               accentColor: Colors.deepOrange,
-              fontFamily: 'Montserrat'),
+              fontFamily: 'Poppins'),
           supportedLocales: const [Locale('en')],
           localizationsDelegates: [
             DefaultMaterialLocalizations.delegate,
@@ -53,18 +53,18 @@ class TeacherApp extends StatelessWidget {
             '/track_bus': (context) => BusTrackingScreen(),
             '/contact_parents': (context) => ContactParentScreen(),
             '/rewards': (context) => RewardScreen(),
-            '/remarks':(context) => RemarkScreen(),
-            '/upcoming_exams':(context) => UpcomingExams(),
-            '/update_student_profile':(context)=> UpdateStudentProfile(),
-            '/update_from_parents':(context)=> UpdateFromParents(),
-            '/teacher_profile':(context) => TeacherProfileScreen(),
-            '/forgot_password':(context) => ForgotPasswordScreen(),
-            '/new_password':(context) => NewPasswordScreen(),
-            '/update_test_paper':(context) =>UpdateTestPaper(),
-            '/update_homework':(context) =>UpdateHomework(),
-            '/remark_history':(context) =>RemarkHistory(),
-            '/leave_request':(context) =>LeaveRequest(),
-            '/approve_leave_request':(context) =>ApproveLeaveRequest()
+            '/remarks': (context) => RemarkScreen(),
+            '/upcoming_exams': (context) => UpcomingExams(),
+            '/update_student_profile': (context) => UpdateStudentProfile(),
+            '/update_from_parents': (context) => UpdateFromParents(),
+            '/teacher_profile': (context) => TeacherProfileScreen(),
+            '/forgot_password': (context) => ForgotPasswordScreen(),
+            '/new_password': (context) => NewPasswordScreen(),
+            '/update_test_paper': (context) => UpdateTestPaper(),
+            '/update_homework': (context) => UpdateHomework(),
+
+            '/leave_request': (context) => LeaveRequest(),
+            '/approve_leave_request': (context) => ApproveLeaveRequest()
             // 'login': (context) => PhoneLoginScreen(),
             // 'owner_form': (context)=> OwnerFormScreen(),
             // 'buyer_form': (context)=> BuyerFormScreen(),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:teacher_app/components/digicampus_appbar.dart';
-import 'package:teacher_app/components/rewards_table.dart';
+import 'package:teacher_app/components/rewards_card.dart';
+import 'package:teacher_app/components/select_class.dart';
+import 'package:teacher_app/components/select_division.dart';
+//import 'package:teacher_app/components/select_student.dart';
 
 class RewardScreen extends StatefulWidget {
   const RewardScreen({Key key}) : super(key: key);
@@ -12,162 +15,129 @@ class RewardScreen extends StatefulWidget {
 class _RewardScreenState extends State<RewardScreen> {
   int grade = 0;
   int division = 0;
+  int listIndex = 0;
+  GlobalKey<AnimatedListState> _listKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        body: Stack(
-          children: <Widget>[
-            SafeArea(
-              child: Container(
-                  child: Column(children: <Widget>[
-                SizedBox(height: 100),
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          Column(children: <Widget>[
+            SizedBox(height: 120),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
                 Row(
                   children: <Widget>[
                     Container(
-                      padding: EdgeInsets.only(left: 50),
+                      padding: EdgeInsets.only(left: 8),
                       child: Text(
-                        'Select Class',
+                        'Select',
                         style: TextStyle(fontSize: 18),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 32),
+                      padding: const EdgeInsets.only(left: 20),
                       child: Container(
-                          height: 30,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            border: Border.all(
-                                color: Colors.blue,
-                                style: BorderStyle.solid,
-                                width: 0.80),
-                          ),
-                          padding: EdgeInsets.only(left: 20),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                                icon: Icon(
-                                  Icons.arrow_drop_down,
-                                  color: Colors.blue,
-                                ),
-                                value: grade,
-                                items: [
-                                  DropdownMenuItem(
-                                    child: Text('Class '),
-                                    value: 0,
-                                  ),
-                                  DropdownMenuItem(
-                                      child: Text('Class I'), value: 1),
-                                  DropdownMenuItem(
-                                      child: Text('Class II'), value: 2),
-                                  DropdownMenuItem(
-                                      child: Text('Class III'), value: 3),
-                                  DropdownMenuItem(
-                                      child: Text('Class IV'), value: 4),
-                                ],
-                                onChanged: (value) {
-                                  division = 0;
-                                  setState(() {
-                                    grade = value;
-                                  });
-                                }),
-                          )),
+                        height: 30,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          border: Border.all(
+                              color: Colors.blue,
+                              style: BorderStyle.solid,
+                              width: 0.80),
+                        ),
+                        padding: EdgeInsets.only(left: 12),
+                        child: SelectClass(
+                          onchanged: (value) {
+                            setState(() {
+                              grade = value;
+                            });
+                          },
+                          grade: grade,
+                        ),
+                      ),
                     )
                   ],
                 ),
-                SizedBox(height: 10),
-                grade == 0
-                    ? Container()
-                    : Row(
-                        children: <Widget>[
-                          Container(
-                              padding: EdgeInsets.only(left: 50),
-                              child: Text(
-                                'Select Division',
-                                style: TextStyle(fontSize: 18),
-                              )),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 12),
-                            child: Container(
-                                height: 30,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  border: Border.all(
-                                      color: Colors.blue,
-                                      style: BorderStyle.solid,
-                                      width: 0.80),
-                                ),
-                                padding: EdgeInsets.only(left: 20),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton(
-                                      icon: Icon(
-                                        Icons.arrow_drop_down,
-                                        color: Colors.blue,
-                                      ),
-                                      value: division,
-                                      items: [
-                                        DropdownMenuItem(
-                                          child: Text('Div '),
-                                          value: 0,
-                                        ),
-                                        DropdownMenuItem(
-                                          child: Text('A'),
-                                          value: 1,
-                                        ),
-                                        DropdownMenuItem(
-                                          child: Text('B'),
-                                          value: 2,
-                                        ),
-                                        DropdownMenuItem(
-                                          child: Text('C'),
-                                          value: 3,
-                                        ),
-                                        DropdownMenuItem(
-                                          child: Text('D'),
-                                          value: 4,
-                                        ),
-                                      ],
-                                      onChanged: (value) {
-                                        setState(() {
-                                          division = value;
-                                        });
-                                      }),
-                                )),
-                          )
-                        ],
-                      ),
-                SizedBox(height: 30),
-                division == 0
-                    ? Container()
-                    : Expanded(
-                        child: RewardTable(),
-                      ),
-               
-              ])),
-              
-            ),
-            DigiCampusAppbar(
-              icon: Icons.close,
-              onDrawerTapped: () {
-                Navigator.of(context).pop();
-              },
-            ),
-             Padding(
-               padding: const EdgeInsets.fromLTRB(12, 550, 12, 0),
-               child: Container(
-                 width: 350,
-                 child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(10.0)),
-                        color: Colors.blue[800],
-                        onPressed: () {},
+                Row(
+                  children: <Widget>[
+                    Container(
+                        padding: EdgeInsets.only(left: 12),
                         child: Text(
-                          'submit',
-                          style: TextStyle(color: Colors.white),
+                          'Select',
+                          style: TextStyle(fontSize: 18),
                         )),
-               ),
-             )
-          ],
-        ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Container(
+                        height: 30,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          border: Border.all(
+                              color: Colors.blue,
+                              style: BorderStyle.solid,
+                              width: 0.80),
+                        ),
+                        padding: EdgeInsets.only(left: 20),
+                        child: SelectDivision(
+                          onchanged: (value) {
+                            setState(() {
+                              division = value;
+                            });
+                          },
+                          division: division,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 30),
+            grade == 0 || division == 0
+                ? Container()
+                :  RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(10.0)),
+                    color: Colors.blue[800],
+                    onPressed: (){
+                       _listKey.currentState.insertItem(listIndex,
+                        duration: const Duration(milliseconds: 500));
+                        listIndex=listIndex+1;
+                    },
+                    child: Text(
+                      'Add Student',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+             Expanded(
+                  child: AnimatedList(
+                key: _listKey,
+                initialItemCount: 0,
+                itemBuilder:
+                    (BuildContext context, int index, Animation animation) {
+                  return SizeTransition(
+                    child: RewardCard(onPressed: (){
+                      listIndex--;
+                      _listKey.currentState.removeItem(index,(context,animation){
+
+                        return Container();
+                      });
+                    },),
+                    sizeFactor: animation,
+                    axis: Axis.vertical,
+                  );
+                },
+              )),
+          ]),
+          DigiCampusAppbar(
+            icon: Icons.close,
+            onDrawerTapped: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
       ),
     );
   }

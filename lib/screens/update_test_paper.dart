@@ -28,7 +28,7 @@ class _UpdateTestPaperState extends State<UpdateTestPaper> {
                     (BuildContext context, int index, Animation animation) {
                   return SizeTransition(
                     child: TestPaper(onPressed: (){
-                      _listKey.currentState.removeItem(1,(context,animation){
+                      _listKey.currentState.removeItem(index,(context,animation){
                         return Container();
                       });
                     },),
@@ -37,10 +37,8 @@ class _UpdateTestPaperState extends State<UpdateTestPaper> {
                   );
                 },
               )),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(12, 520, 12, 0),
+               Padding(
+            padding: const EdgeInsets.only(bottom: 12,left: 12,right: 12),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -65,6 +63,9 @@ class _UpdateTestPaperState extends State<UpdateTestPaper> {
               ],
             ),
           ),
+            ],
+          ),
+         
           DigiCampusAppbar(
             icon: Icons.close,
             onDrawerTapped: () {

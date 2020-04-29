@@ -124,83 +124,85 @@ class _LeaveRequestState extends State<LeaveRequest> {
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 10),
-                  Container(
-                      width: 300,
-                      height: 100,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Card(
-                        elevation: 4,
-                        shape: RoundedRectangleBorder(
+                  Padding(
+                    padding: const EdgeInsets.only(left:14,right: 14),
+                    child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20)),
-                        child: Column(
-                          children: <Widget>[
-                            SizedBox(height: 20),
-                            Text('Fromdate - Todate'),
-                            Text(
-                              'Status:',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w400),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Text('Approved',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500)),
-                                    Container(
-                                      width: 30,
-                                      height: 15,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.green,
-                                          border:
-                                              Border.all(color: Colors.grey)),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Text('pending',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500)),
-                                    Container(
-                                      width: 30,
-                                      height: 15,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.orange,
-                                          border:
-                                              Border.all(color: Colors.grey)),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Text('Denied',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500)),
-                                    Container(
-                                      width: 30,
-                                      height: 15,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.red,
-                                          border:
-                                              Border.all(color: Colors.grey)),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      )),
+                        child: Card(
+                          elevation: 4,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Column(
+                            children: <Widget>[
+                              SizedBox(height: 20),
+                              Text('Fromdate - Todate'),
+                              Text(
+                                'Status:',
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w400),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      Text('Approved',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500)),
+                                      Container(
+                                        width: 30,
+                                        height: 15,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Colors.green,
+                                            border:
+                                                Border.all(color: Colors.grey)),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      Text('pending',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500)),
+                                      Container(
+                                        width: 30,
+                                        height: 15,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Colors.orange,
+                                            border:
+                                                Border.all(color: Colors.grey)),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      Text('Denied',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500)),
+                                      Container(
+                                        width: 30,
+                                        height: 15,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Colors.red,
+                                            border:
+                                                Border.all(color: Colors.grey)),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        )),
+                  ),
                 ],
               ),
             )
