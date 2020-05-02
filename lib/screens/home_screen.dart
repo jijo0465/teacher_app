@@ -147,116 +147,136 @@ class _HomePageState extends State<HomePage> {
                     children: <Widget>[
                       SizedBox(height: 30),
                       Row(
-                            children: <Widget>[
-                              SizedBox(width: 10,),
-                              Expanded(flex: 1,
-                                  child: Container(
+                        children: <Widget>[
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              child: DigiMenuCard(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.3,
+                                onPressed: () {
+                                  Navigator.of(context)
+                                      .pushNamed('/attendance');
+                                },
+                                imagePath: 'assets/images/check_attendance.png',
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              children: <Widget>[
+                                Container(
                                   child: DigiMenuCard(
-                                     height: MediaQuery.of(context).size.height * 0.3,
-                                    
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
                                     onPressed: () {
-                                      Navigator.of(context).pushNamed('/attendance');
+                                      Navigator.of(context)
+                                          .pushNamed('/track_bus');
                                     },
-                                    imagePath: 'assets/images/check_attendance.png',
+                                    imagePath:
+                                        'assets/images/track_schoolbus.png',
                                   ),
                                 ),
-                              ),
-                              SizedBox(width: 10,),
-                              Expanded(flex: 1,
-                                  child: Column(
-                                  children: <Widget>[
-                                    Container(
-                                      child: DigiMenuCard(
-                                        height:
-                                            MediaQuery.of(context).size.height * 0.15,
-                                       
-                                        onPressed: () {
-                                          Navigator.of(context)
-                      .pushNamed('/track_bus');
-                                        },
-                                        imagePath:
-                                            'assets/images/track_schoolbus.png',
-                                      ),
-                                    ),
-                                    
-                                    DigiMenuCard(
-                                       height:
-                                           MediaQuery.of(context).size.height * 0.15,
-                                     
-                                      onPressed: () {
-                                        Navigator.of(context).pushNamed('/rewards');
-                                      },
-                                      imagePath: 'assets/images/give_rewards.png',
-                                    ),
-                                  ],
+                                SizedBox(height:5),
+                                DigiMenuCard(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.15,
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed('/rewards');
+                                  },
+                                  imagePath: 'assets/images/give_rewards.png',
                                 ),
-                              ),
-                              SizedBox(width: 10,)
-                            ],
+                              ],
+                            ),
                           ),
+                          SizedBox(
+                            width: 15,
+                          )
+                        ],
+                      ),
                       SizedBox(height: 5),
                       Row(
                         children: <Widget>[
-                          Column(
-                            children: <Widget>[
-                              Container(
-                                child: DigiMenuCard(
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  child: DigiMenuCard(
+                                    height: MediaQuery.of(context).size.height*
+                                        0.15,
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .pushNamed('/contact_parents');
+                                    },
+                                    imagePath:
+                                        'assets/images/contact_parents.png',
+                                  ),
+                                ),
+                                SizedBox(height:5),
+                                DigiMenuCard(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.13,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.35,
+                                      MediaQuery.of(context).size.height*0.3,
                                   onPressed: () {
                                     Navigator.of(context)
-                                        .pushNamed('/contact_parents');
+                                        .pushNamed('/upcoming_exams');
                                   },
-                                  imagePath:
-                                      'assets/images/contact_parents.png',
+                                  imagePath: 'assets/images/upcoming_exams.png',
                                 ),
-                              ),
-                              DigiMenuCard(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.28,
-                                width: MediaQuery.of(context).size.width * 0.35,
-                                onPressed: () {
-                                  Navigator.of(context)
-                                      .pushNamed('/upcoming_exams');
-                                },
-                                imagePath: 'assets/images/upcoming_exams.png',
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                          Column(
-                            children: <Widget>[
-                              Container(
-                                child: DigiMenuCard(
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  child: DigiMenuCard(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.3,
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .pushNamed('/remarks');
+                                    },
+                                    imagePath:
+                                        'assets/images/write_remarks.png',
+                                  ),
+                                ),
+                                SizedBox(height:5),
+                                DigiMenuCard(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.28,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.35,
+                                      MediaQuery.of(context).size.height * 0.15,
                                   onPressed: () {
-                                    Navigator.of(context).pushNamed('/remarks');
+                                    Navigator.of(context)
+                                        .pushNamed('/update_from_parents');
                                   },
-                                  imagePath: 'assets/images/write_remarks.png',
+                                  imagePath: 'assets/images/premark.png',
                                 ),
-                              ),
-                              DigiMenuCard(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.13,
-                                width: MediaQuery.of(context).size.width * 0.35,
-                                onPressed: () {
-                                  Navigator.of(context)
-                                      .pushNamed('/update_from_parents');
-                                },
-                                imagePath: 'assets/images/premark.png',
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
+                          SizedBox(
+                            width: 15,
+                          )
                         ],
                       ),
                       SizedBox(height: 5),
                       DigiMenuCard(
                         height: MediaQuery.of(context).size.height * 0.13,
-                        width: MediaQuery.of(context).size.width * 0.8,
+                        width: MediaQuery.of(context).size.width * 0.91,
                         onPressed: () {
                           Navigator.of(context)
                               .pushNamed('/update_student_profile');
@@ -266,46 +286,53 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(height: 5),
                       Row(
                         children: <Widget>[
-                          DigiMenuCard(
-                            height: MediaQuery.of(context).size.height * 0.28,
-                            width: MediaQuery.of(context).size.width * 0.35,
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed('/update_homework');
-                            },
-                            imagePath: 'assets/images/update_homework.png',
+                          SizedBox(width: 15),
+                          Expanded(
+                            flex: 1,
+                            child: DigiMenuCard(
+                              height: MediaQuery.of(context).size.height * 0.3,
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed('/update_homework');
+                              },
+                              imagePath: 'assets/images/update_homework.png',
+                            ),
                           ),
-                          Column(
-                            children: <Widget>[
-                              DigiMenuCard(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.13,
-                                width: MediaQuery.of(context).size.width * 0.35,
-                                onPressed: () {
-                                  Navigator.of(context)
-                                      .pushNamed('/update_test_paper');
-                                },
-                                imagePath: 'assets/images/update_testpaper.png',
-                              ),
-                              DigiMenuCard(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.13,
-                                width: MediaQuery.of(context).size.width * 0.35,
-                                onPressed: () {
-                                  Navigator.of(context)
-                                      .pushNamed('/approve_leave_request');
-                                },
-                                imagePath: 'assets/images/approve_leave.png',
-                              ),
-                            ],
+                          SizedBox(width: 15),
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              children: <Widget>[
+                                DigiMenuCard(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.15,
+                                  onPressed: () {
+                                    Navigator.of(context)
+                                        .pushNamed('/update_test_paper');
+                                  },
+                                  imagePath:
+                                      'assets/images/update_testpaper.png',
+                                ),
+                                SizedBox(height:5),
+                                DigiMenuCard(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.15,
+                                  onPressed: () {
+                                    Navigator.of(context)
+                                        .pushNamed('/approve_leave_request');
+                                  },
+                                  imagePath: 'assets/images/approve_leave.png',
+                                ),
+                              ],
+                            ),
                           ),
+                          SizedBox(width: 15)
                         ],
                       ),
                       SizedBox(height: 5),
                       DigiMenuCard(
-                        height:
-                                    MediaQuery.of(context).size.height * 0.13,
-                                width: MediaQuery.of(context).size.width * 0.35,
+                        height: MediaQuery.of(context).size.height * 0.16,
+                        width: MediaQuery.of(context).size.width * 0.5,
                         onPressed: () {
                           Navigator.of(context).pushNamed('/leave_request');
                         },

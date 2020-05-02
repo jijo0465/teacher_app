@@ -27,45 +27,47 @@ class _UpdateTestPaperState extends State<UpdateTestPaper> {
                 itemBuilder:
                     (BuildContext context, int index, Animation animation) {
                   return SizeTransition(
-                    child: TestPaper(onPressed: (){
-                      _listKey.currentState.removeItem(index,(context,animation){
-                        return Container();
-                      });
-                    },),
+                    child: TestPaper(
+                      onPressed: () {
+                        _listKey.currentState.removeItem(index,
+                            (context, animation) {
+                          return Container();
+                        });
+                      },
+                    ),
                     sizeFactor: animation,
                     axis: Axis.vertical,
                   );
                 },
               )),
-               Padding(
-            padding: const EdgeInsets.only(bottom: 12,left: 12,right: 12),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                RaisedButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(10.0)),
-                  color: Colors.blue[800],
-                  onPressed: () {},
-                  child: Text(
-                    'Update',
-                    style: TextStyle(color: Colors.white),
-                  ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12, left: 12, right: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(10.0)),
+                      color: Colors.blue[800],
+                      onPressed: () {},
+                      child: Text(
+                        'Update',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    FloatingActionButton(
+                      onPressed: () {
+                        _listKey.currentState.insertItem(1,
+                            duration: const Duration(milliseconds: 500));
+                      },
+                      child: Icon(Icons.add),
+                      backgroundColor: Colors.blue[800],
+                    ),
+                  ],
                 ),
-                FloatingActionButton(
-                  onPressed: () {
-                    _listKey.currentState.insertItem(1,
-                        duration: const Duration(milliseconds: 500));
-                  },
-                  child: Icon(Icons.add),
-                  backgroundColor: Colors.blue[800],
-                ),
-              ],
-            ),
-          ),
+              ),
             ],
           ),
-         
           DigiCampusAppbar(
             icon: Icons.close,
             onDrawerTapped: () {
