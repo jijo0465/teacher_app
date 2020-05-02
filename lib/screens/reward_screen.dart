@@ -30,14 +30,14 @@ class _RewardScreenState extends State<RewardScreen> {
                 Row(
                   children: <Widget>[
                     Container(
-                      padding: EdgeInsets.only(left: 8),
+                      padding: EdgeInsets.only(left: 6),
                       child: Text(
                         'Select',
                         style: TextStyle(fontSize: 18),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 20),
+                      padding: const EdgeInsets.only(left: 18),
                       child: Container(
                         height: 30,
                         decoration: BoxDecoration(
@@ -69,7 +69,7 @@ class _RewardScreenState extends State<RewardScreen> {
                           style: TextStyle(fontSize: 18),
                         )),
                     Padding(
-                      padding: const EdgeInsets.only(left: 20),
+                      padding: const EdgeInsets.only(left: 18),
                       child: Container(
                         height: 30,
                         decoration: BoxDecoration(
@@ -97,39 +97,46 @@ class _RewardScreenState extends State<RewardScreen> {
             SizedBox(height: 30),
             grade == 0 || division == 0
                 ? Container()
-                :  RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(10.0)),
-                    color: Colors.blue[800],
-                    onPressed: (){
-                       _listKey.currentState.insertItem(listIndex,
+                :Expanded(
+                                  child: Column(
+                    children: <Widget>[
+                      AnimatedList(
+                        
+                        shrinkWrap: true,
+                      key: _listKey,
+                      initialItemCount: 1,
+                      itemBuilder:
+                          (BuildContext context, int index, Animation animation) {
+                        return SizeTransition(
+                          child: RewardCard(
+                            onPressed: () {
+                              listIndex--;
+                              _listKey.currentState.removeItem(index,
+                                  (context, animation) {
+                                return Container();
+                              });
+                            },
+                          ),
+                          sizeFactor: animation,
+                          axis: Axis.vertical,
+                        );
+                      },
+                        ),
+                         Container(
+              child: FlatButton(
+                  child: Text('Add student',style: TextStyle(color:Colors.white),),
+               color: Colors.blue[800],
+                  onPressed: () {
+                    _listKey.currentState.insertItem(listIndex,
                         duration: const Duration(milliseconds: 500));
-                        listIndex=listIndex+1;
-                    },
-                    child: Text(
-                      'Add Student',
-                      style: TextStyle(color: Colors.white),
-                    ),
+                    listIndex = listIndex + 1;
+                  },
+              ),
+            ),
+                    ],
                   ),
-             Expanded(
-                  child: AnimatedList(
-                key: _listKey,
-                initialItemCount: 0,
-                itemBuilder:
-                    (BuildContext context, int index, Animation animation) {
-                  return SizeTransition(
-                    child: RewardCard(onPressed: (){
-                      listIndex--;
-                      _listKey.currentState.removeItem(index,(context,animation){
-
-                        return Container();
-                      });
-                    },),
-                    sizeFactor: animation,
-                    axis: Axis.vertical,
-                  );
-                },
-              )),
+                ),
+           
           ]),
           DigiCampusAppbar(
             icon: Icons.close,
