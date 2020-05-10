@@ -10,6 +10,7 @@ class LeaveRequest extends StatefulWidget {
 }
 
 class _LeaveRequestState extends State<LeaveRequest> {
+  DateTime selectDate=DateTime.now();
   bool showTimeline = false;
   @override
   Widget build(BuildContext context) {
@@ -29,13 +30,23 @@ class _LeaveRequestState extends State<LeaveRequest> {
                       Column(
                         children: <Widget>[
                           Text('From'),
-                          DatePicker(),
+                          DatePicker(
+                            selectedDate: selectDate,
+                            daySelect: (value){
+                              selectDate=value;
+                            },
+                          ),
                         ],
                       ),
                       Column(
                         children: <Widget>[
                           Text('To'),
-                          DatePicker(),
+                          DatePicker(
+                            selectedDate: selectDate,
+                            daySelect: (value){
+                              selectDate=value;
+                            },
+                          ),
                         ],
                       )
                     ],

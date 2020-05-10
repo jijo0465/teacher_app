@@ -10,6 +10,7 @@ class TestPaper extends StatefulWidget {
 }
 
 class _TestPaperState extends State<TestPaper> {
+  DateTime selectDate=DateTime.now();
   int grade = 0;
   int division = 0;
   @override
@@ -25,7 +26,14 @@ class _TestPaperState extends State<TestPaper> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      DatePicker(),
+                      DatePicker(
+                        selectedDate: selectDate,
+                        daySelect: (value){
+                            setState(() {
+                              selectDate=value;
+                            });
+                        },
+                      ),
                       IconButton(
                           icon: Icon(
                             Icons.delete,

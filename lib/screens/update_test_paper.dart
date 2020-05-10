@@ -29,10 +29,13 @@ class _UpdateTestPaperState extends State<UpdateTestPaper> {
                   return SizeTransition(
                     child: TestPaper(
                       onPressed: () {
+                       if(index!=0)
+                       {
                         _listKey.currentState.removeItem(index,
                             (context, animation) {
                           return Container();
                         });
+                      }
                       },
                     ),
                     sizeFactor: animation,
