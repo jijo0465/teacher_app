@@ -7,9 +7,11 @@ import 'package:teacher_app/screens/attendance_screen.dart';
 import 'package:teacher_app/screens/bus_tracking_screen.dart';
 import 'package:teacher_app/screens/classroom_screen.dart';
 import 'package:teacher_app/screens/contact_parent_screen.dart';
+import 'package:teacher_app/screens/discussions_screen.dart';
 import 'package:teacher_app/screens/forgot_password_screen.dart';
 import 'package:teacher_app/screens/home_screen.dart';
 import 'package:teacher_app/screens/leave_request_screen.dart';
+import 'package:teacher_app/screens/live_screen.dart';
 import 'package:teacher_app/screens/new_password_screen.dart';
 import 'package:teacher_app/screens/remark_screen.dart';
 import 'package:teacher_app/screens/reward_screen.dart';
@@ -67,7 +69,9 @@ class TeacherApp extends StatelessWidget {
             '/leave_request': (context) => LeaveRequest(),
             '/approve_leave_request': (context) => ApproveLeaveRequest(),
             '/attendance_history':(context) => AttendanceHistory(),
-            '/classroom_screen':(context)=>ClassroomScreen()
+            '/classroom_screen': (context) => ClassroomScreen(),
+            '/discussions': (context) => DiscussionsScreen(),
+            '/live': (context) => LiveScreen(),
           },
         ));
   }

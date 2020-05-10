@@ -35,6 +35,12 @@ dependencies:
   flutter_datetime_picker: ^1.3.5
   intl: ^0.16.1
   table_calendar: ^2.2.3
+  video_player: ^0.10.10
+  webview_flutter: ^0.3.21
+  firebase_core: ^0.4.4+3
+  firebase_analytics: ^5.0.11
+  cloud_firestore: ^0.13.5
+  firebase_storage: ^3.1.5
  
 
 dev_dependencies:
@@ -62,6 +68,7 @@ flutter:
     - assets/images/contact_parents.png
     - assets/images/student_profile.png
     - assets/images/premark.png
+    - assets/images/classroom.png
     - assets/images/update_homework.png
     - assets/images/update_testpaper.png
     - assets/images/approve_leave.png
@@ -72,6 +79,8 @@ flutter:
     - assets/images/sir.jpg
     - assets/images/child.jpg
     - assets/images/calendar.jpg
+    - assets/videos/smartschool.mp4
+    
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

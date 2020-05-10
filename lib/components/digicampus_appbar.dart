@@ -28,7 +28,7 @@ class DigiCampusAppbar extends StatelessWidget {
                 letterSpacing: 1,
                 color: Colors.white,
                 fontSize: 20,
-                fontWeight: FontWeight.w600),
+                fontWeight: FontWeight.w400),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 30),
@@ -42,9 +42,9 @@ class DigiCampusAppbar extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.blue[800],
           borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(50),
-              bottomRight: Radius.circular(50))),
-      height: 120 - MediaQuery.of(context).padding.top,
+              bottomLeft: Radius.circular(30),
+              bottomRight: Radius.circular(30))),
+      height: 110 - MediaQuery.of(context).padding.top,
       width: MediaQuery.of(context).size.width,
     );
   }

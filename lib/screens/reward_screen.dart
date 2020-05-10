@@ -23,7 +23,7 @@ class _RewardScreenState extends State<RewardScreen> {
       body: Stack(
         children: <Widget>[
           SingleChildScrollView(
-                      child: Column(children: <Widget>[
+            child: Column(children: <Widget>[
               SizedBox(height: 120),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -95,12 +95,12 @@ class _RewardScreenState extends State<RewardScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 30),
               grade == 0 || division == 0
                   ? Container()
                   : Column(
                       children: <Widget>[
                         AnimatedList(
+                          physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           key: _listKey,
                           initialItemCount: 1,
@@ -110,12 +110,11 @@ class _RewardScreenState extends State<RewardScreen> {
                               child: RewardCard(
                                 onPressed: () {
                                   listIndex--;
-                                  if(index!=0)
-                                  {
-                                  _listKey.currentState.removeItem(index,
-                                      (context, animation) {
-                                    return Container();
-                                  });
+                                  if (index != 0) {
+                                    _listKey.currentState.removeItem(index,
+                                        (context, animation) {
+                                      return Container();
+                                    });
                                   }
                                 },
                               ),
@@ -124,24 +123,24 @@ class _RewardScreenState extends State<RewardScreen> {
                             );
                           },
                         ),
-                        Row(mainAxisAlignment: MainAxisAlignment.end,
-                      
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             Container(
-                              padding: EdgeInsets.only(right:8),
-                                child: FlatButton(
-                                  child: Text(
-                                    'Add student',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  color: Colors.blue[800],
-                                  onPressed: () {
-                                    _listKey.currentState.insertItem(listIndex,
-                                        duration: const Duration(milliseconds: 500));
-                                    listIndex = listIndex + 1;
-                                  },
+                              padding: EdgeInsets.only(right: 8),
+                              child: FlatButton(
+                                child: Text(
+                                  'Add student',
+                                  style: TextStyle(color: Colors.white),
                                 ),
+                                color: Colors.blue[800],
+                                onPressed: () {
+                                  _listKey.currentState.insertItem(listIndex,
+                                      duration: const Duration(milliseconds: 500));
+                                  listIndex = listIndex + 1;
+                                },
                               ),
+                            ),
                           ],
                         ),
                       ],
@@ -149,11 +148,11 @@ class _RewardScreenState extends State<RewardScreen> {
             ]),
           ),
           DigiCampusAppbar(
-            icon: Icons.close,
-            onDrawerTapped: () {
-              Navigator.of(context).pop();
-            },
-          ),
+              icon: Icons.close,
+              onDrawerTapped: () {
+                Navigator.of(context).pop();
+              },
+            ),
         ],
       ),
     );

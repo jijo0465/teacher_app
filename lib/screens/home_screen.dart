@@ -147,13 +147,13 @@ class _HomePageState extends State<HomePage> {
                     children: <Widget>[
                       SizedBox(height: 30),
                        DigiMenuCard(
-                        height: MediaQuery.of(context).size.height * 0.13,
+                        height: MediaQuery.of(context).size.height * 0.17,
                         width: MediaQuery.of(context).size.width * 0.91,
                         onPressed: () {
                           Navigator.of(context)
                               .pushNamed('/classroom_screen');
                         },
-                        imagePath: 'assets/images/student_profile.png',
+                        imagePath: 'assets/images/classroom.png',
                       ),
                       SizedBox(height:5),
                       Row(

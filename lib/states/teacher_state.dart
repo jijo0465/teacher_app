@@ -8,9 +8,11 @@ class TeacherState with ChangeNotifier {
   TeacherState.instance():_teacher=Teacher(0,'None');
 
   String get teacherName => _teacher.name;
+  Teacher get teacher => this._teacher;
 
   setTeacher(Teacher teacher) async {
     this._teacher = teacher;
     notifyListeners();
   }
+
 }

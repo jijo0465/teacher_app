@@ -58,7 +58,8 @@ class DigiAppbar extends StatelessWidget {
                         builder: (BuildContext context, TeacherState value,
                             Widget child) {
                           return Text(
-                            'Hi ${value.teacherName} !',
+                            // 'Hi ${value.teacherName} !',
+                            'Hi Rachel !',
                             style: TextStyle(fontSize: 20, color: Colors.white),
                           );
                         },
@@ -95,7 +96,7 @@ class DigiAppbar extends StatelessWidget {
 class BackgroundClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    var roundnessFactor = 50.0;
+    var roundnessFactor = 40.0;
     var path = Path();
     path.moveTo(0, 0);
     path.lineTo(0, size.height);
