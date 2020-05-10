@@ -38,16 +38,16 @@ class _RemarkScreenState extends State<RemarkScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 30),
                       child: Container(
-                          height: 30,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            border: Border.all(
-                                color: Colors.blue,
-                                style: BorderStyle.solid,
-                                width: 0.80),
-                          ),
-                          padding: EdgeInsets.only(left: 20),
-                          child: SelectClass(
+                        height: 30,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          border: Border.all(
+                              color: Colors.blue,
+                              style: BorderStyle.solid,
+                              width: 0.80),
+                        ),
+                        padding: EdgeInsets.only(left: 20),
+                        child: SelectClass(
                           onchanged: (value) {
                             division = 0;
                             student = 0;
@@ -56,7 +56,8 @@ class _RemarkScreenState extends State<RemarkScreen> {
                             });
                           },
                           grade: grade,
-                        ),),
+                        ),
+                      ),
                     )
                   ],
                 ),
@@ -77,16 +78,16 @@ class _RemarkScreenState extends State<RemarkScreen> {
                           Padding(
                             padding: const EdgeInsets.only(left: 10),
                             child: Container(
-                                height: 30,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  border: Border.all(
-                                      color: Colors.blue,
-                                      style: BorderStyle.solid,
-                                      width: 0.80),
-                                ),
-                                padding: EdgeInsets.only(left: 20),
-                                child:SelectDivision(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                border: Border.all(
+                                    color: Colors.blue,
+                                    style: BorderStyle.solid,
+                                    width: 0.80),
+                              ),
+                              padding: EdgeInsets.only(left: 20),
+                              child: SelectDivision(
                                 onchanged: (value) {
                                   student = 0;
                                   setState(() {
@@ -94,7 +95,8 @@ class _RemarkScreenState extends State<RemarkScreen> {
                                   });
                                 },
                                 division: division,
-                              ),),
+                              ),
+                            ),
                           )
                         ],
                       ),
@@ -115,23 +117,24 @@ class _RemarkScreenState extends State<RemarkScreen> {
                           Padding(
                             padding: const EdgeInsets.only(left: 10),
                             child: Container(
-                                height: 30,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  border: Border.all(
-                                      color: Colors.blue,
-                                      style: BorderStyle.solid,
-                                      width: 0.80),
-                                ),
-                                padding: EdgeInsets.only(left: 16),
-                                child:SelectStudent(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                border: Border.all(
+                                    color: Colors.blue,
+                                    style: BorderStyle.solid,
+                                    width: 0.80),
+                              ),
+                              padding: EdgeInsets.only(left: 16),
+                              child: SelectStudent(
                                 onchanged: (value) {
                                   setState(() {
                                     student = value;
                                   });
                                 },
                                 student: student,
-                              ),),
+                              ),
+                            ),
                           )
                         ],
                       ),
@@ -152,17 +155,16 @@ class _RemarkScreenState extends State<RemarkScreen> {
                                   minLines: 3,
                                   maxLines: 5,
                                   decoration: InputDecoration(
-                                     
                                       enabledBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(12.0),
-                                          borderSide: BorderSide(
-                                              color: Colors.black)),
+                                          borderSide:
+                                              BorderSide(color: Colors.black)),
                                       border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(12.0),
-                                          borderSide: BorderSide(
-                                              color: Colors.blue))),
+                                          borderSide:
+                                              BorderSide(color: Colors.blue))),
                                 ),
                               ),
                               Align(
@@ -172,7 +174,6 @@ class _RemarkScreenState extends State<RemarkScreen> {
                                     height: 30,
                                     width: 100,
                                     alignment: Alignment.center,
-                                    
                                     child: Text(
                                       'Remarks',
                                       style: TextStyle(fontSize: 18),
@@ -200,59 +201,59 @@ class _RemarkScreenState extends State<RemarkScreen> {
             ],
           ),
           AnimatedPositioned(
-          duration: Duration(milliseconds: 500),
-          top: showTimeline ? 180 : MediaQuery.of(context).size.height - 48,
-          child: Column(children: <Widget>[
-            GestureDetector(
-              onVerticalDragStart: (details) {
-                setState(() {
-                  showTimeline = !showTimeline;
-                });
-              },
-              onTap: () {
-                setState(() {
-                  showTimeline = !showTimeline;
-                });
-              },
-              child: Container(
-                height: 45,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    color: Colors.blue[800],
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(50),
-                        topRight: Radius.circular(50))),
-                alignment: Alignment.topCenter,
+            duration: Duration(milliseconds: 500),
+            top: showTimeline ? 180 : MediaQuery.of(context).size.height - 48,
+            child: Column(children: <Widget>[
+              GestureDetector(
+                onVerticalDragStart: (details) {
+                  setState(() {
+                    showTimeline = !showTimeline;
+                  });
+                },
+                onTap: () {
+                  setState(() {
+                    showTimeline = !showTimeline;
+                  });
+                },
                 child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(15),
-                            bottomRight: Radius.circular(15))),
-                    padding: EdgeInsets.only(left: 12, right: 12),
-                    height: 40,
-                    width: 120,
-                    child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Text('History',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.red[300],
-                              )),
-                        ])),
+                  height: 45,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.blue[800],
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(50),
+                          topRight: Radius.circular(50))),
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(15),
+                              bottomRight: Radius.circular(15))),
+                      padding: EdgeInsets.only(left: 12, right: 12),
+                      height: 40,
+                      width: 120,
+                      child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Text('History',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.red[300],
+                                )),
+                          ])),
+                ),
               ),
-            ),
-            Container(
-              color: Colors.blue[800],
-              width: (MediaQuery.of(context).size.width),
-              height: MediaQuery.of(context).size.height - 120 - 30 - 12,
-              child: Column(
-                children: <Widget>[
-                  SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.only(left:14,right: 14),
-                    child: Container(
+              Container(
+                color: Colors.blue[800],
+                width: (MediaQuery.of(context).size.width),
+                height: MediaQuery.of(context).size.height - 120 - 30 - 12,
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 14, right: 14),
+                      child: Container(
                         width: MediaQuery.of(context).size.width,
                         height: 130,
                         decoration: BoxDecoration(
@@ -269,7 +270,8 @@ class _RemarkScreenState extends State<RemarkScreen> {
                               ),
                               SizedBox(height: 60),
                               Padding(
-                                padding: const EdgeInsets.only(left:14,right: 14),
+                                padding:
+                                    const EdgeInsets.only(left: 14, right: 14),
                                 child: Container(
                                   width: MediaQuery.of(context).size.width,
                                   child: Column(
@@ -279,25 +281,29 @@ class _RemarkScreenState extends State<RemarkScreen> {
                                         thickness: 1.5,
                                       ),
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
                                           Container(
                                               child: Text(
                                             '11/06/2020',
                                             style: TextStyle(
-                                                fontSize: 12, color: Colors.blue),
+                                                fontSize: 12,
+                                                color: Colors.blue),
                                           )),
                                           Container(
                                               child: Text(
                                             'VII A',
                                             style: TextStyle(
-                                                fontSize: 12, color: Colors.blue),
+                                                fontSize: 12,
+                                                color: Colors.blue),
                                           )),
                                           Container(
                                               child: Text(
                                             'Jon Snow',
                                             style: TextStyle(
-                                                fontSize: 12, color: Colors.blue),
+                                                fontSize: 12,
+                                                color: Colors.blue),
                                           )),
                                         ],
                                       ),
@@ -307,20 +313,20 @@ class _RemarkScreenState extends State<RemarkScreen> {
                               ),
                             ],
                           ),
-                        ),),
-                  ),
-                ],
-              ),
-            )
-          ]),
-        ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ]),
+          ),
           DigiCampusAppbar(
             icon: Icons.close,
             onDrawerTapped: () {
               Navigator.of(context).pop();
             },
           ),
-         
         ],
       ),
     );

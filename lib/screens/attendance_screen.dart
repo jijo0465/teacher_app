@@ -25,24 +25,26 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                 AttendanceCard(),
                 SizedBox(height: 20),
                 Container(
-                  width: MediaQuery.of(context).size.width,
-                  height:MediaQuery.of(context).size.height,
-                  decoration: BoxDecoration(
-                    color: Colors.blue[400],
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(50),
-                          topRight: Radius.circular(50))
-                  ),
-                   
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                        color: Colors.blue[400],
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(50),
+                            topRight: Radius.circular(50))),
                     padding: EdgeInsets.all(12),
                     child: Padding(
-                      padding: const EdgeInsets.only(left:16),
-                      child: AttendanceTable(),
+                      padding: const EdgeInsets.only(left: 16),
+                      child: AttendanceTable(
+                        onChanged: (bool state){
+                           print('turned ${(state) ? 'on' : 'off'}');
+                        },
+                      ),
                     )),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 12,),
+                  padding:
+                      const EdgeInsets.only(bottom: 12, left: 120, right: 100),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       RaisedButton(
                           shape: RoundedRectangleBorder(
@@ -50,17 +52,18 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                           color: Colors.blue[800],
                           onPressed: () {},
                           child: Text(
-                            'History',
+                            'Update',
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           )),
-                      RaisedButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(10.0)),
-                        color: Colors.blue[800],
-                        onPressed: () {},
-                        child: Text('Update',
-                            style: TextStyle(fontSize: 16, color: Colors.white)),
-                      )
+                      Container(
+                          child: IconButton(
+                              icon: Icon(
+                                Icons.history,
+                                color: Colors.black,
+                              ),
+                              onPressed: (){
+                                Navigator.of(context).pushNamed('/attendance_history');
+                              }))
                     ],
                   ),
                 ),

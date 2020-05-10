@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teacher_app/redirect.dart';
 import 'package:teacher_app/screens/approve_leave_request.dart';
+import 'package:teacher_app/screens/attendance_history.dart';
 import 'package:teacher_app/screens/attendance_screen.dart';
 import 'package:teacher_app/screens/bus_tracking_screen.dart';
+import 'package:teacher_app/screens/classroom_screen.dart';
 import 'package:teacher_app/screens/contact_parent_screen.dart';
 import 'package:teacher_app/screens/forgot_password_screen.dart';
 import 'package:teacher_app/screens/home_screen.dart';
@@ -62,12 +64,10 @@ class TeacherApp extends StatelessWidget {
             '/new_password': (context) => NewPasswordScreen(),
             '/update_test_paper': (context) => UpdateTestPaper(),
             '/update_homework': (context) => UpdateHomework(),
-
             '/leave_request': (context) => LeaveRequest(),
-            '/approve_leave_request': (context) => ApproveLeaveRequest()
-            // 'login': (context) => PhoneLoginScreen(),
-            // 'owner_form': (context)=> OwnerFormScreen(),
-            // 'buyer_form': (context)=> BuyerFormScreen(),
+            '/approve_leave_request': (context) => ApproveLeaveRequest(),
+            '/attendance_history':(context) => AttendanceHistory(),
+            '/classroom_screen':(context)=>ClassroomScreen()
           },
         ));
   }
