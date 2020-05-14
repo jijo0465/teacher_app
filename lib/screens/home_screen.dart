@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 image: DecorationImage(
                                   fit: BoxFit.fill,
                                   image: AssetImage(
-                                    'assets/images/rachel.png',
+                                    'assets/images/sir.jpg',
                                   ),
                                 ),
                                 shape: BoxShape.circle,

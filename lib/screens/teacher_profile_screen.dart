@@ -62,7 +62,7 @@ class TeacherProfileScreen extends StatelessWidget {
                         image: DecorationImage(
                             alignment: Alignment.center,
                             fit: BoxFit.fill,
-                            image: AssetImage('assets/images/rachel.png'))),
+                            image: AssetImage('assets/images/sir.jpg'))),
                   ),
                 ),
                 SizedBox(

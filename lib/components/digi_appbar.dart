@@ -78,7 +78,7 @@ class DigiAppbar extends StatelessWidget {
                             image: DecorationImage(
                               fit: BoxFit.fill,
                               image: AssetImage(
-                                'assets/images/rachel.png',
+                                'assets/images/sir.jpg',
                               ),
                             ),
                             shape: BoxShape.circle),
