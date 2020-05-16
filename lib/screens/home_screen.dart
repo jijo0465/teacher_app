@@ -358,13 +358,43 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       SizedBox(height: 5),
-                      DigiMenuCard(
-                        height: MediaQuery.of(context).size.height * 0.16,
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/leave_request');
-                        },
-                        imagePath: 'assets/images/leave_request.png',
+                      Row(
+                        children: <Widget>[
+                          SizedBox(width: 15,),
+                          Column(
+                            children: <Widget>[
+                              DigiMenuCard(
+                                height: MediaQuery.of(context).size.height * 0.15,
+                                width: MediaQuery.of(context).size.width*0.44,
+                                onPressed: () {
+                                  Navigator.of(context).pushNamed('/leave_request');
+                                },
+                                imagePath: 'assets/images/leave_request.png',
+                              ),
+                              SizedBox(height: 5),
+                               DigiMenuCard(
+                            height: MediaQuery.of(context).size.height * 0.15,
+                             width: MediaQuery.of(context).size.width*0.44,
+                            onPressed: () {
+                              Navigator.of(context).pushNamed('/student_360');
+                            },
+                            imagePath: 'assets/images/leave_request.png',
+                          ),
+                            ],
+                          ),
+                         SizedBox(width: 15,),
+                         DigiMenuCard(
+                                  height:
+                                      MediaQuery.of(context).size.height*0.3,
+                                      width: MediaQuery.of(context).size.width*0.43,
+                                  onPressed: () {
+                                    Navigator.of(context)
+                                        .pushNamed('/student_result');
+                                  },
+                                  imagePath: 'assets/images/upcoming_exams.png',
+                                ),
+                          
+                        ],
                       )
                     ],
                   ),

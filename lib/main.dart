@@ -17,6 +17,8 @@ import 'package:teacher_app/screens/new_password_screen.dart';
 import 'package:teacher_app/screens/remark_screen.dart';
 import 'package:teacher_app/screens/reward_screen.dart';
 import 'package:teacher_app/screens/settings_screen.dart';
+import 'package:teacher_app/screens/student_360.dart';
+import 'package:teacher_app/screens/student_result.dart';
 import 'package:teacher_app/screens/teacher_profile_screen.dart';
 import 'package:teacher_app/screens/update_homework.dart';
 import 'package:teacher_app/screens/update_test_paper.dart';
@@ -74,6 +76,8 @@ class TeacherApp extends StatelessWidget {
             '/discussions': (context) => DiscussionsScreen(),
             '/live': (context) => LiveScreen(),
             '/chat': (context) => ChatScreen(),
+            '/student_360': (context) => Student360Screen(), 
+            '/student_result':(context) => StudentResult(),
           },
         ));
   }
