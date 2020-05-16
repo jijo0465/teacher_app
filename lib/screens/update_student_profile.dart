@@ -357,7 +357,7 @@ class _UpdateStudentProfileState extends State<UpdateStudentProfile> {
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             new BorderRadius.circular(10.0)),
-                                    color: Colors.blue[800],
+                                    color: Theme.of(context).primaryColor,
                                     onPressed: _validateInputs,
                                     child: Text(
                                       'save',

@@ -12,7 +12,7 @@ class DigiAppbar extends StatelessWidget {
         clipper: BackgroundClipper(),
         child: Container(
           padding: EdgeInsets.only(top: 35),
-          color: Colors.blue[800],
+          color:  Theme.of(context).primaryColor,
           height: 180,
           width: double.infinity,
           child: Column(

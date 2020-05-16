@@ -133,7 +133,7 @@ class _RewardScreenState extends State<RewardScreen> {
                                   'Add student',
                                   style: TextStyle(color: Colors.white),
                                 ),
-                                color: Colors.blue[800],
+                                color: Theme.of(context).primaryColor,
                                 onPressed: () {
                                   _listKey.currentState.insertItem(listIndex,
                                       duration: const Duration(milliseconds: 500));

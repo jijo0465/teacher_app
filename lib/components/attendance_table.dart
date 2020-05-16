@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AttendanceTable extends StatefulWidget {
   final ValueChanged<bool> onChanged;
@@ -31,6 +30,7 @@ class _AttendanceTableState extends State<AttendanceTable> {
               style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 14,
+                  fontFamily: 'Poppins',
                   color: Colors.white),
             )),
             DataColumn(
@@ -38,6 +38,7 @@ class _AttendanceTableState extends State<AttendanceTable> {
                     style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 14,
+                        fontFamily: 'Poppins',
                         color: Colors.white))),
             DataColumn(
                 label: Container(
@@ -46,6 +47,7 @@ class _AttendanceTableState extends State<AttendanceTable> {
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
+                      fontFamily: 'Poppins',
                       color: Colors.white)),
             ))
           ],

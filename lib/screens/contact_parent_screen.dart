@@ -313,7 +313,7 @@ class _ContactParentScreenState extends State<ContactParentScreen> {
                                     'Call',
                                     style: TextStyle(color: Colors.white),
                                   ),
-                                  color: Colors.blue[800],
+                                  color: Theme.of(context).primaryColor,
                                 ),
                                 RaisedButton(
                                   shape: RoundedRectangleBorder(
@@ -324,7 +324,7 @@ class _ContactParentScreenState extends State<ContactParentScreen> {
                                     'Message',
                                     style: TextStyle(color: Colors.white),
                                   ),
-                                  color: Colors.blue[800],
+                                  color: Theme.of(context).primaryColor,
                                 )
                               ],
                             )

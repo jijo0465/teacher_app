@@ -1,6 +1,10 @@
+import 'dart:io';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:teacher_app/components/digicampus_appbar.dart';
 import 'package:teacher_app/models/grade.dart';
@@ -8,6 +12,62 @@ import 'package:teacher_app/models/student.dart';
 import 'package:teacher_app/models/teacher.dart';
 import 'package:teacher_app/states/teacher_state.dart';
 import 'package:video_player/video_player.dart';
+
+enum FileType {
+  ANY,
+  IMAGE,
+  VIDEO,
+  CAMERA,
+  CUSTOM,
+}
+
+class FilePicker {
+  static const MethodChannel _channel = const MethodChannel('file_picker');
+  static const String _tag = 'FilePicker';
+
+  static Future<String> _getPath(String type) async {
+    try {
+      return await _channel.invokeMethod(type);
+    } on PlatformException catch (e) {
+      print("[$_tag] Platform exception: " + e.toString());
+    } catch (e) {
+      print(
+          "[$_tag] Unsupported operation. This probably have happened because [${type.split('_').last}] is an unsupported file type. You may want to try FileType.ALL instead.");
+    }
+    return null;
+  }
+
+  static Future<String> _getImage(ImageSource type) async {
+    try {
+      var image = await ImagePicker.pickImage(source: type);
+      return image?.path;
+    } on PlatformException catch (e) {
+      print("[$_tag] Platform exception: " + e.toString());
+    }
+    return null;
+  }
+
+  static Future<Map<String, dynamic>> getFilePath(
+      {FileType type = FileType.ANY, String fileExtension}) async {
+    switch (type) {
+      case FileType.IMAGE:
+        final result = await _getImage(ImageSource.gallery);
+        return <String, String>{'path': result};
+      case FileType.VIDEO:
+        final result = await _channel.invokeMethod('VIDEO');
+        return Map<String, dynamic>.from(result);
+      case FileType.ANY:
+        final result = await _getPath('ANY');
+        return <String, String>{'path': result};
+      case FileType.CUSTOM:
+        final result = await _getPath('__CUSTOM_' + (fileExtension ?? ''));
+        return <String, String>{'path': result};
+      default:
+        final result = await _getPath('ANY');
+        return <String, String>{'path': result};
+    }
+  }
+}
 
 class DiscussionsScreen extends StatefulWidget {
   // final Grade grade = Grade();
@@ -36,6 +96,15 @@ class _DiscussionsScreenState extends State<DiscussionsScreen> {
   Firestore firestore = Firestore.instance;
   VideoPlayerController _playerController;
   Color color = Colors.grey;
+  File imageURI;
+
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      imageURI = image;
+    });
+  }
 
   @override
   void initState() {
@@ -121,11 +190,11 @@ class _DiscussionsScreenState extends State<DiscussionsScreen> {
           height: 12,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Container(
               height: 40,
-              width: MediaQuery.of(context).size.width - 60,
+              width: MediaQuery.of(context).size.width - 100,
               // decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
               child: TextField(
                 onChanged: (text) {
@@ -151,8 +220,9 @@ class _DiscussionsScreenState extends State<DiscussionsScreen> {
                   ),
                   suffixIcon: IconButton(
                     onPressed: () {
-                      _addToDiscussions(_textFieldController.text);
-                      _textFieldController.clear();
+                      getImage();
+                      // _addToDiscussions(_textFieldController.text);
+                      // _textFieldController.clear();
                     },
                     icon: Icon(Icons.camera_alt),
                     color: Colors.blue,
@@ -168,6 +238,9 @@ class _DiscussionsScreenState extends State<DiscussionsScreen> {
                 // },
               ),
             ),
+            IconButton(icon: Icon(Icons.book), onPressed: (){
+              FilePicker();
+            }),
             Container(
                 height: 40,
                 width: 40,
@@ -187,41 +260,41 @@ class _DiscussionsScreenState extends State<DiscussionsScreen> {
           ],
         ),
         SizedBox(height: 12),
-        StreamBuilder<QuerySnapshot>(
-            // key: _key,
-            stream: firestore.collection('classroom_${grade.id}').snapshots(),
-            builder:
-                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (!snapshot.hasData)
-                return Center(
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                        Theme.of(context).primaryColor),
-                  ),
-                );
-              else {
-                _items = snapshot.data.documents;
-                listItem(_items);
-                // print('item: ${_items[0]}');
-                // setState(() {
-                // AnimatedList.of(context).insertItem(0);
-                // Future.delayed(Duration(milliseconds: 200))
-                //     .then((value) => _listKey.currentState.insertItem(0));
+        // StreamBuilder<QuerySnapshot>(
+        //     // key: _key,
+        //     stream: firestore.collection('classroom_${grade.id}').snapshots(),
+        //     builder:
+        //         (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        //       if (!snapshot.hasData)
+        //         return Center(
+        //           child: CircularProgressIndicator(
+        //             valueColor: AlwaysStoppedAnimation<Color>(
+        //                 Theme.of(context).primaryColor),
+        //           ),
+        //         );
+        //       else {
+        //         _items = snapshot.data.documents;
+        //         listItem(_items);
+        //         // print('item: ${_items[0]}');
+        //         // setState(() {
+        //         // AnimatedList.of(context).insertItem(0);
+        //         // Future.delayed(Duration(milliseconds: 200))
+        //         //     .then((value) => _listKey.currentState.insertItem(0));
 
-                // });
-                // return listItem(_items[0]);'
-                // commentData.addAll(_items[0]['']['']);
-                return (_items.isNotEmpty)
-                    ? Expanded(
-                        child: SingleChildScrollView(
-                            child: Column(
-                                children:
-                                    discussionListWidget.reversed.toList())
-                            // child: listItem(_items[0]['disussion'])
-                            ))
-                    : Container(child: Text('No Discussions yet!!'));
-              }
-            }),
+        //         // });
+        //         // return listItem(_items[0]);'
+        //         // commentData.addAll(_items[0]['']['']);
+        //         return (_items.isNotEmpty)
+        //             ? Expanded(
+        //                 child: SingleChildScrollView(
+        //                     child: Column(
+        //                         children:
+        //                             discussionListWidget.reversed.toList())
+        //                     // child: listItem(_items[0]['disussion'])
+        //                     ))
+        //             : Container(child: Text('No Discussions yet!!'));
+        //       }
+        //     }),
       ]),
     ));
   }

@@ -13,6 +13,7 @@ class _ApproveLeaveRequestState extends State<ApproveLeaveRequest> {
   bool _value = true;
   @override
   Widget build(BuildContext context) {
+    Color color = Theme.of(context).primaryColor;
     return Scaffold(
         body: Stack(
       children: <Widget>[
@@ -128,7 +129,7 @@ class _ApproveLeaveRequestState extends State<ApproveLeaveRequest> {
                               shape: RoundedRectangleBorder(
                                   borderRadius:
                                       new BorderRadius.circular(10.0)),
-                              color: Colors.blue[800],
+                              color: Theme.of(context).primaryColor,
                               onPressed: () {},
                               child: Text(
                                 'Approve',
@@ -139,7 +140,7 @@ class _ApproveLeaveRequestState extends State<ApproveLeaveRequest> {
                               shape: RoundedRectangleBorder(
                                   borderRadius:
                                       new BorderRadius.circular(10.0)),
-                              color: Colors.blue[800],
+                              color: Theme.of(context).primaryColor,
                               onPressed: () {},
                               child: Text(
                                 'Contact',
@@ -173,7 +174,15 @@ class _ApproveLeaveRequestState extends State<ApproveLeaveRequest> {
                 height: 45,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: Colors.blue[800],
+                    gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                        color.withOpacity(0.8),
+                        color,
+                        color.withOpacity(0.9)
+                      ],
+                    ),
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(50),
                         topRight: Radius.circular(50))),
@@ -199,7 +208,17 @@ class _ApproveLeaveRequestState extends State<ApproveLeaveRequest> {
               ),
             ),
             Container(
-              color: Colors.blue[800],
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    color.withOpacity(0.8),
+                    color,
+                    color.withOpacity(0.9)
+                  ],
+                ),
+              ),
               width: (MediaQuery.of(context).size.width),
               height: MediaQuery.of(context).size.height - 120 - 30 - 12,
               child: Column(

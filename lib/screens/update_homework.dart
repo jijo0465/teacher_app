@@ -200,7 +200,7 @@ class _UpdateHomeworkState extends State<UpdateHomework> {
                   child: RaisedButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(10.0)),
-                    color: Colors.blue[800],
+                    color: Theme.of(context).primaryColor,
                     onPressed: () {},
                     child: Text(
                       'Update',

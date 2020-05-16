@@ -51,7 +51,7 @@ class _UpdateTestPaperState extends State<UpdateTestPaper> {
                     RaisedButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(10.0)),
-                      color: Colors.blue[800],
+                      color: Theme.of(context).primaryColor,
                       onPressed: () {},
                       child: Text(
                         'Update',
@@ -64,7 +64,7 @@ class _UpdateTestPaperState extends State<UpdateTestPaper> {
                             duration: const Duration(milliseconds: 500));
                       },
                       child: Icon(Icons.add),
-                      backgroundColor: Colors.blue[800],
+                      backgroundColor: Theme.of(context).primaryColor,
                     ),
                   ],
                 ),

@@ -59,7 +59,7 @@ class _RewardCardState extends State<RewardCard> {
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
-                    color: Colors.blue[800]),
+                    color:  Theme.of(context).primaryColor),
                 child: DigiRating(
                   rating: 0,
                   valueChanged: (value) {
@@ -102,7 +102,7 @@ class _RewardCardState extends State<RewardCard> {
                   RaisedButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(10.0)),
-                    color: Colors.blue[800],
+                    color: Theme.of(context).primaryColor,
                     onPressed: () {},
                     child: Text(
                       'Update',
@@ -112,7 +112,7 @@ class _RewardCardState extends State<RewardCard> {
                   RaisedButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(10.0)),
-                    color: Colors.blue[800],
+                    color: Theme.of(context).primaryColor,
                     onPressed: widget.onPressed,
                     child: Text(
                       'Remove',

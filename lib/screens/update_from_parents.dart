@@ -19,7 +19,7 @@ class UpdateFromParents extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
-                        color: Colors.blue),
+                        color: Theme.of(context).primaryColor),
                   ),
                 ),
               ),
@@ -58,19 +58,19 @@ class UpdateFromParents extends StatelessWidget {
                                         child: Text(
                                       '10/06/2020',
                                       style: TextStyle(
-                                          fontSize: 12, color: Colors.blue),
+                                          fontSize: 12, color: Theme.of(context).primaryColor),
                                     )),
                                     Container(
                                         child: Text(
                                       'V A',
                                       style: TextStyle(
-                                          fontSize: 12, color: Colors.blue),
+                                          fontSize: 12, color: Theme.of(context).primaryColor),
                                     )),
                                     Container(
                                         child: Text(
                                       'Parent of Sansa',
                                       style: TextStyle(
-                                          fontSize: 12, color: Colors.blue),
+                                          fontSize: 12, color: Theme.of(context).primaryColor),
                                     )),
                                   ],
                                 ),
@@ -118,19 +118,19 @@ class UpdateFromParents extends StatelessWidget {
                                         child: Text(
                                       '11/06/2020',
                                       style: TextStyle(
-                                          fontSize: 12, color: Colors.blue),
+                                          fontSize: 12, color: Theme.of(context).primaryColor),
                                     )),
                                     Container(
                                         child: Text(
                                       'IX C',
                                       style: TextStyle(
-                                          fontSize: 12, color: Colors.blue),
+                                          fontSize: 12, color: Theme.of(context).primaryColor),
                                     )),
                                     Container(
                                         child: Text(
                                       'Parent of Ramsey',
                                       style: TextStyle(
-                                          fontSize: 12, color: Colors.blue),
+                                          fontSize: 12, color: Theme.of(context).primaryColor),
                                     )),
                                   ],
                                 ),
@@ -180,19 +180,19 @@ class UpdateFromParents extends StatelessWidget {
                                         child: Text(
                                       '11/06/2020',
                                       style: TextStyle(
-                                          fontSize: 12, color: Colors.blue),
+                                          fontSize: 12, color: Theme.of(context).primaryColor),
                                     )),
                                     Container(
                                         child: Text(
                                       'VII A',
                                       style: TextStyle(
-                                          fontSize: 12, color: Colors.blue),
+                                          fontSize: 12, color: Theme.of(context).primaryColor),
                                     )),
                                     Container(
                                         child: Text(
                                       'Parent of Theon',
                                       style: TextStyle(
-                                          fontSize: 12, color: Colors.blue),
+                                          fontSize: 12, color: Theme.of(context).primaryColor),
                                     )),
                                   ],
                                 ),

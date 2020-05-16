@@ -14,6 +14,7 @@ class _LeaveRequestState extends State<LeaveRequest> {
   bool showTimeline = false;
   @override
   Widget build(BuildContext context) {
+    Color color = Theme.of(context).primaryColor;
     return Scaffold(
       resizeToAvoidBottomPadding: false,
         body: Stack(
@@ -79,7 +80,7 @@ class _LeaveRequestState extends State<LeaveRequest> {
                 ),
                 shape: RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(20.0)),
-                color: Colors.blue[800],
+                color: Theme.of(context).primaryColor,
               ),
             ],
           ),
@@ -103,7 +104,11 @@ class _LeaveRequestState extends State<LeaveRequest> {
                 height: 45,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: Colors.blue[800],
+                     gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [color.withOpacity(0.8), color, color.withOpacity(0.9)],
+          ),
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(50),
                         topRight: Radius.circular(50))),
@@ -129,7 +134,13 @@ class _LeaveRequestState extends State<LeaveRequest> {
               ),
             ),
             Container(
-              color: Colors.blue[800],
+              decoration: BoxDecoration(
+                 gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [color.withOpacity(0.8), color, color.withOpacity(0.9)],
+          ),
+              ),
               width: (MediaQuery.of(context).size.width),
               height: MediaQuery.of(context).size.height - 120 - 30 - 12,
               child: Column(

@@ -46,7 +46,7 @@ class _AttendanceHistoryState extends State<AttendanceHistory> {
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
-                        color: Colors.blue[400],
+                        color: Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(50),
                             topRight: Radius.circular(50))),

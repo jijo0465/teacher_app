@@ -28,7 +28,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
-                        color: Colors.blue[400],
+                        color: Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(50),
                             topRight: Radius.circular(50))),
@@ -49,7 +49,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                       RaisedButton(
                           shape: RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(10.0)),
-                          color: Colors.blue[800],
+                          color: Theme.of(context).primaryColor,
                           onPressed: () {},
                           child: Text(
                             'Update',

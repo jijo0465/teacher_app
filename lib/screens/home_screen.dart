@@ -106,6 +106,24 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
               ),
             ),
+            bottomNavigationBar: BottomNavigationBar(
+                selectedItemColor: Theme.of(context).primaryColor,
+                unselectedItemColor: Colors.grey,
+                onTap: (index) {
+                  if (index == 1) Navigator.of(context).pushNamed('/chat');
+                },
+                items: [
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home,),
+                    title: Text('Home'),
+                  ),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.message), title: Text('Chat')),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.info),
+                    title: Text('About'),
+                  ),
+                ]),
           );
         }
       },
@@ -352,6 +370,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               )
+              
             ],
           ),
           Positioned(top: 140, child: DigiPeriodCard()),

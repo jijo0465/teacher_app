@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class DigiCampusAppbar extends StatelessWidget {
   final VoidCallback onDrawerTapped;
   final IconData icon;
-  const DigiCampusAppbar({Key key, this.onDrawerTapped, this.icon}) : super(key: key);
+  const DigiCampusAppbar({Key key, this.onDrawerTapped, this.icon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Color color = Theme.of(context).primaryColor;
     return Container(
       alignment: Alignment.bottomCenter,
       padding: EdgeInsets.only(bottom: 20),
@@ -40,7 +42,11 @@ class DigiCampusAppbar extends StatelessWidget {
         ],
       ),
       decoration: BoxDecoration(
-          color: Colors.blue[800],
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [color.withOpacity(0.8), color, color.withOpacity(0.8)],
+          ),
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(30),
               bottomRight: Radius.circular(30))),

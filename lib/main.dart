@@ -5,6 +5,7 @@ import 'package:teacher_app/screens/approve_leave_request.dart';
 import 'package:teacher_app/screens/attendance_history.dart';
 import 'package:teacher_app/screens/attendance_screen.dart';
 import 'package:teacher_app/screens/bus_tracking_screen.dart';
+import 'package:teacher_app/screens/chat_screen.dart';
 import 'package:teacher_app/screens/classroom_screen.dart';
 import 'package:teacher_app/screens/contact_parent_screen.dart';
 import 'package:teacher_app/screens/discussions_screen.dart';
@@ -41,7 +42,7 @@ class TeacherApp extends StatelessWidget {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-              primaryColor: Theme.of(context).primaryColor,
+              primaryColor: Color(0xff00739e),
               accentColor: Colors.deepOrange,
               fontFamily: 'Poppins'),
           supportedLocales: const [Locale('en')],
@@ -72,6 +73,7 @@ class TeacherApp extends StatelessWidget {
             '/classroom_screen': (context) => ClassroomScreen(),
             '/discussions': (context) => DiscussionsScreen(),
             '/live': (context) => LiveScreen(),
+            '/chat': (context) => ChatScreen(),
           },
         ));
   }
