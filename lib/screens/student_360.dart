@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nima/nima_actor.dart';
-import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:syncfusion_flutter_core/core.dart';
 import 'package:teacher_app/components/digi_guage.dart';
 
@@ -17,11 +16,12 @@ class Student360Screen extends StatefulWidget {
 }
 
 class _Student360ScreenState extends State<Student360Screen> {
-  @override
-  Widget build(BuildContext context) {
-    int grade = 0;
+  int grade = 0;
     int division = 0;
     int student = 0;
+  @override
+  Widget build(BuildContext context) {
+    
     SyncfusionLicense.registerLicense(
         'NT8mJyc2IWhia31ifWN9Z2FoYmF8YGJ8ampqanNiYmlmamlmanMDHmg5Ojk8Y2dlZhM0PjI6P30wPD4=');
     return Scaffold(
@@ -155,104 +155,99 @@ class _Student360ScreenState extends State<Student360Screen> {
                     ),
               student == 0
                   ? Container()
-                  : Column(
+                  : Expanded(
+                    child: Stack(
                       children: <Widget>[
-                        Expanded(
+                        Column(
+                          children: <Widget>[
+                            Expanded(child: Container(),),
+                            Container(
+                              height: 210,
+                              width: MediaQuery.of(context).size.width,
+                              child: NimaActor(
+                                'assets/animations/superman-podium.nma',
+                                fit: BoxFit.fitHeight,
+                                animation: 'Untitled',
+                              ),
+                            ),
+                            Expanded(child: Container(),),
+                          ],
+                        ),
+                        Positioned(
+                          top: 10,
+                          left: 15,
                           child: Container(
-                            child: Stack(
-                              children: <Widget>[
-                                Positioned(
-                                  top:
-                                      MediaQuery.of(context).size.height * 0.24,
-                                  child: Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.35,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: NimaActor(
-                                      'assets/animations/superman-podium.nma',
-                                      fit: BoxFit.fitHeight,
-                                      animation: 'Untitled',
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 10,
-                                  left: 15,
-                                  child: Container(
-                                    height: 160,
-                                    width: 160,
-                                    child: DigiGauge(
-                                      value: 90,
-                                      text: 'Academics',
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 10,
-                                  right: 15,
-                                  child: Container(
-                                    height: 160,
-                                    width: 160,
-                                    child: DigiGauge(
-                                      value: 70,
-                                      text: 'Sports',
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 190,
-                                  left: 0,
-                                  child: Container(
-                                    height: 120,
-                                    width: 120,
-                                    child: DigiGauge(
-                                      value: 50,
-                                      text: 'Consistency',
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 190,
-                                  right: 0,
-                                  child: Container(
-                                    height: 120,
-                                    width: 120,
-                                    child: DigiGauge(
-                                      value: 62,
-                                      text: 'Attendance',
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 25,
-                                  left: 12,
-                                  child: Container(
-                                    height: 170,
-                                    width: 170,
-                                    child: DigiGauge(
-                                      value: 88,
-                                      text: 'Language',
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 25,
-                                  right: 12,
-                                  child: Container(
-                                    height: 170,
-                                    width: 170,
-                                    child: DigiGauge(
-                                      value: 90,
-                                      text: 'Extra Curriculum',
-                                    ),
-                                  ),
-                                ),
-                              ],
+                            height: 140,
+                            width: 140,
+                            child: DigiGauge(
+                              value: 90,
+                              text: 'Academics',
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 10,
+                          right: 15,
+                          child: Container(
+                            height: 140,
+                            width: 140,
+                            child: DigiGauge(
+                              value: 70,
+                              text: 'Sports',
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 165,
+                          left: 0,
+                          child: Container(
+                            height: 110,
+                            width: 110,
+                            child: DigiGauge(
+                              value: 50,
+                              text: 'Consistency',
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 165,
+                          right: 0,
+                          child: Container(
+                            height: 110,
+                            width: 110,
+                            child: DigiGauge(
+                              value: 62,
+                              text: 'Attendance',
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 25,
+                          left: 12,
+                          child: Container(
+                            height: 140,
+                            width: 140,
+                            child: DigiGauge(
+                              value: 88,
+                              text: 'Language',
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 25,
+                          right: 12,
+                          child: Container(
+                            height: 140,
+                            width: 140,
+                            child: DigiGauge(
+                              value: 90,
+                              text: 'Extra Curriculum',
                             ),
                           ),
                         ),
                       ],
                     ),
+                  ),
             ],
           ),
         ],
