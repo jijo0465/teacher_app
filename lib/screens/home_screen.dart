@@ -111,6 +111,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 unselectedItemColor: Colors.grey,
                 onTap: (index) {
                   if (index == 1) Navigator.of(context).pushNamed('/chat');
+                  else if(index==2) Navigator.of(context).pushNamed('/knowledge_base');
                 },
                 items: [
                   BottomNavigationBarItem(
@@ -120,8 +121,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   BottomNavigationBarItem(
                       icon: Icon(Icons.message), title: Text('Chat')),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.info),
-                    title: Text('About'),
+                    icon: Icon(Icons.video_label),
+                    title: Text('Teach me'),
                   ),
                 ]),
           );

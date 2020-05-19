@@ -75,7 +75,7 @@ class TeacherProfileScreen extends StatelessWidget {
                       SizedBox(height: 6),
                       Container(
                         child: Text(
-                          'Student ID : $displayTeacherId',
+                          'Teacher ID : $displayTeacherId',
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                       ),

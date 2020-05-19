@@ -84,6 +84,9 @@ flutter:
     - assets/images/sir.jpg
     - assets/images/child.jpg
     - assets/images/calendar.jpg
+    - assets/images/tutorial.jpg
+    - assets/images/tutorial2.jpg
+    - assets/images/tutorial3.jpg
     - assets/videos/smartschool.mp4
     - assets/animations/superman-podium.nma
     - assets/animations/superman-podium.png

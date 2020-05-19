@@ -76,6 +76,7 @@ class _ContactParentScreenState extends State<ContactParentScreen> {
                                     setState(() {
                                       grade = value;
                                     });
+                                    print(value);
                                   }),
                             )),
                       )
