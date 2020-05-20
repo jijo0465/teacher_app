@@ -90,6 +90,9 @@ flutter:
     - assets/videos/smartschool.mp4
     - assets/animations/superman-podium.nma
     - assets/animations/superman-podium.png
+    - assets/images/report.png
+    - assets/images/360.png
+    - assets/images/1001.jpg
     
   #  - images/a_dot_ham.jpeg
 

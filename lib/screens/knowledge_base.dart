@@ -46,13 +46,13 @@ class _KnowledgeBaseState extends State<KnowledgeBase> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
+    return Container(
+      child: Stack(
         children: <Widget>[
           //Container(color: Theme.of(context).primaryColor.withOpacity(0.15)),
           Column(
             children: <Widget>[
-              SizedBox(height: 50),
+              SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -63,7 +63,7 @@ class _KnowledgeBaseState extends State<KnowledgeBase> {
                     ),
                     onPressed: () {
                       setState(() {
-                        val = true;
+                        val = !val;
                       });
                     },
                   ),
@@ -82,229 +82,307 @@ class _KnowledgeBaseState extends State<KnowledgeBase> {
                 ],
               ),
               SizedBox(height: 20),
-              Container(
-                height: 80,
-                width: MediaQuery.of(context).size.width * 0.94,
-                decoration: BoxDecoration(
-                    border: Border.all(
-                  style: BorderStyle.solid,
-                  color: Colors.black,
-                )),
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      height: 80,
-                      width: 120,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/images/tutorial2.jpg'),
-                              fit: BoxFit.fill)),
-                    ),
-                    SizedBox(width: 10),
-                    Column(
-                      children: <Widget>[
-                        Text('Linear Equations',
-                            style: TextStyle(fontSize: 16)),
-                        Row(
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        height: 80,
+                        width: MediaQuery.of(context).size.width * 0.94,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                          style: BorderStyle.solid,
+                          color: Colors.black,
+                        )),
+                        child: Row(
                           children: <Widget>[
                             Container(
-                                child: Icon(
-                              Icons.brightness_1,
-                              size: 10,
-                              color: Colors.grey,
-                            )),
-                            Text('VII', style: TextStyle(fontSize: 10)),
-                            Container(
-                                child: Icon(
-                              Icons.brightness_1,
-                              size: 10,
-                              color: Colors.grey,
-                            )),
-                            Text('Maths', style: TextStyle(fontSize: 10)),
-                            Container(
-                                child: Icon(
-                              Icons.timer,
-                              size: 10,
-                              color: Colors.grey,
-                            )),
-                            Text('8 min', style: TextStyle(fontSize: 10)),
+                              height: 80,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/tutorial2.jpg'),
+                                      fit: BoxFit.fill)),
+                            ),
+                            SizedBox(width: 10),
+                            Column(
+                              children: <Widget>[
+                                Text('Whole Numbers',
+                                    style: TextStyle(fontSize: 16)),
+                                Row(
+                                  children: <Widget>[
+                                    Container(
+                                        child: Icon(
+                                      Icons.brightness_1,
+                                      size: 10,
+                                      color: Colors.grey,
+                                    )),
+                                    Text('VII', style: TextStyle(fontSize: 10)),
+                                    Container(
+                                        child: Icon(
+                                      Icons.brightness_1,
+                                      size: 10,
+                                      color: Colors.grey,
+                                    )),
+                                    Text('Maths',
+                                        style: TextStyle(fontSize: 10)),
+                                    Container(
+                                        child: Icon(
+                                      Icons.timer,
+                                      size: 10,
+                                      color: Colors.grey,
+                                    )),
+                                    Text('8 min',
+                                        style: TextStyle(fontSize: 10)),
+                                  ],
+                                ),
+                                Text('Description of the topic')
+                              ],
+                            )
                           ],
                         ),
-                        Text('Description of the topic')
-                      ],
-                    )
-                  ],
-                ),
-                // child:  _playerController.value.initialized? AspectRatio(
-                //           aspectRatio: _playerController.value.aspectRatio,
-                //           child: VideoPlayer(_playerController),
-                //         ):Container(),
-              ),
-              SizedBox(height: 20),
-              Container(
-                height: 80,
-                width: MediaQuery.of(context).size.width * 0.94,
-                decoration: BoxDecoration(
-                    border: Border.all(
-                  style: BorderStyle.solid,
-                  color: Colors.black,
-                )),
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      height: 80,
-                      width: 120,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/images/tutorial.jpg'),
-                              fit: BoxFit.fill)),
-                    ),
-                    SizedBox(width: 10),
-                    Column(
-                      children: <Widget>[
-                        Text('English Grammer',
-                            style: TextStyle(fontSize: 16)),
-                        Row(
+                        // child:  _playerController.value.initialized? AspectRatio(
+                        //           aspectRatio: _playerController.value.aspectRatio,
+                        //           child: VideoPlayer(_playerController),
+                        //         ):Container(),
+                      ),
+                      SizedBox(height: 20),
+                      Container(
+                        height: 80,
+                        width: MediaQuery.of(context).size.width * 0.94,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                          style: BorderStyle.solid,
+                          color: Colors.black,
+                        )),
+                        child: Row(
                           children: <Widget>[
                             Container(
-                                child: Icon(
-                              Icons.brightness_1,
-                              size: 10,
-                              color: Colors.grey,
-                            )),
-                            Text('V', style: TextStyle(fontSize: 10)),
-                            Container(
-                                child: Icon(
-                              Icons.brightness_1,
-                              size: 10,
-                              color: Colors.grey,
-                            )),
-                            Text('English', style: TextStyle(fontSize: 10)),
-                            Container(
-                                child: Icon(
-                              Icons.timer,
-                              size: 10,
-                              color: Colors.grey,
-                            )),
-                            Text('10 min', style: TextStyle(fontSize: 10)),
+                              height: 80,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/tutorial2.jpg'),
+                                      fit: BoxFit.fill)),
+                            ),
+                            SizedBox(width: 10),
+                            Column(
+                              children: <Widget>[
+                                Text('Integers',
+                                    style: TextStyle(fontSize: 16)),
+                                Row(
+                                  children: <Widget>[
+                                    Container(
+                                        child: Icon(
+                                      Icons.brightness_1,
+                                      size: 10,
+                                      color: Colors.grey,
+                                    )),
+                                    Text('V', style: TextStyle(fontSize: 10)),
+                                    Container(
+                                        child: Icon(
+                                      Icons.brightness_1,
+                                      size: 10,
+                                      color: Colors.grey,
+                                    )),
+                                    Text('Maths',
+                                        style: TextStyle(fontSize: 10)),
+                                    Container(
+                                        child: Icon(
+                                      Icons.timer,
+                                      size: 10,
+                                      color: Colors.grey,
+                                    )),
+                                    Text('12 min',
+                                        style: TextStyle(fontSize: 10)),
+                                  ],
+                                ),
+                                Text('Description of the topic')
+                              ],
+                            )
                           ],
                         ),
-                        Text('Description of the topic')
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(height: 20),
-              Container(
-                height: 80,
-                width: MediaQuery.of(context).size.width * 0.94,
-                decoration: BoxDecoration(
-                    border: Border.all(
-                  style: BorderStyle.solid,
-                  color: Colors.black,
-                )),
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      height: 80,
-                      width: 120,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/images/tutorial3.jpg'),
-                              fit: BoxFit.fill)),
-                    ),
-                    SizedBox(width: 10),
-                    Column(
-                      children: <Widget>[
-                        Text('Nutrition in plants',
-                            style: TextStyle(fontSize: 16)),
-                        Row(
+                      ),
+                      SizedBox(height: 20),
+                      Container(
+                        height: 80,
+                        width: MediaQuery.of(context).size.width * 0.94,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                          style: BorderStyle.solid,
+                          color: Colors.black,
+                        )),
+                        child: Row(
                           children: <Widget>[
                             Container(
-                                child: Icon(
-                              Icons.brightness_1,
-                              size: 10,
-                              color: Colors.grey,
-                            )),
-                            Text('VII', style: TextStyle(fontSize: 10)),
-                            Container(
-                                child: Icon(
-                              Icons.brightness_1,
-                              size: 10,
-                              color: Colors.grey,
-                            )),
-                            Text('Science', style: TextStyle(fontSize: 10)),
-                            Container(
-                                child: Icon(
-                              Icons.timer,
-                              size: 10,
-                              color: Colors.grey,
-                            )),
-                            Text('12 min', style: TextStyle(fontSize: 10)),
+                              height: 80,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/tutorial.jpg'),
+                                      fit: BoxFit.fill)),
+                            ),
+                            SizedBox(width: 10),
+                            Column(
+                              children: <Widget>[
+                                Text('English Grammer',
+                                    style: TextStyle(fontSize: 16)),
+                                Row(
+                                  children: <Widget>[
+                                    Container(
+                                        child: Icon(
+                                      Icons.brightness_1,
+                                      size: 10,
+                                      color: Colors.grey,
+                                    )),
+                                    Text('V', style: TextStyle(fontSize: 10)),
+                                    Container(
+                                        child: Icon(
+                                      Icons.brightness_1,
+                                      size: 10,
+                                      color: Colors.grey,
+                                    )),
+                                    Text('English',
+                                        style: TextStyle(fontSize: 10)),
+                                    Container(
+                                        child: Icon(
+                                      Icons.timer,
+                                      size: 10,
+                                      color: Colors.grey,
+                                    )),
+                                    Text('10 min',
+                                        style: TextStyle(fontSize: 10)),
+                                  ],
+                                ),
+                                Text('Description of the topic')
+                              ],
+                            )
                           ],
                         ),
-                        Text('Description of the topic')
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(height: 20),
-              Container(
-                height: 80,
-                width: MediaQuery.of(context).size.width * 0.94,
-                decoration: BoxDecoration(
-                    border: Border.all(
-                  style: BorderStyle.solid,
-                  color: Colors.black,
-                )),
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      height: 80,
-                      width: 120,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/images/tutorial3.jpg'),
-                              fit: BoxFit.fill)),
-                    ),
-                    SizedBox(width: 10),
-                    Column(
-                      children: <Widget>[
-                        Text('Nutrition in plants',
-                            style: TextStyle(fontSize: 16)),
-                        Row(
+                      ),
+                      SizedBox(height: 20),
+                      Container(
+                        height: 80,
+                        width: MediaQuery.of(context).size.width * 0.94,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                          style: BorderStyle.solid,
+                          color: Colors.black,
+                        )),
+                        child: Row(
                           children: <Widget>[
                             Container(
-                                child: Icon(
-                              Icons.brightness_1,
-                              size: 10,
-                              color: Colors.grey,
-                            )),
-                            Text('VII', style: TextStyle(fontSize: 10)),
-                            Container(
-                                child: Icon(
-                              Icons.brightness_1,
-                              size: 10,
-                              color: Colors.grey,
-                            )),
-                            Text('Science', style: TextStyle(fontSize: 10)),
-                            Container(
-                                child: Icon(
-                              Icons.timer,
-                              size: 10,
-                              color: Colors.grey,
-                            )),
-                            Text('12 min', style: TextStyle(fontSize: 10)),
+                              height: 80,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/tutorial3.jpg'),
+                                      fit: BoxFit.fill)),
+                            ),
+                            SizedBox(width: 10),
+                            Column(
+                              children: <Widget>[
+                                Text('Nutrition in plants',
+                                    style: TextStyle(fontSize: 16)),
+                                Row(
+                                  children: <Widget>[
+                                    Container(
+                                        child: Icon(
+                                      Icons.brightness_1,
+                                      size: 10,
+                                      color: Colors.grey,
+                                    )),
+                                    Text('VII', style: TextStyle(fontSize: 10)),
+                                    Container(
+                                        child: Icon(
+                                      Icons.brightness_1,
+                                      size: 10,
+                                      color: Colors.grey,
+                                    )),
+                                    Text('Science',
+                                        style: TextStyle(fontSize: 10)),
+                                    Container(
+                                        child: Icon(
+                                      Icons.timer,
+                                      size: 10,
+                                      color: Colors.grey,
+                                    )),
+                                    Text('12 min',
+                                        style: TextStyle(fontSize: 10)),
+                                  ],
+                                ),
+                                Text('Description of the topic')
+                              ],
+                            )
                           ],
                         ),
-                        Text('Description of the topic')
-                      ],
-                    )
-                  ],
+                      ),
+                      SizedBox(height: 20),
+                      Container(
+                        height: 80,
+                        width: MediaQuery.of(context).size.width * 0.94,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                          style: BorderStyle.solid,
+                          color: Colors.black,
+                        )),
+                        child: Row(
+                          children: <Widget>[
+                            Container(
+                              height: 80,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/tutorial3.jpg'),
+                                      fit: BoxFit.fill)),
+                            ),
+                            SizedBox(width: 10),
+                            Column(
+                              children: <Widget>[
+                                Text('Nutrition in plants',
+                                    style: TextStyle(fontSize: 16)),
+                                Row(
+                                  children: <Widget>[
+                                    Container(
+                                        child: Icon(
+                                      Icons.brightness_1,
+                                      size: 10,
+                                      color: Colors.grey,
+                                    )),
+                                    Text('VII', style: TextStyle(fontSize: 10)),
+                                    Container(
+                                        child: Icon(
+                                      Icons.brightness_1,
+                                      size: 10,
+                                      color: Colors.grey,
+                                    )),
+                                    Text('Science',
+                                        style: TextStyle(fontSize: 10)),
+                                    Container(
+                                        child: Icon(
+                                      Icons.timer,
+                                      size: 10,
+                                      color: Colors.grey,
+                                    )),
+                                    Text('12 min',
+                                        style: TextStyle(fontSize: 10)),
+                                  ],
+                                ),
+                                Text('Description of the topic')
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+              )
             ],
           ),
           val == true ? Positioned(bottom: 0, child: DigiTeach()) : Container()

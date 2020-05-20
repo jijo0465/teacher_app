@@ -27,27 +27,27 @@ class ChatScreen extends StatelessWidget {
           name: "Bran\nPid",
           photoUrl: "assets/images/1001.jpg"),
     ];
-    return Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-            selectedItemColor: Theme.of(context).primaryColor,
-            unselectedItemColor: Colors.grey,
-            currentIndex: 1,
-            onTap: (index) {
-              if (index == 0) Navigator.of(context).pop();
-            },
-            items: [
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.home), title: Text('Home')),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.message), title: Text('Chat')),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.info),
-                title: Text('About'),
-              ),
-            ]),
-        body: Column(
+    return Container(
+        // bottomNavigationBar: BottomNavigationBar(
+        //     selectedItemColor: Theme.of(context).primaryColor,
+        //     unselectedItemColor: Colors.grey,
+        //     currentIndex: 1,
+        //     onTap: (index) {
+        //       if (index == 0) Navigator.of(context).pop();
+        //     },
+        //     items: [
+        //       BottomNavigationBarItem(
+        //           icon: Icon(Icons.home), title: Text('Home')),
+        //       BottomNavigationBarItem(
+        //           icon: Icon(Icons.message), title: Text('Chat')),
+        //       BottomNavigationBarItem(
+        //         icon: Icon(Icons.info),
+        //         title: Text('About'),
+        //       ),
+        //     ]),
+        child: Column(
           children: <Widget>[
-            DigiCampusAppbar(),
+            // DigiCampusAppbar(),
             Expanded(
               child: ListView.builder(
                 itemCount: 3,

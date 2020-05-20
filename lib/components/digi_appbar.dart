@@ -11,85 +11,94 @@ class DigiAppbar extends StatelessWidget {
     return ClipPath(
         clipper: BackgroundClipper(),
         child: Container(
-          padding: EdgeInsets.only(top: 35),
-          color:  Theme.of(context).primaryColor,
-          height: 180,
-          width: double.infinity,
-          child: Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Container(
-                    child: IconButton(
-                      onPressed: onPressed,
-                      icon: Icon(Icons.dashboard),
-                      color: Colors.white,
-                    ),
+            // padding: EdgeInsets.only(top: 35),
+            color: Theme.of(context).primaryColor,
+            height: 120 - MediaQuery.of(context).padding.top,
+            width: double.infinity,
+            child:
+                // Column(
+                // children: <Widget>[
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: <Widget>[
+                //     Container(
+                //       child: IconButton(
+                //         onPressed: onPressed,
+                //         icon: Icon(Icons.dashboard),
+                //         color: Colors.white,
+                //       ),
+                //     ),
+                //     Container(
+                //         padding: EdgeInsets.only(left: 12),
+                //         child: Text(
+                //           'Christ Nagar',
+                //           style: TextStyle(
+                //               fontSize: 16,
+                //               color: Colors.white,
+                //               fontWeight: FontWeight.w300),
+                //         )),
+                //     Container(
+                //       padding: EdgeInsets.only(right: 12),
+                //       child: IconButton(
+                //         onPressed: () {
+                //           print('Pressed');
+                //         },
+                //         icon: Icon(Icons.notifications),
+                //         color: Colors.white,
+                //       ),
+                //     )
+                //   ],
+                // ),
+                Column(
+              children: <Widget>[
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Container(
+                          padding: EdgeInsets.only(left: 12),
+                          // alignment: Alignment.,
+                          child: Consumer<TeacherState>(
+                            builder: (BuildContext context, TeacherState value,
+                                Widget child) {
+                              return Text(
+                                // 'Hi ${value.teacherName} !',
+                                'Hi Rachel !',
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                              );
+                            },
+                          )),
+                      Hero(
+                        tag: 'Teacher profile',
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushNamed('/teacher_profile');
+                          },
+                          child: Container(
+                            width: 40,
+                            height: 40,
+                            margin: EdgeInsets.only(right: 12),
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: AssetImage(
+                                    'assets/images/sir.jpg',
+                                  ),
+                                ),
+                                shape: BoxShape.circle),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-                  Container(
-                      padding: EdgeInsets.only(left: 12),
-                      child: Text(
-                        'Christ Nagar',
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w300),
-                      )),
-                  Container(
-                    padding: EdgeInsets.only(right: 12),
-                    child: IconButton(
-                      onPressed: () {
-                        print('Pressed');
-                      },
-                      icon: Icon(Icons.notifications),
-                      color: Colors.white,
-                    ),
-                  )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Container(
-                      padding: EdgeInsets.only(left: 12),
-                      alignment: Alignment.centerLeft,
-                      child: Consumer<TeacherState>(
-                        builder: (BuildContext context, TeacherState value,
-                            Widget child) {
-                          return Text(
-                            // 'Hi ${value.teacherName} !',
-                            'Hi Rachel !',
-                            style: TextStyle(fontSize: 20, color: Colors.white),
-                          );
-                        },
-                      )),
-                  Hero(
-                    tag: 'Teacher profile',
-                    child: GestureDetector(
-                      onTap: (){
-                        Navigator.of(context).pushNamed('/teacher_profile');
-                      },
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        margin: EdgeInsets.only(right: 12),
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage(
-                                'assets/images/sir.jpg',
-                              ),
-                            ),
-                            shape: BoxShape.circle),
-                      ),
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
-        ));
+                ),
+                SizedBox(height: 40)
+              ],
+            )
+            //   ],
+            // ),
+            ));
   }
 }
 
