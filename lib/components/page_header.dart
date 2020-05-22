@@ -43,7 +43,7 @@ class PageHeader extends StatelessWidget {
                   Container(
                       padding: EdgeInsets.only(left: 12),
                       child: Text(
-                        'Christ Nagar',
+                        'A J Central',
                         style: TextStyle(
                             fontSize: 16,
                             color: Colors.white,
@@ -61,7 +61,7 @@ class PageHeader extends StatelessWidget {
                   )
                 ],
               ),
-          SizedBox(height: 4)
+          // SizedBox(height: 4)
         ],
       ),
     );
