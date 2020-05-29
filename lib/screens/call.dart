@@ -64,13 +64,13 @@ class _CallPageState extends State<CallPage> {
       return;
     }
 
-    await _initAgoraRtcEngine();
     _addAgoraEventHandlers();
-    await AgoraRtcEngine.enableWebSdkInteroperability(true);
-    await AgoraRtcEngine.setChannelProfile(ChannelProfile.LiveBroadcasting);
-    await AgoraRtcEngine.setClientRole(ClientRole.Broadcaster);
-    await AgoraRtcEngine.setParameters(
-        '''{\"che.video.lowBitRateStreamParameter\":{\"width\":320,\"height\":180,\"frameRate\":15,\"bitRate\":140}}''');
+    await _initAgoraRtcEngine();
+    // await AgoraRtcEngine.enableWebSdkInteroperability(true);
+    // await AgoraRtcEngine.setChannelProfile(ChannelProfile.LiveBroadcasting);
+    // await AgoraRtcEngine.setClientRole(ClientRole.Broadcaster);
+    // await AgoraRtcEngine.setParameters(
+    //     '{\"che.video.lowBitRateStreamParameter\":{\"width\":320,\"height\":180,\"frameRate\":15,\"bitRate\":140}}');
     // await AgoraRtcEngine.joinChannel(null, widget.channelName, null, 0);
   }
 
@@ -78,12 +78,17 @@ class _CallPageState extends State<CallPage> {
   Future<void> _initAgoraRtcEngine() async {
     await AgoraRtcEngine.create(APP_ID);
     await AgoraRtcEngine.enableVideo();
+    await AgoraRtcEngine.setChannelProfile(ChannelProfile.LiveBroadcasting);
+    await AgoraRtcEngine.setClientRole(ClientRole.Broadcaster);
+    await AgoraRtcEngine.enableWebSdkInteroperability(true);
+    
+    
     await AgoraRtcEngine.joinChannel(
-        "006afe8cf8cb8fd494bbd8d7e1d900483baIAByyYgio6HHPtqn6oKpjpQmgdG0BTBhgX5vxbDCOE7b+q8sD1MAAAAAEABfqfzlUUfNXgEAAQBRR81e",
+        "006afe8cf8cb8fd494bbd8d7e1d900483baIACSZiNJ2hQaSB+xmyM1ebHLSiDRTL6QVAKekTjc0zECEq8sD1MAAAAAEABfqfzlkmnQXgEAAQCRadBe",
         'live',
         null,
         broadcasterUid);
-        startRecording();
+        // startRecording();
     // await AgoraRtcEngine.enableWebSdkInteroperability(true);
   }
 
@@ -172,7 +177,7 @@ class _CallPageState extends State<CallPage> {
       int height,
       int elapsed,
     ) {
-      print("oihsidogisidggdsggggggggggggg");
+      print("firstRemoteVideo: $uid ${width}x $height");
       setState(() {
         final info = 'firstRemoteVideo: $uid ${width}x $height';
         _infoStrings.add(info);
@@ -433,7 +438,7 @@ class _CallPageState extends State<CallPage> {
   }
 
   void _onCallEnd(BuildContext context) {
-    stopRecording();
+    // stopRecording();
     Navigator.pop(context);
   }
 
