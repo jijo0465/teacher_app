@@ -4,12 +4,17 @@ class SelectDivision extends StatelessWidget {
   final int division;
   final ValueChanged onchanged;
 
-  const SelectDivision({Key key, this.onchanged, this.division}) : super(key: key);
+  const SelectDivision({Key key, this.onchanged, this.division})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonHideUnderline(
       child: DropdownButton(
+          icon: Icon(
+            Icons.arrow_drop_down,
+            color: Theme.of(context).primaryColor,
+          ),
           value: division,
           items: [
             DropdownMenuItem(

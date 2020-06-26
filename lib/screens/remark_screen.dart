@@ -31,50 +31,49 @@ class _RemarkScreenState extends State<RemarkScreen> {
                 child: Row(
                   children: <Widget>[
                     Container(
-                      padding: EdgeInsets.only(left: 50),
-                      child: Text(
-                        'Select Class',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Container(
-                        height: 30,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
-                          border: Border.all(
-                              color: Colors.blue,
-                              style: BorderStyle.solid,
-                              width: 0.80),
-                        ),
-                        padding: EdgeInsets.only(left: 20),
-                        child: SelectClass(
-                          onchanged: (value) {
-                            division = 0;
-                            student = 0;
-                            setState(() {
-                              grade = value;
-                            });
-                          },
-                          grade: grade,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(height: 10),
-              grade == 0
-                  ? Container()
-                  : Padding(
-                      padding: const EdgeInsets.only(left: 12),
                       child: Row(
                         children: <Widget>[
                           Container(
-                              padding: EdgeInsets.only(left: 50),
+                            //padding: EdgeInsets.only(left: 50),
+                            child: Text(
+                              'Select',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 12),
+                            child: Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                border: Border.all(
+                                    color: Theme.of(context).primaryColor,
+                                    style: BorderStyle.solid,
+                                    width: 0.80),
+                              ),
+                              padding: EdgeInsets.only(left: 20),
+                              child: SelectClass(
+                                onchanged: (value) {
+                                  division = 0;
+                                  student = 0;
+                                  setState(() {
+                                    grade = value;
+                                  });
+                                },
+                                grade: grade,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                              padding: EdgeInsets.only(left: 12),
                               child: Text(
-                                'Select Division',
+                                'Select',
                                 style: TextStyle(fontSize: 18),
                               )),
                           Padding(
@@ -84,7 +83,7 @@ class _RemarkScreenState extends State<RemarkScreen> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15.0),
                                 border: Border.all(
-                                    color: Colors.blue,
+                                    color: Theme.of(context).primaryColor,
                                     style: BorderStyle.solid,
                                     width: 0.80),
                               ),
@@ -103,44 +102,31 @@ class _RemarkScreenState extends State<RemarkScreen> {
                         ],
                       ),
                     ),
-              SizedBox(height: 10),
-              division == 0
+                  ],
+                ),
+              ),
+              SizedBox(height: 15),
+              division == 0 || grade==0
                   ? Container()
-                  : Padding(
-                      padding: const EdgeInsets.only(left: 12),
-                      child: Row(
-                        children: <Widget>[
-                          Container(
-                              padding: EdgeInsets.only(left: 50),
-                              child: Text(
-                                'Select Student',
-                                style: TextStyle(fontSize: 18),
-                              )),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Container(
-                              height: 30,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15.0),
-                                border: Border.all(
-                                    color: Colors.blue,
-                                    style: BorderStyle.solid,
-                                    width: 0.80),
-                              ),
-                              padding: EdgeInsets.only(left: 16),
-                              child: SelectStudent(
-                                onchanged: (value) {
-                                  setState(() {
-                                    student = value;
-                                  });
-                                },
-                                student: student,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                  : Container(
+                    height: 30,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      border: Border.all(
+                          color: Theme.of(context).primaryColor,
+                          style: BorderStyle.solid,
+                          width: 0.80),
                     ),
+                    padding: EdgeInsets.only(left: 16),
+                    child: SelectStudent(
+                      onchanged: (value) {
+                        setState(() {
+                          student = value;
+                        });
+                      },
+                      student: student,
+                    ),
+                  ),
               student == 0
                   ? Container()
                   : Column(

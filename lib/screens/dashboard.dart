@@ -9,6 +9,8 @@ import 'package:teacher_app/components/digi_appbar.dart';
 import 'package:teacher_app/components/digi_menu_card.dart';
 import 'package:teacher_app/components/digi_period_card.dart';
 import 'package:teacher_app/components/digi_nav_bar.dart';
+import 'package:teacher_app/components/select_class.dart';
+import 'package:teacher_app/components/select_division.dart';
 import 'package:teacher_app/screens/chat_screen.dart';
 import 'package:teacher_app/screens/knowledge_base.dart';
 
@@ -24,10 +26,80 @@ class HomePage extends DrawerContent {
 class _HomePageState extends State<HomePage> {
   int navState = 0;
   PageController _pageController;
+  int grade;
+  int division;
+
   @override
   void initState() {
     _pageController = PageController(initialPage: 0, keepPage: true);
     super.initState();
+  }
+
+  createAlertDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            actions: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Container(
+                    height: 30,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      border: Border.all(
+                          color: Theme.of(context).primaryColor,
+                          style: BorderStyle.solid,
+                          width: 0.80),
+                    ),
+                    padding: EdgeInsets.only(left: 20),
+                    child: SelectClass(
+                      onchanged: (value) {
+                        //division = 0;
+                        setState(() {
+                          grade = value;
+                        });
+                      },
+                      grade: grade,
+                    ),
+                  ),
+                   Container(
+                height: 30,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.0),
+                  border: Border.all(
+                      color: Theme.of(context).primaryColor,
+                      style: BorderStyle.solid,
+                      width: 0.80),
+                ),
+                padding: EdgeInsets.only(left: 20),
+                child: SelectDivision(
+                  onchanged: (value) {
+                    setState(() {
+                      division = value;
+                    });
+                  },
+                  division: division,
+                ),
+              ),
+                ],
+              ),
+             SizedBox(height:20),
+              Center(
+                child: FlatButton(
+                  onPressed: () async {
+                    await Permission.camera.request();
+                    await Permission.microphone.request();
+                    Navigator.of(context).pushNamed('/call');
+                  },
+                  child: Text('Confirm Class'),
+                  color: Theme.of(context).primaryColor,
+                ),
+              )
+            ],
+          );
+        });
   }
 
   @override
@@ -67,10 +139,8 @@ class _HomePageState extends State<HomePage> {
                                         0.17,
                                     width: MediaQuery.of(context).size.width *
                                         0.91,
-                                    onPressed: () async {
-                                      await Permission.camera.request();
-                                      await Permission.microphone.request();
-                                      Navigator.of(context).pushNamed('/call');
+                                    onPressed: () {
+                                      createAlertDialog(context);
                                     },
                                     imagePath: 'assets/images/classroom.png',
                                   ),

@@ -44,7 +44,7 @@ class _RewardScreenState extends State<RewardScreen> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.0),
                             border: Border.all(
-                                color: Colors.blue,
+                                color: Theme.of(context).primaryColor,
                                 style: BorderStyle.solid,
                                 width: 0.80),
                           ),
@@ -76,7 +76,7 @@ class _RewardScreenState extends State<RewardScreen> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15.0),
                             border: Border.all(
-                                color: Colors.blue,
+                                color: Theme.of(context).primaryColor,
                                 style: BorderStyle.solid,
                                 width: 0.80),
                           ),

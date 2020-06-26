@@ -86,14 +86,8 @@ class _KnowledgeBaseState extends State<KnowledgeBase> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      Container(
-                        height: 80,
-                        width: MediaQuery.of(context).size.width * 0.94,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                          style: BorderStyle.solid,
-                          color: Colors.black,
-                        )),
+                      Card(
+                        elevation: 4,
                         child: Row(
                           children: <Widget>[
                             Container(
@@ -147,15 +141,9 @@ class _KnowledgeBaseState extends State<KnowledgeBase> {
                         //           child: VideoPlayer(_playerController),
                         //         ):Container(),
                       ),
-                      SizedBox(height: 20),
-                      Container(
-                        height: 80,
-                        width: MediaQuery.of(context).size.width * 0.94,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                          style: BorderStyle.solid,
-                          color: Colors.black,
-                        )),
+                      SizedBox(height: 10),
+                      Card(
+                        elevation: 4,
                         child: Row(
                           children: <Widget>[
                             Container(
@@ -205,15 +193,9 @@ class _KnowledgeBaseState extends State<KnowledgeBase> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Container(
-                        height: 80,
-                        width: MediaQuery.of(context).size.width * 0.94,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                          style: BorderStyle.solid,
-                          color: Colors.black,
-                        )),
+                      SizedBox(height: 10),
+                      Card(
+                        elevation: 4,
                         child: Row(
                           children: <Widget>[
                             Container(
@@ -263,15 +245,9 @@ class _KnowledgeBaseState extends State<KnowledgeBase> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Container(
-                        height: 80,
-                        width: MediaQuery.of(context).size.width * 0.94,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                          style: BorderStyle.solid,
-                          color: Colors.black,
-                        )),
+                      SizedBox(height: 10),
+                      Card(
+                        elevation: 4,
                         child: Row(
                           children: <Widget>[
                             Container(
@@ -321,15 +297,9 @@ class _KnowledgeBaseState extends State<KnowledgeBase> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Container(
-                        height: 80,
-                        width: MediaQuery.of(context).size.width * 0.94,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                          style: BorderStyle.solid,
-                          color: Colors.black,
-                        )),
+                      SizedBox(height: 10),
+                      Card(
+                        elevation: 4,
                         child: Row(
                           children: <Widget>[
                             Container(

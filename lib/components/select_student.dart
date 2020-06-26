@@ -9,6 +9,10 @@ class SelectStudent extends StatelessWidget {
   Widget build(BuildContext context) {
     return  DropdownButtonHideUnderline(
                                   child: DropdownButton(
+                                    icon: Icon(
+                                    Icons.arrow_drop_down,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
                                       value: student,
                                       items: [
                                         DropdownMenuItem(

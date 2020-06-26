@@ -213,18 +213,18 @@ class _CallPageState extends State<CallPage> {
       alignment: Alignment.bottomCenter,
       padding: const EdgeInsets.symmetric(vertical: 48),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           RawMaterialButton(
             onPressed: _onToggleMute,
             child: Icon(
               muted ? Icons.mic_off : Icons.mic,
-              color: muted ? Colors.white : Colors.blueAccent,
-              size: 20.0,
+              color: muted ? Colors.white : Theme.of(context).primaryColor,
+              size: 25.0,
             ),
             shape: CircleBorder(),
             elevation: 2.0,
-            fillColor: muted ? Colors.blueAccent : Colors.white,
+            fillColor: muted ? Theme.of(context).primaryColor : Colors.white,
             padding: const EdgeInsets.all(12.0),
           ),
           RawMaterialButton(
@@ -243,8 +243,8 @@ class _CallPageState extends State<CallPage> {
             onPressed: _onSwitchCamera,
             child: Icon(
               Icons.switch_camera,
-              color: Colors.blueAccent,
-              size: 20.0,
+              color: Theme.of(context).primaryColor,
+              size: 25.0,
             ),
             shape: CircleBorder(),
             elevation: 2.0,
