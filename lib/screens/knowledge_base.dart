@@ -12,7 +12,6 @@ class KnowledgeBase extends StatefulWidget {
 
 class _KnowledgeBaseState extends State<KnowledgeBase> {
   bool val = false;
-
   // List<Widget> discussionListWidget = [];
   // int id = 4001;
   // int widgetIndex;
@@ -47,6 +46,18 @@ class _KnowledgeBaseState extends State<KnowledgeBase> {
   @override
   Widget build(BuildContext context) {
     return Container(
+//      child: Column(
+//        children: <Widget>[
+//          Container(
+//            alignment: Alignment.center,
+//            child: Text('Knowledge Database'),
+//          ),
+//          SizedBox(height: 20,)
+//        ],
+//      )
+//    );
+//  }
+//}
       child: Stack(
         children: <Widget>[
           //Container(color: Theme.of(context).primaryColor.withOpacity(0.15)),
@@ -86,8 +97,14 @@ class _KnowledgeBaseState extends State<KnowledgeBase> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      Card(
-                        elevation: 4,
+                      Container(
+                        height: 80,
+                        width: MediaQuery.of(context).size.width * 0.94,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                          style: BorderStyle.solid,
+                          color: Colors.black,
+                        )),
                         child: Row(
                           children: <Widget>[
                             Container(
@@ -141,9 +158,15 @@ class _KnowledgeBaseState extends State<KnowledgeBase> {
                         //           child: VideoPlayer(_playerController),
                         //         ):Container(),
                       ),
-                      SizedBox(height: 10),
-                      Card(
-                        elevation: 4,
+                      SizedBox(height: 20),
+                      Container(
+                        height: 80,
+                        width: MediaQuery.of(context).size.width * 0.94,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                          style: BorderStyle.solid,
+                          color: Colors.black,
+                        )),
                         child: Row(
                           children: <Widget>[
                             Container(
@@ -193,9 +216,15 @@ class _KnowledgeBaseState extends State<KnowledgeBase> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 10),
-                      Card(
-                        elevation: 4,
+                      SizedBox(height: 20),
+                      Container(
+                        height: 80,
+                        width: MediaQuery.of(context).size.width * 0.94,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                          style: BorderStyle.solid,
+                          color: Colors.black,
+                        )),
                         child: Row(
                           children: <Widget>[
                             Container(
@@ -245,9 +274,15 @@ class _KnowledgeBaseState extends State<KnowledgeBase> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 10),
-                      Card(
-                        elevation: 4,
+                      SizedBox(height: 20),
+                      Container(
+                        height: 80,
+                        width: MediaQuery.of(context).size.width * 0.94,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                          style: BorderStyle.solid,
+                          color: Colors.black,
+                        )),
                         child: Row(
                           children: <Widget>[
                             Container(
@@ -297,9 +332,15 @@ class _KnowledgeBaseState extends State<KnowledgeBase> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 10),
-                      Card(
-                        elevation: 4,
+                      SizedBox(height: 20),
+                      Container(
+                        height: 80,
+                        width: MediaQuery.of(context).size.width * 0.94,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                          style: BorderStyle.solid,
+                          color: Colors.black,
+                        )),
                         child: Row(
                           children: <Widget>[
                             Container(

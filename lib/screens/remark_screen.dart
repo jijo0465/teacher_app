@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:teacher_app/components/digi_alert.dart';
 import 'package:teacher_app/components/digicampus_appbar.dart';
+import 'package:teacher_app/components/icons.dart';
 import 'package:teacher_app/components/select_class.dart';
 import 'package:teacher_app/components/select_division.dart';
 import 'package:teacher_app/components/select_student.dart';
@@ -31,49 +33,50 @@ class _RemarkScreenState extends State<RemarkScreen> {
                 child: Row(
                   children: <Widget>[
                     Container(
-                      child: Row(
-                        children: <Widget>[
-                          Container(
-                            //padding: EdgeInsets.only(left: 50),
-                            child: Text(
-                              'Select',
-                              style: TextStyle(fontSize: 18),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 12),
-                            child: Container(
-                              height: 30,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15.0),
-                                border: Border.all(
-                                    color: Theme.of(context).primaryColor,
-                                    style: BorderStyle.solid,
-                                    width: 0.80),
-                              ),
-                              padding: EdgeInsets.only(left: 20),
-                              child: SelectClass(
-                                onchanged: (value) {
-                                  division = 0;
-                                  student = 0;
-                                  setState(() {
-                                    grade = value;
-                                  });
-                                },
-                                grade: grade,
-                              ),
-                            ),
-                          )
-                        ],
+                      padding: EdgeInsets.only(left: 50),
+                      child: Text(
+                        'Select Class',
+                        style: TextStyle(fontSize: 18),
                       ),
                     ),
-                    Container(
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Container(
+                        height: 30,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          border: Border.all(
+                              color: Colors.blue,
+                              style: BorderStyle.solid,
+                              width: 0.80),
+                        ),
+                        padding: EdgeInsets.only(left: 20),
+                        child: SelectClass(
+                          onchanged: (value) {
+                            division = 0;
+                            student = 0;
+                            setState(() {
+                              grade = value;
+                            });
+                          },
+                          grade: grade,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+              grade == 0
+                  ? Container()
+                  : Padding(
+                      padding: const EdgeInsets.only(left: 12),
                       child: Row(
                         children: <Widget>[
                           Container(
-                              padding: EdgeInsets.only(left: 12),
+                              padding: EdgeInsets.only(left: 50),
                               child: Text(
-                                'Select',
+                                'Select Division',
                                 style: TextStyle(fontSize: 18),
                               )),
                           Padding(
@@ -83,7 +86,7 @@ class _RemarkScreenState extends State<RemarkScreen> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15.0),
                                 border: Border.all(
-                                    color: Theme.of(context).primaryColor,
+                                    color: Colors.blue,
                                     style: BorderStyle.solid,
                                     width: 0.80),
                               ),
@@ -102,31 +105,44 @@ class _RemarkScreenState extends State<RemarkScreen> {
                         ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 15),
-              division == 0 || grade==0
+              SizedBox(height: 10),
+              division == 0
                   ? Container()
-                  : Container(
-                    height: 30,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.0),
-                      border: Border.all(
-                          color: Theme.of(context).primaryColor,
-                          style: BorderStyle.solid,
-                          width: 0.80),
+                  : Padding(
+                      padding: const EdgeInsets.only(left: 12),
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                              padding: EdgeInsets.only(left: 50),
+                              child: Text(
+                                'Select Student',
+                                style: TextStyle(fontSize: 18),
+                              )),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                border: Border.all(
+                                    color: Colors.blue,
+                                    style: BorderStyle.solid,
+                                    width: 0.80),
+                              ),
+                              padding: EdgeInsets.only(left: 16),
+                              child: SelectStudent(
+                                onchanged: (value) {
+                                  setState(() {
+                                    student = value;
+                                  });
+                                },
+                                student: student,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                    padding: EdgeInsets.only(left: 16),
-                    child: SelectStudent(
-                      onchanged: (value) {
-                        setState(() {
-                          student = value;
-                        });
-                      },
-                      student: student,
-                    ),
-                  ),
               student == 0
                   ? Container()
                   : Column(
@@ -327,12 +343,13 @@ class _RemarkScreenState extends State<RemarkScreen> {
               )
             ]),
           ),
-          DigiCampusAppbar(
-            icon: Icons.close,
-            onDrawerTapped: () {
-              Navigator.of(context).pop();
-            },
-          ),
+//          DigiCampusAppbar(
+//            icon: Icons.close,
+//            onDrawerTapped: () {
+//              Navigator.of(context).pop();
+//            },
+//          ),
+          DigiAlert(title: 'Give Rewards',text: 'Subscribe for the complete digital school experience',icon: DigiIcons.school_alt)
         ],
       ),
     );

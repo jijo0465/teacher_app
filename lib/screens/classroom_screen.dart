@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:teacher_app/components/digicampus_appbar.dart';
+import 'package:teacher_app/models/timetable.dart';
+import 'package:teacher_app/screens/discussions_screen.dart';
+import 'package:teacher_app/states/teacher_state.dart';
 
 class ClassroomScreen extends StatefulWidget {
   const ClassroomScreen({Key key}) : super(key: key);
-
 
   @override
   _ClassroomScreenState createState() => _ClassroomScreenState();
@@ -13,6 +17,10 @@ class ClassroomScreen extends StatefulWidget {
 
 class _ClassroomScreenState extends State<ClassroomScreen> {
   ScrollController _scrollController = new ScrollController();
+  var launchDate = DateTime(2020,06,08);
+  DateTime lastDate;
+  Firestore firestore = Firestore.instance;
+  List<DocumentSnapshot> _items;
   // ScrollController _controller2;
   // double iconOffset;
   // double offset;
@@ -35,12 +43,13 @@ class _ClassroomScreenState extends State<ClassroomScreen> {
   //   super.initState();
   // }
 
-  // @override
-  // void initState() {
-  //   // iconOffset = 50.0;
-  //   // watchLive = false;
-  //   super.initState();
-  // }
+   @override
+   void initState() {
+     // iconOffset = 50.0;
+     // watchLive = false;
+     lastDate =  DateTime.now().add(Duration(days: 1));
+     super.initState();
+   }
 
   @override
   void dispose() {
@@ -49,56 +58,57 @@ class _ClassroomScreenState extends State<ClassroomScreen> {
   }
 
   Widget dateTiles(int i) {
+    TeacherState teacherState =  Provider.of<TeacherState>(context, listen: true);
+    print('DATETILES');
     DateFormat _dateFormat = DateFormat.yMMMd();
     DateFormat _dateFormatDay = DateFormat.E();
-    var date = DateTime.now().subtract(Duration(days: i));
+//    DateFormat _dateFormatSave = DateFormat.yMd();
+    var date = lastDate.subtract(Duration(days: i));
     int hrs = 11;
     // print(hrs);
     // int mts = date.minute;
     String formattedDay = _dateFormatDay.format(date);
     String formattedDate = _dateFormat.format(date);
-   List<Map<String, dynamic>> timeTableList = [
-    {
-      '0': 'Period 1\nClass VI',
-      '1': 'Period 2\nClass VII',
-      '2': 'Period 3\nClass VII',
-      '3': 'Period 4\nClass VI',
-      '4': 'Period 5\nClass VII',
-      '5': 'Period 6\nClass VI',
-    },
-    {
-      '0': 'Period 1\nClass VI',
-      '1': 'Period 2\nClass VII',
-      '2': 'Period 3\nClass VII',
-      '3': 'Period 4\nClass VI',
-      '4': 'Period 5\nClass VII',
-      '5': 'Period 6\nClass VI',
-    },
-    {
-      '0': 'Period 1\nClass VI',
-      '1': 'Period 2\nClass VII',
-      '2': 'Period 3\nClass VII',
-      '3': 'Period 4\nClass VI',
-      '4': 'Period 5\nClass VII',
-      '5': 'Period 6\nClass VI',
-    },
-    {
-      '0': 'Period 1\nClass VI',
-      '1': 'Period 2\nClass VII',
-      '2': 'Period 3\nClass VII',
-      '3': 'Period 4\nClass VI',
-      '4': 'Period 5\nClass VII',
-      '5': 'Period 6\nClass VI',
-    },
-    {
-      '0': 'Period 1\nClass VI',
-      '1': 'Period 2\nClass VII',
-      '2': 'Period 3\nClass VII',
-      '3': 'Period 4\nClass VI',
-      '4': 'Period 5\nClass VII',
-      '5': 'Period 6\nClass VI',
-    }
-  ];
+    String saveFormattedDate = DateFormat('dd-MM-yyyy').format(date);
+//    bool isVideoUploaaded= false;
+    var startTime = ['10:00','10:45','11:30'];
+    var endTime = ['10:30','11:15','12:00'];
+//    print('TIMETABLE : : : : ${TimeTable().getTeacherTimeTable(teacherState.teacher.teacherId)[0]['periods'][2]['class']}');
+
+    List<Map<String, dynamic>> timeTableList = TimeTable().getTeacherTimeTable(teacherState.teacher.teacherId);
+//    [
+//      {
+//        'day': 'Monday',
+//        'periods': [{'pdno': 1, 'class': '7', 'startTime': '10:00', 'endTime': '10:30'},
+//          {'pdno': 2, 'class': '8', 'startTime': '10:45', 'endTime': '11:15'},
+//          {'pdno': 3, 'class': '7', 'startTime': '11:30', 'endTime': '12:00'}],
+//      },
+//      {
+//        'day': 'Tuesday',
+//        'periods': [{'pdno': 1, 'class': '7', 'startTime': '10:00', 'endTime': '10:30'},
+//          {'pdno': 2, 'class': '8', 'startTime': '10:45', 'endTime': '11:15'},
+//          {'pdno': 3, 'class': '9', 'startTime': '11:30', 'endTime': '12:00'}],
+//      },
+//      {
+//        'day': 'Wednesday',
+//        'periods': [{'pdno': 1, 'class': '8', 'startTime': '10:00', 'endTime': '10:30'},
+//          {'pdno': 2, 'class': '7', 'startTime': '10:45', 'endTime': '11:15'},
+//          {'pdno': 3, 'class': '9', 'startTime': '11:30', 'endTime': '12:00'}],
+//      },
+//      {
+//        'day': 'Thursday',
+//        'periods': [{'pdno': 1, 'class': '9', 'startTime': '10:00', 'endTime': '10:30'},
+//          {'pdno': 2, 'class': '8', 'startTime': '10:45', 'endTime': '11:15'},
+//          {'pdno': 3, 'class': '9', 'startTime': '11:30', 'endTime': '12:00'}],
+//      },
+//      {
+//        'day': 'Friday',
+//        'periods': [{'pdno': 1, 'class': '7', 'startTime': '10:00', 'endTime': '10:30'},
+//          {'pdno': 2, 'class': '8', 'startTime': '10:45', 'endTime': '11:15'},
+//          {'pdno': 3, 'class': '9', 'startTime': '11:30', 'endTime': '12:00'}],
+//      },
+//  ];
+    print(timeTableList);
     Map<String, dynamic> timeTable;
     print(formattedDay);
     switch (formattedDay) {
@@ -118,10 +128,10 @@ class _ClassroomScreenState extends State<ClassroomScreen> {
         timeTable = timeTableList[4];
         break;
       default:
-        timeTable = timeTableList[2];
+        return Container();
     }
-    print('num: ${timeTable['0']}');
-
+    print('num: ${timeTable['day']}');
+    print('indexlength : ${timeTable['periods'].length}');
     // List<Widget> _periods = [];
     // for (int i = 0; i < 7; i++) _periods.add(periodWidgets(i, formattedDay));
     return Container(
@@ -165,77 +175,103 @@ class _ClassroomScreenState extends State<ClassroomScreen> {
                       child: Container(
                         decoration: BoxDecoration(
                             gradient: LinearGradient(colors: [
-                          Colors.greenAccent[100],
-                          Colors.greenAccent[400]
+                          Colors.grey[100].withOpacity(0.3),
+                          Colors.grey[400].withOpacity(0.3)
                         ])),
                         child: Row(
-                            children: List.generate(6, (index) {
-                          // print(timeTable['$index'].toString());
-                          return Row(
-                            children: <Widget>[
-                              GestureDetector(
-                                behavior: HitTestBehavior.translucent,
-                                onTap: (){
-                                  print(hrs);
-                                  hrs == (9+index) && i == 0
-                                  ? Navigator.of(context).pushNamed('/live')
-                                  : Navigator.of(context).pushNamed('/discussions');
-                                },
-                                child: Container(
-                                    height: 80,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                        gradient: i == 0
-                                            ? LinearGradient(colors: [
-                                                Colors.deepOrange[
-                                                    (index + 1) * 100],
-                                                Colors.deepOrange[
-                                                    100 + ((index + 1) * 100)]
-                                              ])
-                                            : null),
-                                    // color: Colors.deepOrange[100+(index*100)],
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          Text(
-                                            timeTable['$index'].toString(),
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                            overflow: TextOverflow.clip,
-                                          ),
-                                          hrs == (9+index) && i == 0
-                                          ?Align(
-                                            alignment: Alignment.bottomRight,
-                                            child: IntrinsicWidth(
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.end,
+                            children: List.generate(timeTable['periods'].length, (index) {
+                          var isVideoUploaded = false;
+                          var videoUrl = '';
+                          return StreamBuilder<QuerySnapshot>(
+                            stream: firestore.collection('grade_${timeTable['periods'][index]['class']}').snapshots(),
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData)
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Theme.of(context).primaryColor)));
+                              else  {
+                                _items = snapshot.data.documents;
+                                if(_items.isNotEmpty)
+                                _items.forEach((element) {
+                                  if(timeTable['periods'][index]['class']==0)
+                                    isVideoUploaded = false;
+                                  else if(element.documentID == saveFormattedDate)
+                                    if(element['period_${timeTable['periods'][index]['pdno']}']!=null)
+                                      {
+                                        print(element['period_${timeTable['periods'][index]['pdno']}']['videoUrl']);
+                                        videoUrl = element['period_${timeTable['periods'][index]['pdno']}']['videoUrl'];
+                                        print('KEY --->> TRUE');
+                                        videoUrl != null
+                                            ?isVideoUploaded = true
+                                            :isVideoUploaded = false;
+                                      }
+                                    else  isVideoUploaded = false;
+                                });
+                              return Row(
+                                    children: <Widget>[
+                                      GestureDetector(
+                                        behavior: HitTestBehavior.translucent,
+                                        onTap: (){
+                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                                              DiscussionsScreen(date: saveFormattedDate, grade: timeTable['periods'][index]['class'].toString(), subject: timeTable['subject'], period: timeTable['periods'][index]['pdno'], uploadStatus: isVideoUploaded, url: videoUrl,)));
+                                          print(hrs);
+//                                  hrs == (9+index) && i == 0
+//                                  ? Navigator.of(context).pushNamed('/live')
+//                                  : Navigator.of(context).pushNamed('/discussions');
+                                        },
+                                        child: Container(
+                                            height: 80,
+                                            width: 100,
+                                            decoration: BoxDecoration(
+                                                gradient: isVideoUploaded
+                                                    ? LinearGradient(colors: [
+                                                        Colors.blue[
+                                                            (index + 1) * 100],
+                                                        Colors.blue[
+                                                            100 + ((index + 1) * 100)]
+                                                      ])
+                                                    : null),
+                                            // color: Colors.deepOrange[100+(index*100)],
+                                            child: Align(
+                                              alignment: Alignment.center,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                crossAxisAlignment: CrossAxisAlignment.center,
                                                 children: <Widget>[
-                                                  Icon(Icons.my_location,color: Colors.red[800],),
-                                                  SizedBox(width: 8,),
-                                                  Text('Live' ,style: TextStyle(color: Colors.red[900],fontWeight: FontWeight.w700),),
-                                                  SizedBox(width: 8,),
+                                                  Text(
+//                                                    'Class : ',
+                                                    timeTable['periods'][index]['class']==0?
+                                                        'Free Period'
+                                                    :'Class : ${timeTable['periods'][index]['class']}',
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                    ),
+                                                    textAlign: TextAlign.center,
+                                                    overflow: TextOverflow.clip,
+                                                  ),
+                                                  Text(
+                                                    "${startTime[timeTable['periods'][index]['pdno']-1]} - ${endTime[timeTable['periods'][index]['pdno']-1]}",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                    ),
+                                                    textAlign: TextAlign.center,
+                                                    overflow: TextOverflow.clip,
+                                                  ),
                                                 ],
                                               ),
-                                            ),
-                                          )
-                                          :Container()
-                                        ],
+                                            )),
                                       ),
-                                    )),
-                              ),
-                              VerticalDivider(
-                                thickness: 1,
-                                width: 1,
-                                color: Colors.white,
-                              )
-                            ],
-                          );
-                        })),
+                                      VerticalDivider(
+                                        thickness: 1,
+                                        width: 1,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  );}
+                            }
+                          );}
+                              )),
                       ),
                     ),
                   ),
@@ -246,9 +282,9 @@ class _ClassroomScreenState extends State<ClassroomScreen> {
 
   @override
   Widget build(BuildContext context) {
-    int hr;
     List<Widget> _dateTileWidgets = [];
-    for (int i = 0; i < 20; i++) _dateTileWidgets.add(dateTiles(i));
+    print(launchDate.difference(DateTime.now()).inDays);
+    for (int i = 0; i <= lastDate.difference(launchDate).inDays; i++) _dateTileWidgets.add(dateTiles(i));
     return Scaffold(
         body: Column(
       children: <Widget>[
@@ -257,6 +293,7 @@ class _ClassroomScreenState extends State<ClassroomScreen> {
           onDrawerTapped: () {
             Navigator.of(context).pop();
           },
+          title: 'Virtual Classroom',
         ),
         SizedBox(height: 12),
         Container(
@@ -273,12 +310,19 @@ class _ClassroomScreenState extends State<ClassroomScreen> {
                 padding: EdgeInsets.only(left: 50),
                 margin: EdgeInsets.only(top: 10, bottom: 10),
                 child: Row(
-                    children: List.generate(8, (index) {
-                  hr = 9 + index;
-                  return Row(
-                    children: <Widget>[Text('$hr:00'), SizedBox(width: 65)],
-                  );
-                }))),
+//                    children: List.generate(8, (index) {
+//                  hr = 9 + index;
+//                  return Row(
+//                    children: <Widget>[Text('$hr:00'), SizedBox(width: 65)],
+//                  );
+//                })
+                children: [
+                  Text('10:00'), SizedBox(width: 65),
+                  Text('10:45'), SizedBox(width: 65),
+                  Text('11:30'), SizedBox(width: 65),
+                  Text('12:00'), SizedBox(width: 65)
+                ],
+                )),
           ),
         ),
         Expanded(

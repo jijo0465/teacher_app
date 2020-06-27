@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:teacher_app/components/digi_alert.dart';
 import 'package:teacher_app/components/digicampus_appbar.dart';
+import 'package:teacher_app/components/icons.dart';
 
 class BusTrackingScreen extends StatelessWidget {
   const BusTrackingScreen({Key key}) : super(key: key);
@@ -9,6 +11,10 @@ class BusTrackingScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: <Widget>[
+          Container(
+          color: Theme.of(context).primaryColor,
+          height: MediaQuery.of(context).padding.top,
+        ),
           Container(
             width: double.infinity,
             height: double.infinity,
@@ -25,12 +31,14 @@ class BusTrackingScreen extends StatelessWidget {
               ),
             ),
           ),
-           DigiCampusAppbar(
-                icon: Icons.close,
-                onDrawerTapped: () {
-                  Navigator.of(context).pop();
-                },
-              ),
+//           DigiCampusAppbar(
+//             title: 'Track School Bus',
+//                icon: Icons.close,
+//                onDrawerTapped: () {
+//                  Navigator.of(context).pop();
+//                },
+//              ),
+          DigiAlert(title: 'Attendance',text: 'Subscribe for the complete digital school experience',icon: DigiIcons.school_alt)
         ],
       ),
     );

@@ -37,106 +37,111 @@ class _UpdateStudentProfileState extends State<UpdateStudentProfile> {
                 SizedBox(
                   height: 120,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left:12),
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        child: Row(
-                          children: <Widget>[
-                            Container(
-                              //padding: EdgeInsets.only(left: 50),
-                              child: Text(
-                                'Select',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 12),
-                              child: Container(
-                                height: 30,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  border: Border.all(
-                                      color: Theme.of(context).primaryColor,
-                                      style: BorderStyle.solid,
-                                      width: 0.80),
-                                ),
-                                padding: EdgeInsets.only(left: 20),
-                                child: SelectClass(
-                                  onchanged: (value) {
-                                    division = 0;
-                                    student = 0;
-                                    setState(() {
-                                      grade = value;
-                                    });
-                                  },
-                                  grade: grade,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
+                Row(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.only(left: 50),
+                      child: Text(
+                        'Select Class',
+                        style: TextStyle(fontSize: 18),
                       ),
-                      Container(
-                        child: Row(
-                          children: <Widget>[
-                            Container(
-                                padding: EdgeInsets.only(left: 12),
-                                child: Text(
-                                  'Select',
-                                  style: TextStyle(fontSize: 18),
-                                )),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 12),
-                              child: Container(
-                                height: 30,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  border: Border.all(
-                                      color: Theme.of(context).primaryColor,
-                                      style: BorderStyle.solid,
-                                      width: 0.80),
-                                ),
-                                padding: EdgeInsets.only(left: 20),
-                                child: SelectDivision(
-                                  onchanged: (value) {
-                                    student = 0;
-                                    setState(() {
-                                      division = value;
-                                    });
-                                  },
-                                  division: division,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 10),
-                division == 0||grade==0
-                    ? Container()
-                    : Container(
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 32),
+                      child: Container(
                         height: 30,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.0),
                           border: Border.all(
-                              color: Theme.of(context).primaryColor,
+                              color: Colors.blue,
                               style: BorderStyle.solid,
                               width: 0.80),
                         ),
-                        padding: EdgeInsets.only(left: 18),
-                        child: SelectStudent(
+                        padding: EdgeInsets.only(left: 20),
+                        child: SelectClass(
                           onchanged: (value) {
+                            division = 0;
+                            student = 0;
                             setState(() {
-                              student = value;
+                              grade = value;
                             });
                           },
-                          student: student,
+                          grade: grade,
                         ),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(height: 10),
+                grade == 0
+                    ? Container()
+                    : Row(
+                        children: <Widget>[
+                          Container(
+                              padding: EdgeInsets.only(left: 50),
+                              child: Text(
+                                'Select Division',
+                                style: TextStyle(fontSize: 18),
+                              )),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 12),
+                            child: Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                border: Border.all(
+                                    color: Colors.blue,
+                                    style: BorderStyle.solid,
+                                    width: 0.80),
+                              ),
+                              padding: EdgeInsets.only(left: 20),
+                              child: SelectDivision(
+                                onchanged: (value) {
+                                  student = 0;
+                                  setState(() {
+                                    division = value;
+                                  });
+                                },
+                                division: division,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                SizedBox(height: 10),
+                division == 0
+                    ? Container()
+                    : Row(
+                        children: <Widget>[
+                          Container(
+                              padding: EdgeInsets.only(left: 50),
+                              child: Text(
+                                'Select Student',
+                                style: TextStyle(fontSize: 18),
+                              )),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 12),
+                            child: Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                border: Border.all(
+                                    color: Colors.blue,
+                                    style: BorderStyle.solid,
+                                    width: 0.80),
+                              ),
+                              padding: EdgeInsets.only(left: 18),
+                              child: SelectStudent(
+                                onchanged: (value) {
+                                  setState(() {
+                                    student = value;
+                                  });
+                                },
+                                student: student,
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                 SizedBox(height: 10),
                 student == 0
@@ -393,8 +398,7 @@ class _UpdateStudentProfileState extends State<UpdateStudentProfile> {
       });
     }
   }
-
-  String validateContact(String value) {
+  String validateContact(String value){
     if (value.length != 10)
       return 'Mobile Number must be of 10 digit';
     else

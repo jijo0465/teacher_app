@@ -1,45 +1,84 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:file/file.dart';
+import 'package:file/local.dart';
+import 'package:flutter/material.dart';
+import 'dart:io';
 import 'dart:ui';
 
+import 'package:provider/provider.dart';
+import 'package:teacher_app/models/timetable.dart';
+import 'package:teacher_app/states/teacher_state.dart';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:diagonal_scrollview/diagonal_scrollview.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 import 'package:teacher_app/components/digicampus_appbar.dart';
 import 'package:teacher_app/components/live_stream_settings.dart';
 import 'package:teacher_app/models/grade.dart';
 import 'package:http/http.dart' as http;
 
 class CallPage extends StatefulWidget {
-  /// non-modifiable channel name of the page
   // final String channelName;
-
-  /// Creates a call page with given channel name.
-  const CallPage({Key key}) : super(key: key);
+  final int id;
+  const CallPage({Key key, this.id}) : super(key: key);
 
   @override
   _CallPageState createState() => _CallPageState();
 }
 
-class _CallPageState extends State<CallPage> {
+class _CallPageState extends State<CallPage> with SingleTickerProviderStateMixin {
   static final _users = <int>[];
   final _infoStrings = <String>[];
-  bool muted = false;
-  final broadcasterUid = 3001;
-  final bool isflag = false;
-  bool checkParticipants = false;
-  // Firestore firestore = Firestore.instance;
-  // List<DocumentSnapshot> _items;
-  // DocumentSnapshot _item;
+  final double _minScale = .6;
+  final double _maxScale = 3;
+  final TextEditingController _textFieldController =
+  new TextEditingController();
+  String channelName;
+  DiagonalScrollViewController _controller;
+  AnimationController _animationController;
+  Animation _animation;
+  Firestore firestore = Firestore.instance;
+  DocumentSnapshot _participantSnapshot;
+  DocumentSnapshot _discussionSnapshot;
+  List<Widget> discussionListWidget = [];
+  List<Map<String, dynamic>> _discussionData = [];
+  List<String> participantName = [];
   Grade grade = Grade.empty();
-  int id = 4001;
+  int widgetIndex = 0;
+  int broadcasterUid;
   String resourceId;
   String sid;
+  String videoPath;
+  String _platformVersion = 'Unknown';
+//  double appBarHeight = 100;
+  double _boxSizeWidth = 520.0;
+  double _boxSizeHeight = 104.0;
+
+//  ValueNotifier<bool> onShowToolbar = ValueNotifier(true);
+//  ValueNotifier<bool> onCheckParticipants = ValueNotifier(false);
+//  ValueNotifier<bool> recording = ValueNotifier(false);
+  bool onShowToolbar = true;
+//  bool onShowDiscussions = false;
+  bool onCheckParticipants = false;
+  bool muted = false;
+  bool record = false;
+  Color discussionFieldColor = Colors.grey;
+  Color recordButtonColor = Colors.redAccent;
+  String date = DateFormat('dd-MM-yyyy').format(DateTime.now());
+
+  LocalFileSystem localFileSystem = LocalFileSystem();
+
+
   @override
   void dispose() {
     // clear users
+    _animationController.dispose();
     _users.clear();
+    discussionListWidget.clear();
     // destroy sdk
+//    _animationController.dispose();
     AgoraRtcEngine.leaveChannel();
     AgoraRtcEngine.destroy();
     super.dispose();
@@ -48,10 +87,45 @@ class _CallPageState extends State<CallPage> {
   @override
   void initState() {
     super.initState();
-    grade.setId(id);
+    grade.setId(widget.id);
+    _animationController = AnimationController(
+        vsync: this,
+        duration: Duration(milliseconds: 900)
+    );
+    _animation = Tween(
+        begin: 1.0,
+        end: 0.0).animate(_animationController);
+//    _animationController.forward();
     // initialize agora sdk
+//    _initAudio();
     initialize();
+    Future.delayed(Duration(seconds: 10)).then((value) {
+      setState(() {
+        onShowToolbar = false;
+      });
+      _animationController.forward();
+    });
+//    initPlatformState();
   }
+
+//  Future<void> initPlatformState() async {
+//    String platformVersion;
+//    // Platform messages may fail, so we use a try/catch PlatformException.
+//    try {
+//      platformVersion = await FlutterScreenRecording.platformVersion;
+//    } on PlatformException {
+//      platformVersion = 'Failed to get platform version.';
+//    }
+//
+//    // If the widget was removed from the tree while the asynchronous platform
+//    // message was in flight, we want to discard the reply rather than calling
+//    // setState to update our non-existent appearance.
+//    if (!mounted) return;
+//
+//    setState(() {
+//      _platformVersion = platformVersion;
+//    });
+//  }
 
   Future<void> initialize() async {
     if (APP_ID.isEmpty) {
@@ -63,15 +137,8 @@ class _CallPageState extends State<CallPage> {
       });
       return;
     }
-
     _addAgoraEventHandlers();
     await _initAgoraRtcEngine();
-    // await AgoraRtcEngine.enableWebSdkInteroperability(true);
-    // await AgoraRtcEngine.setChannelProfile(ChannelProfile.LiveBroadcasting);
-    // await AgoraRtcEngine.setClientRole(ClientRole.Broadcaster);
-    // await AgoraRtcEngine.setParameters(
-    //     '{\"che.video.lowBitRateStreamParameter\":{\"width\":320,\"height\":180,\"frameRate\":15,\"bitRate\":140}}');
-    // await AgoraRtcEngine.joinChannel(null, widget.channelName, null, 0);
   }
 
   /// Create agora sdk instance and initialize
@@ -81,14 +148,11 @@ class _CallPageState extends State<CallPage> {
     await AgoraRtcEngine.setChannelProfile(ChannelProfile.LiveBroadcasting);
     await AgoraRtcEngine.setClientRole(ClientRole.Broadcaster);
     await AgoraRtcEngine.enableWebSdkInteroperability(true);
-    
-    
     await AgoraRtcEngine.joinChannel(
-        "006afe8cf8cb8fd494bbd8d7e1d900483baIACSZiNJ2hQaSB+xmyM1ebHLSiDRTL6QVAKekTjc0zECEq8sD1MAAAAAEABfqfzlkmnQXgEAAQCRadBe",
-        'live',
         null,
-        broadcasterUid);
-        // startRecording();
+        'class_${grade.id}',
+        null,
+        0);
     // await AgoraRtcEngine.enableWebSdkInteroperability(true);
   }
 
@@ -106,29 +170,27 @@ class _CallPageState extends State<CallPage> {
       });
     };
 
-    AgoraRtcEngine.onJoinChannelSuccess = (
-      String channel,
-      int uid,
-      int elapsed,
-    ) {
-      
-      
-      setState(() {
-        final info = 'onJoinChannel: $channel, uid: $uid';
-        _infoStrings.add(info);
+    AgoraRtcEngine.onJoinChannelSuccess = (String channel,
+        int uid,
+        int elapsed,) {
+      channelName = channel;
+      firestore.collection('live').document('grade_${grade.id}').setData({'liveBroadcastUserId': {'users': null}},merge: true);
+      firestore.collection('live').document('grade_${grade.id}')
+          .setData({'liveBroadcastChannelId': uid},merge: true)
+          .then((value) {
+        startRecording(uid);
+        broadcasterUid = uid;
+        setState(() {
+          final info = 'onJoinChannel: $channel, uid: $uid';
+          _infoStrings.add(info);
+        });
       });
-
-      //   DocumentReference documentReference =
-      //     firestore.collection('classroom_${grade.id}').document('live_session');
-      // firestore.runTransaction((transaction) async {
-      //   await transaction.update(
-      //       documentReference, {'userid': FieldValue.arrayUnion([uid])});
-      // });
 
       Future.delayed(Duration(seconds: 3)).then((value) {
         setState(() {
           _infoStrings.removeLast();
         });
+//        startRecording(uid);
       });
     };
 
@@ -171,12 +233,10 @@ class _CallPageState extends State<CallPage> {
       });
     };
 
-    AgoraRtcEngine.onFirstRemoteVideoFrame = (
-      int uid,
-      int width,
-      int height,
-      int elapsed,
-    ) {
+    AgoraRtcEngine.onFirstRemoteVideoFrame = (int uid,
+        int width,
+        int height,
+        int elapsed,) {
       print("firstRemoteVideo: $uid ${width}x $height");
       setState(() {
         final info = 'firstRemoteVideo: $uid ${width}x $height';
@@ -259,128 +319,167 @@ class _CallPageState extends State<CallPage> {
         AgoraRtcEngine.setupLocalVideo(viewId, VideoRenderMode.Fit);
       }),
     );
-    //  AgoraRtcEngine.createNativeView((viewId) {
-    //   // _viewId = viewId;
-    //   // print(widget.uid);
-    //   // AgoraRtcEngine.setupLocalVideo(_viewId, VideoRenderMode.Fit);
-    //   // AgoraRtcEngine.startPreview();
-    //   AgoraRtcEngine.setupRemoteVideo(viewId, VideoRenderMode.Fit, broadcasterUid); //widget.uid  --> Broadcaster Uid
-    //   // AgoraRtcEngine.startPreview();
-    //   // AgoraRtcEngine.joinChannel(null, 'flutter', null, 0);
-    // });
-    // return AgoraRenderWidget(broadcasterUid, local: true, preview: true);
   }
 
   /// Toolbar layout
   Widget _toolbar() {
     return Container(
-      width: MediaQuery.of(context).size.width,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width,
       alignment: Alignment.bottomCenter,
-      padding: const EdgeInsets.symmetric(vertical: 48),
+//      padding: const EdgeInsets.symmetric(vertical: 48),
+      margin: EdgeInsets.only(bottom: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
+//          Flexible(
+//            flex: 1,
+//            child: RaisedButton(
+//                shape: CircleBorder(side: BorderSide(color: Colors.white30)),
+//                color: Colors.grey,
+//                onPressed: onCheckParticipants ? null : () {
+//                  setState(() {
+//                    onShowDiscussions = !onShowDiscussions;
+//                  });
+//                  if(!onShowDiscussions)
+//                    Future.delayed(Duration(seconds: 10)).then((value) {
+//                      if(!onCheckParticipants)  {
+//                        _animationController.forward();
+//                        setState(() {
+//                          onShowToolbar = false;
+//                        });
+//                      }
+//                    });
+//                },
+//                child: Icon(
+//                  Icons.chat,
+//                  color: Colors.black54,
+//                  size: 40.0,
+//                )),
+//          ),
           Flexible(
             flex: 2,
-            child: RaisedButton(
-                shape: CircleBorder(side: BorderSide(color: Colors.black12)),
-                color: Theme.of(context).primaryColor.withOpacity(0.4),
-                onPressed: checkParticipants ? null : () {},
-                child: Icon(
-                  Icons.chat,
-                  color: Colors.white,
-                  size: 20.0,
-                )),
-          ),
-          Flexible(
-            flex: 2,
-            child: RaisedButton(
-                shape: CircleBorder(side: BorderSide(color: Colors.black12)),
-                color: Theme.of(context).primaryColor.withOpacity(0.4),
-                onPressed: checkParticipants ? null : _onToggleMute,
-                child: Icon(
-                  muted ? Icons.mic_off : Icons.mic,
-                  color: muted ? Colors.red : Colors.white,
-                  size: 20,
-                )),
-          ),
-          Flexible(
-            flex: 3,
-            child: RaisedButton(
-              shape: CircleBorder(side: BorderSide(color: Colors.black12)),
-              color: Theme.of(context).primaryColor.withOpacity(0.4),
-              onPressed: checkParticipants ? null : () => _onCallEnd(context),
-              child: Icon(
-                Icons.call_end,
-                color: Colors.red,
-                size: 40.0,
+            child: Container(
+              child: IconButton(
+                padding: EdgeInsets.all(16),
+                onPressed: () {
+                  _onCallEnd(context);
+//                  Navigator.of(context).pop();
+                },
+//                  backgroundColor: Colors.white30,
+                icon: Icon(Icons.add_to_home_screen,color: Colors.white,size: 30,),
               ),
             ),
           ),
           Flexible(
             flex: 2,
-            child: RaisedButton(
-                shape: CircleBorder(side: BorderSide(color: Colors.black12)),
-                color: Theme.of(context).primaryColor.withOpacity(0.4),
-                onPressed: checkParticipants ? null : _onSwitchCamera,
-                child: Icon(
+            child: IconButton(
+//                shape: CircleBorder(side: BorderSide(color: Colors.white30)),
+                color: Theme
+                    .of(context)
+                    .primaryColor
+                    .withOpacity(0.6),
+                onPressed: onCheckParticipants ? null : _onToggleMute,
+                icon: Icon(
+                  muted ? Icons.mic_off : Icons.mic,
+                  color: muted ? Colors.red : Colors.white70,
+                  size: 40,
+                )),
+          ),
+          Flexible(
+            flex: 3,
+            child:TweenAnimationBuilder(
+              tween: ColorTween(begin: Theme.of(context)
+                        .primaryColor
+                        .withOpacity(0.6),end: recordButtonColor),
+              duration: Duration(seconds: 1),
+              onEnd: (){
+                if(!record)
+                setState(() {
+                  recordButtonColor = recordButtonColor == Colors.redAccent
+                      ?Theme
+                        .of(context)
+                        .primaryColor
+                        .withOpacity(0.6)
+                      :Colors.redAccent;
+                });
+                else {
+                  recordButtonColor = Colors.redAccent;
+                }
+              },
+              builder: (_, Color color, __){
+                return FloatingActionButton(
+//              shape: CircleBorder(side: BorderSide(color: Colors.white30)),
+                  backgroundColor: Colors.transparent,
+                  onPressed: onCheckParticipants ? null : ()
+//              => _onCallEnd(context),
+                  {
+//                setState(() {
+//                  record = !record;
+//                });
+//                record ? startRecording(broadcasterUid)
+//                    : stopRecording(broadcasterUid);
+
+//                record ? _startVideoRecording()
+//                    : _stopVideoRecording();
+                  },
+                  child: Icon(
+                    CupertinoIcons.circle_filled,
+                    size: 60,
+                    color: color
+//                    recording.value ? Colors.redAccent : Theme
+//                        .of(context)
+//                        .primaryColor
+//                        .withOpacity(0.6),
+//                size: 60.0,
+                  ),
+                );
+              },
+            )
+          ),
+          Flexible(
+            flex: 2,
+            child: IconButton(
+//                shape: CircleBorder(side: BorderSide(color: Colors.white30)),
+                color: Theme
+                    .of(context)
+                    .primaryColor
+                    .withOpacity(0.6),
+                onPressed: onCheckParticipants ? null : _onSwitchCamera,
+                icon: Icon(
                   Icons.switch_camera,
-                  color: Colors.white,
-                  size: 20.0,
+                  color: Colors.white70,
+                  size: 40.0,
                 )),
           ),
           Flexible(
             flex: 2,
-            child: RaisedButton(
-                shape: CircleBorder(side: BorderSide(color: Colors.black12)),
-                color: Theme.of(context).primaryColor.withOpacity(0.4),
+            child: IconButton(
+//                shape: CircleBorder(side: BorderSide(color: Colors.white30)),
+                color: Theme
+                    .of(context)
+                    .primaryColor
+                    .withOpacity(0.6),
                 onPressed: () {
                   setState(() {
-                    checkParticipants = !checkParticipants;
+                    onCheckParticipants = !onCheckParticipants;
                   });
+                  if (!onCheckParticipants)
+                    Future.delayed(Duration(seconds: 10)).then((value) {
+                      _animationController.forward();
+                      setState(() {
+                        onShowToolbar = false;
+                      });
+                    });
                 },
-                child: Icon(
+                icon: Icon(
                   Icons.group,
-                  color: Colors.white,
-                  size: 20.0,
+                  color: Colors.white70,
+                  size: 40.0,
                 )),
           ),
-          //   RawMaterialButton(
-          //     onPressed: _onToggleMute,
-          //     child: Icon(
-          //       muted ? Icons.mic_off : Icons.mic,
-          //       color: muted ? Colors.white : Colors.blueAccent,
-          //       size: 20.0,
-          //     ),
-          //     shape: CircleBorder(),
-          //     elevation: 2.0,
-          //     fillColor: muted ? Colors.blueAccent : Colors.white,
-          //     padding: const EdgeInsets.all(12.0),
-          //   ),
-          //   RawMaterialButton(
-          //     onPressed: () => _onCallEnd(context),
-          //     child: Icon(
-          //       Icons.call_end,
-          //       color: Colors.white,
-          //       size: 35.0,
-          //     ),
-          //     shape: CircleBorder(),
-          //     elevation: 2.0,
-          //     fillColor: Colors.redAccent,
-          //     padding: const EdgeInsets.all(15.0),
-          //   ),
-          //   RawMaterialButton(
-          //     onPressed: _onSwitchCamera,
-          //     child: Icon(
-          //       Icons.switch_camera,
-          //       color: Colors.blueAccent,
-          //       size: 20.0,
-          //     ),
-          //     shape: CircleBorder(),
-          //     elevation: 2.0,
-          //     fillColor: Colors.white,
-          //     padding: const EdgeInsets.all(12.0),
-          //   )
         ],
       ),
     );
@@ -418,7 +517,10 @@ class _CallPageState extends State<CallPage> {
                         ),
                         decoration: BoxDecoration(
                           color:
-                              Theme.of(context).primaryColor.withOpacity(0.3),
+                          Theme
+                              .of(context)
+                              .primaryColor
+                              .withOpacity(0.3),
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: Text(
@@ -438,8 +540,35 @@ class _CallPageState extends State<CallPage> {
   }
 
   void _onCallEnd(BuildContext context) {
-    // stopRecording();
-    Navigator.pop(context);
+    showDialog(
+//      barrierDismissible: true ,
+        context: context,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+          title: Text('End Class?'),
+          content: Text('press exit to discard'),
+          actions: <Widget>[
+            CupertinoDialogAction(
+                child: Text('Upload Class'),
+                onPressed: () {
+                  stopRecording(broadcasterUid,true);
+//                  if(record)
+//                    _stopVideoRecording();
+                  firestore.collection('live').document('grade_${grade.id}')
+                      .setData({'liveBroadcastChannelId': null},merge: true);
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                }),
+            CupertinoDialogAction(
+              child: Text('Exit'),
+              onPressed: (){
+                stopRecording(broadcasterUid,false);
+                firestore.collection('live').document('grade_${grade.id}')
+                    .setData({'liveBroadcastChannelId': null},merge: true);
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },),
+          ],
+        ));
   }
 
   void _onToggleMute() {
@@ -453,123 +582,703 @@ class _CallPageState extends State<CallPage> {
     AgoraRtcEngine.switchCamera();
   }
 
+  List<Widget> _getChildrenColumn(List<dynamic> item) {
+    List<Widget> children;
+    int cubeId = 0;
+    int totalParticipants = item != null ? item.length : 0;
+    for (num x = 0; x < totalParticipants; x++) {
+      
+    }
+  }
+
+  List<Widget> _getChildren(List<dynamic> item) {
+    List<Widget> children = [];
+    Color childColor = Colors.blueGrey;
+    double childSize = 80;
+    double childMargin = 20;
+    num numChildrenX;
+    num numChildrenY;
+    int cubeId = 0;
+    int totalParticipants = item != null ? item.length : 0;
+    numChildrenY = (totalParticipants / 5).ceil();
+    for (int i = 0; i < totalParticipants; i++)
+      participantName.insert(i, item[i].toString());
+//    participantName.sort();
+    print('PARTICIPANTS: $totalParticipants');
+    for (num x = 0; x < numChildrenY; x++) {
+      numChildrenX =
+      (totalParticipants - (x * 5)) > 5 ? 5 : totalParticipants - (x * 5);
+      for (num y = 0; y < numChildrenX; y++) {
+        Widget cube = Container(
+//          width: childSize+20,
+//          height: childSize,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+//            color: childColor,
+          ),
+          child: Center(
+            child: Container(
+              padding: EdgeInsets.all(8),
+              child: Text(
+//              (cubeId++).toString(),
+                '${cubeId+1}. ${participantName[cubeId++]}',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+                overflow: TextOverflow.clip,
+              ),
+            ),
+          ),
+        );
+        children.add(Padding(
+          padding: EdgeInsets.all(0),
+//          left: childMargin + (childMargin + childSize) * y,
+//          top: childMargin + (childMargin + childSize) * x,
+          child: cube,
+        ));
+      }
+    }
+    return children;
+  }
+
+//  _listDiscussion(var item) {
+//    for (; widgetIndex < item['discussion'].length; widgetIndex++) {
+//      _discussionData.insert(widgetIndex, {
+//        'id': item['discussion'][widgetIndex]['id'],
+//        'text': item['discussion'][widgetIndex]['text'],
+//        'time': item['discussion'][widgetIndex]['time']
+//      });
+//      print(_discussionData[widgetIndex]['text']);
+//      discussionListWidget.add(Column(children: <Widget>[
+//        Container(
+//          height: 50,
+//          width: MediaQuery
+//              .of(context)
+//              .size
+//              .width * 5 / 6,
+//          child: Row(
+//            children: <Widget>[
+//              Container(
+//                height: 40,
+//                width: 40,
+//                // margin: EdgeInsets.only(left: 20),
+//                decoration: BoxDecoration(
+//                  shape: BoxShape.circle,
+//                  image: DecorationImage(
+//                      image:
+//                      NetworkImage(
+//                          'https://i.pinimg.com/236x/e4/f7/5e/e4f75e2f6b1ef0afa711278b655dfe4a.jpg'),
+//                      fit: BoxFit.fill),
+//                ),
+//              ),
+//              Expanded(
+//                  child: Container(
+//                    padding: EdgeInsets.only(left: 20, right: 20),
+//                    height: 50,
+//                    width: MediaQuery
+//                        .of(context)
+//                        .size
+//                        .width,
+//                    child: Align(
+//                      alignment: Alignment.centerLeft,
+//                      child: Text(item['discussion'][widgetIndex]['text']),
+//                    ),
+//                  )),
+//            ],
+//          ),
+//        ),
+//        Divider(
+//          indent: 5,
+//          endIndent: 5,
+//          color: Colors.black38,
+//          // thickness: 2,
+//        )
+//      ]));
+//    }
+//  }
+
+//  _addToDiscussions(String text) async {
+//    var addText = [
+//      {'id': 3001, 'text': text, 'time': DateTime.now().toUtc()}
+//    ];
+//    DocumentReference documentReference =
+//    firestore.collection('live').document('subject_date_hr');
+//    firestore.runTransaction((transaction) async {
+//      await transaction.update(
+//          documentReference, {'discussion': FieldValue.arrayUnion(addText)});
+//    });
+    // documentReference.get().then((doc){
+    //   if(doc.exists){
+    //     documentReference.updateData({'disussion':FieldValue.arrayUnion(comment)});
+    //   }else{
+    //     documentReference.setData({'disussion':FieldValue.arrayUnion(comment)});
+    //   }
+    // });
+//  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Center(
-        child: Stack(
-          children: <Widget>[
-            // _viewRows(),
-            _viewVideo(),
-            _panel(),
-            _toolbar(),
-            DigiCampusAppbar(
-              icon: Icons.close,
-              onDrawerTapped: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            // StreamBuilder<QuerySnapshot>(
-            // stream:
-            //     firestore.collection('classroom_${grade.id}').snapshots(),
-            // builder: (BuildContext context,
-            //     AsyncSnapshot<QuerySnapshot> snapshot) {
-            //   // if (!snapshot.hasData)
-            //   if (!snapshot.hasData)
-            //     return
-            //   Center(
-            //     child: CircularProgressIndicator(
-            //       valueColor: AlwaysStoppedAnimation<Color>(
-            //           Theme.of(context).primaryColor),
-            //     ),
-            //   );
-            // else {
-            //   _items = snapshot.data.documents;
-            //   for (int i = 0; i < _items.length; i++)
-            //     if (_items[i].documentID == 'live_session')
-            //       _item = _items[i];
-            //   return
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Center(
-                child: ClipRect(
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(
-                        sigmaX: checkParticipants ? 25 : 0,
-                        sigmaY: checkParticipants ? 25 : 0),
-                    child: checkParticipants
-                        ? Container(
-                            width: MediaQuery.of(context).size.width - 40,
-                            height: MediaQuery.of(context).size.height * 0.6,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              color: Colors.black
-                                  .withOpacity(checkParticipants ? 0.4 : 0.0),
-                            ),
-                            child: _users.length == 0
-                                ? Text('No Users Joined!',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 16))
-                                : Column(
-                                    children:
-                                        //   List.generate(
-                                        //       _item['userid'].length, (index) {
-                                        // return Text('User ${index+1} : ${_item['userid'][index]}',
-                                        List.generate(_users.length, (index) {
-                                    return Text(
-                                        'User ${index + 1} : ${_users.elementAt(index)}',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 16));
-                                  }))
-                            // Center(
-                            //     child: Text(
-                            //   'No Participants yet!',
-                            //   style: TextStyle(
-                            //       color: Colors.white, fontSize: 16),
-                            // ))
-                            // Container(
-                            //     // width: 300,
-                            //     // color: Colors.white.withOpacity(0.3),
-                            //     ),
-                            )
-                        : Container(),
-                  ),
+      body: WillPopScope(
+        onWillPop: () {
+          _onCallEnd(context);
+          return Future.value(true);
+        },
+        child: Center(
+          child: Stack(
+            children: <Widget>[
+              // _viewRows(),
+              _viewVideo(),
+              _panel(),
+              FadeTransition(
+                  opacity: _animation,
+                  child: _toolbar()),
+//            Positioned(
+//              top: MediaQuery.of(context).padding.top,
+//              child: Container(
+//                child: IconButton(
+//                  padding: EdgeInsets.all(16),
+//                  onPressed: () {
+//                    _onCallEnd(context);
+//                    Navigator.of(context).pop();
+//                  },
+////                  backgroundColor: Colors.white30,
+//                  icon: Icon(Icons.add_to_home_screen,color: Colors.red,size: 28,),
+//                ),
+//              ),
+//            ),
+//            AnimatedContainer(
+//              duration: Duration(milliseconds: 900),
+//              height: onShowToolbar ? 110 - MediaQuery
+//                  .of(context)
+//                  .padding
+//                  .top : 0,
+//              curve: Curves.easeIn,
+//              child: DigiCampusAppbar(
+//                icon: Icons.close,
+//                onDrawerTapped: () {
+//                  _onCallEnd(context);
+////                  Navigator.of(context).pop();
+//                },
+//              ),
+//            ),
+              onShowToolbar ? Container()
+                  : Container(
+                child: GestureDetector(
+                    onTap: () {
+                      _animationController.reverse();
+                      setState(() {
+                        onShowToolbar = true;
+                      });
+                      Future.delayed(Duration(seconds: 10)).then((value) {
+                        if (!onCheckParticipants) {
+                          _animationController.forward();
+                          setState(() {
+                            onShowToolbar = false;
+                          });
+                        }
+                      });
+                    },
+                    behavior: HitTestBehavior.translucent,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .height,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width,
+                      ),
+                    )
                 ),
               ),
-            )
-            //   }
-            // })
-          ],
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Center(
+                  child: ClipRect(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(
+                          sigmaX: onCheckParticipants ? 25 : 0,
+                          sigmaY: onCheckParticipants ? 25 : 0),
+                      child: onCheckParticipants
+                          ? StreamBuilder<QuerySnapshot>(
+                          stream: firestore.collection('live').snapshots(),
+                          builder: (BuildContext context, AsyncSnapshot<
+                              QuerySnapshot> snapshot) {
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Theme
+                                          .of(context)
+                                          .primaryColor),
+                                ),
+                              );
+                            }
+                            else {
+                              for (int i = 0; i <
+                                  snapshot.data.documents.length; i++) {
+                                if (snapshot.data.documents[i].documentID ==
+                                    'grade_${grade.id}')
+                                  _participantSnapshot =
+                                  snapshot.data.documents[i];
+                              }
+                              if (_participantSnapshot['liveBroadcastUserId']['users'] != null) {
+                                _boxSizeHeight = 104.0 *
+                                    (_participantSnapshot['liveBroadcastUserId']['users'].length / 5)
+                                        .ceil();
+                                return Container(
+                                    width: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .width - 40,
+                                    height: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height * 0.6,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: Colors.black
+                                          .withOpacity(
+                                          onCheckParticipants ? 0.4 : 0.0),
+                                    ),
+                                    child:
+                                    SingleChildScrollView(
+                                      padding: EdgeInsets.all(8),
+                                      child: Column(
+                                        children: _getChildren(_participantSnapshot['liveBroadcastUserId']['users']),
+                                      ),
+                                    )
+//                                    DiagonalScrollView(
+//                                        enableFling: true,
+//                                        enableZoom: true,
+//                                        flingVelocityReduction: 0.3,
+//                                        minScale: _minScale,
+//                                        maxScale: _maxScale,
+//                                        maxHeight: _boxSizeHeight,
+//                                        maxWidth: _boxSizeWidth,
+//                                        onCreated: (
+//                                            DiagonalScrollViewController controller) {
+//                                          _controller = controller;
+//                                        },
+//                                        child:
+//                                        Container(
+//                                          height: _boxSizeHeight,
+//                                          width: _boxSizeWidth,
+//                                          child: Stack(
+//                                            children: _getChildren(
+//                                                _participantSnapshot['liveBroadcastUserId']['users']),
+//                                          ),
+//                                        )
+//                                    )
+                                );
+                              }
+                              else {
+                                return Container(
+                                    width: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .width - 40,
+                                    height: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height * 0.6,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: Colors.black
+                                          .withOpacity(
+                                          onCheckParticipants ? 0.4 : 0.0),
+                                    ),
+                                    child:
+                                    Center(
+                                      child: Text('Students yet to join!',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Colors.white, fontSize: 18)),
+                                    ));
+                              }
+                            }
+                          }
+                      )
+//                        : onShowDiscussions
+//                        ? Container(
+//                            width: MediaQuery.of(context).size.width - 40,
+//                            height: MediaQuery.of(context).size.height * 0.6,
+//                            padding: EdgeInsets.all(12),
+//                            decoration: BoxDecoration(
+//                            borderRadius: BorderRadius.circular(12),
+//                            color: Colors.white
+//                                .withOpacity(onShowDiscussions ? 0.4 : 0.0),
+//                            ),
+//                            child: Column(
+//                              children: [
+//                                Center(
+//                                  child: Text('Discussions',textScaleFactor: 1.3,)
+//                                ),
+//                                Expanded(
+//                                  child: Container(
+//                                    child: StreamBuilder<QuerySnapshot>(
+//                                    stream: firestore.collection('live').snapshots(),
+//                                    builder: (context, snapshot) {
+//                                      if (!snapshot.hasData)
+//                                        return Center(
+//                                          child: CircularProgressIndicator(
+//                                            valueColor: AlwaysStoppedAnimation<Color>(
+//                                                Theme.of(context).primaryColor),
+//                                          ),
+//                                        );
+//                                      else{
+//                                        for(int i=0; i<snapshot.data.documents.length; i++)
+//                                          if(snapshot.data.documents[i].documentID == 'subject_date_hr')
+//                                            _discussionSnapshot = snapshot.data.documents[i];
+//                                          _listDiscussion(_discussionSnapshot);
+//                                        return (_discussionSnapshot['discussion'].isNotEmpty)
+//                                            ? SingleChildScrollView(
+//                                                child: Column(
+//                                                    children: discussionListWidget.toList())
+//                                              // child: listItem(_items[0]['disussion'])
+//                                            )
+//                                            : Center(child: Container(child: Text('No Discussions yet!!')));}
+//                                    }
+//                          ),
+//                                  ),
+//                                ),
+//                                Row(
+//                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                                  children: <Widget>[
+//                                    Container(
+//                                      height: 40,
+//                                      width: MediaQuery.of(context).size.width*0.60,
+//                                      // decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+//                                      child: TextField(
+//                                        onChanged: (text) {
+//                                          if (text == '') {
+//                                            setState(() {
+//                                              discussionFieldColor = Colors.grey;
+//                                            });
+//                                          } else {
+//                                            setState(() {
+//                                              discussionFieldColor = Colors.deepOrange[300];
+//                                            });
+//                                          }
+//                                        },
+//                                        controller: _textFieldController,
+//                                        // textAlignVertical: TextAlignVertical.center,
+//                                        textAlign: TextAlign.start,
+//                                        cursorColor: Colors.blue,
+//                                        decoration: InputDecoration(
+//                                          hintText: 'add to discussions...',
+//                                          contentPadding: EdgeInsets.symmetric(horizontal: 12),
+//                                          border: OutlineInputBorder(
+//                                            borderRadius: BorderRadius.circular(20),
+//                                          ),
+//                                          suffixIcon: IconButton(
+//                                            onPressed: () {
+//                                              _addToDiscussions(_textFieldController.text);
+//                                              _textFieldController.clear();
+//                                            },
+//                                            icon: Icon(Icons.camera_alt),
+//                                            color: Colors.blue,
+//                                          ),
+//                                        ),
+//
+//                                        // autofocus: true,
+//                                        // onSubmitted: (text) {
+//                                        //   // print(text);
+//                                        //   _addToDiscussions(text);
+//                                        //   _textFieldController.clear();
+//                                        //   // text = '';
+//                                        // },
+//                                      ),
+//                                    ),
+//                                    Container(
+//                                        height: 40,
+//                                        width: 40,
+//                                        decoration: BoxDecoration(
+//                                            shape: BoxShape.circle, color: Colors.grey[300]),
+//                                        child: GestureDetector(
+//                                          child: Icon(Icons.send, color: discussionFieldColor),
+//                                          behavior: HitTestBehavior.translucent,
+//                                          onTap: () {
+//                                            _addToDiscussions(_textFieldController.text);
+//                                            _textFieldController.clear();
+//                                            setState(() {
+//                                              discussionFieldColor = Colors.grey;
+//                                            });
+//                                          },
+//                                        ))
+//                                  ],
+//                                ),
+//                              ],
+//                            ),
+//                        )
+                          : Container(),
+                    ),
+                  ),
+                ),
+              )
+              //   }
+              // })
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Future<void> startRecording() async {
-    print("Starting Recording");
-    String url = 'http://192.168.0.12:8080/start_recording';
+  Future<void> updateDatabaseVideo(String url, String subject) async {
+    int periodNo;
+    String saveFormattedDate = DateFormat('dd-MM-yyyy').format(DateTime.now());
+    await firestore.collection('grade_${grade.id}').document('$saveFormattedDate').get().then((value) {
+      periodNo = value.data == null  ?1 :value.data.length+1;
+      firestore.collection('grade_${grade.id}').document('$saveFormattedDate').setData(
+          {'period_$periodNo': {'pdno': '$periodNo','subject': subject,'videoUrl': url}},merge: true
+      );
+    });
+    }
+//
+  Future<void> startRecording(int uid) async {
+    print("Starting Recording$channelName");
+    String url = 'http://api.monkmindsolutions.com/start_recording/$uid/$channelName';
     Map<String, String> headers = {"Content-type": "application/json"};
-    Map<String, dynamic> params = {};
-    String data = jsonEncode(params);
-    
-    http.get(url, headers: headers).then((response) {
+//    Map<String, String> params = {"uid": uid.toString()};
+//    String data = jsonEncode(params);
+
+    http.get(url, headers: headers).then((response) async {
+      await Future.delayed(Duration(seconds: 5));
+      getRecordingStatus(uid);
       // print(response.body);
       // resourceId = json.decode(response.body)['resourceId'];
       // sid = json.decode(response.body)['resourceId'];
     }).catchError((error) => print(error));
+
   }
 
-  Future<void> stopRecording() async {
-    print('Stopping Recording....');
-    String url = 'http://192.168.0.12:8080/stop_recording';
+  Future<dynamic> getRecordingStatus(int uid){
+    print("Getting Status");
+    String url = 'http://api.monkmindsolutions.com/get_status/$uid/$channelName';
     Map<String, String> headers = {"Content-type": "application/json"};
-    Map<String, dynamic> params = {"resourceId": "$resourceId","sid":"$sid"};
-    String data = jsonEncode(params);
-    await http.get(url, headers: headers).then((response) {
+//    Map<String, String> params = {"uid": uid.toString()};
+//    String data = jsonEncode(params);
+
+    http.get(url, headers: headers).then((response) {
+//      getRecordingStatus();
+       print(response.body);
+       var status = jsonDecode(response.body);
+       print('STATUS \n$status');
+       print('STATUS CODE : ${status['serverResponse']['status']}');
+       if(status['serverResponse']['status'] == 5){
+         print('STATUS CODE : ${status['serverResponse']['status']}');
+         setState(() {
+           record = true;
+         });
+       }else{
+         throw Exception('Recording Not started');
+       }
+      // sid = json.decode(response.body)['resourceId'];
+    }).catchError((error) => showCupertinoDialog(context: context, builder:(context) {
+      return CupertinoAlertDialog(
+        title: Text('Recording Not Started'),
+        actions: [
+          FlatButton(child: Text('Exit'),onPressed: (){
+            Navigator.of(context).pop();
+            _onCallEnd(context);
+          },),
+          FlatButton(child: Text('Try Again'),onPressed: () async {
+            Navigator.of(context).pop();
+            AgoraRtcEngine.leaveChannel();
+            await AgoraRtcEngine.joinChannel(
+                null,
+                'class_${grade.id}',
+                null,
+                0);
+          },)
+        ],
+      );
+    }, ));
+  }
+
+  Future<void> stopRecording(int uid, bool rec) async {
+    TeacherState teacherState =  Provider.of<TeacherState>(context, listen: false);
+    DateFormat _dateFormat = DateFormat.E();
+    String formattedDay = _dateFormat.format(DateTime.now());
+    List<Map<String, dynamic>> timeTableList = TimeTable().getTeacherTimeTable(teacherState.teacher.teacherId);
+    print(timeTableList);
+    Map<String, dynamic> timeTable;
+    print(formattedDay);
+    switch (formattedDay) {
+      case 'Mon':
+        timeTable = timeTableList[0];
+        break;
+      case 'Tue':
+        timeTable = timeTableList[1];
+        break;
+      case 'Wed':
+        timeTable = timeTableList[2];
+        break;
+      case 'Thu':
+        timeTable = timeTableList[3];
+        break;
+      case 'Fri':
+        timeTable = timeTableList[4];
+        break;
+      default:
+        return ;
+    }
+    String subject = timeTable['subject'];
+    print('Stopping Recording....$channelName');
+    await Future.delayed(Duration(seconds: 5));
+    String url = 'http://api.monkmindsolutions.com/stop_recording/$uid/$channelName';
+    Map<String, String> headers = {"Content-type": "application/json"};
+//    Map<String, dynamic> params = {"resourceId": "$resourceId", "sid": "$sid"};
+//    String data = jsonEncode(params);
+    await http.get(url, headers: headers).then((response) async {
       print(response.body);
-      
+      var res = json.decode(response.body);
+      String url = "https://digicampus.s3.us-east-2.amazonaws.com/" +
+          res['serverResponse']['fileList'];
+      if (rec)
+      await updateDatabaseVideo(url,subject);
     }).catchError((error) => print(error));
   }
+
+//  _startVideoRecording() async {
+//      bool start = await FlutterScreenRecording.startRecordScreen("${DateTime.now().day}_${DateTime.now().month}_${DateTime.now().year}");
+////      _startAudio();
+//      print('RECORD STATUS : $start');
+//    print('audio STARTED');
+//    await _recorder.start();
+//    var recording = await _recorder.current(channel: 0);
+//    print('RECORDING AUDIO STARTED : :: : : ${recording.path}');
+//  }
+
+//  _stopVideoRecording() async {
+//    String path = await FlutterScreenRecording.stopRecordScreen;
+////    _stopAudio();
+//    var result = await _recorder.stop();
+//    print('AUDIO Stopped');
+//    print("Stop recording: ${result.path}");
+//    print("Stop recording: ${result.duration}");
+//    print('AUDIO RECORDED PATH${result.path}');
+//    print('Recorded File : $path');
+//    _flutterFFmpeg.execute("-i $path -i ${result.path} -c:v copy -c:a copy -codec: copy /storage/emulated/0/DCIM/output.mp4").then((rc) => print("FFmpeg process exited with rc $rc"));
+//
+//  }
+
+//  _initAudio() async {
+////    if(await FlutterAudioRecorder.hasPermissions){
+//    print('Audio INITIALIZED');
+////    _recorder = FlutterAudioRecorder("${DateTime.now().millisecondsSinceEpoch.toString()}_audio", audioFormat: AudioFormat.AAC); // or AudioFormat.WAV
+////    await _recorder.initialized;
+////    setState(() {
+////    });}
+////    else{
+////      Scaffold.of(context).showSnackBar(
+////          new SnackBar(content: new Text("You must accept permissions")));
+////    }
+//
+////    try {
+////      if (await FlutterAudioRecorder.hasPermissions) {
+//        String audioPath = "/storage/emulated/0/DCIM/${DateTime.now().millisecondsSinceEpoch.toString()}_audio";
+////        Directory appDocDirectory;
+//////        appDocDirectory = await getApplicationDocumentsDirectory();
+////        appDocDirectory = await getExternalStorageDirectory();
+////        if (Platform.isIOS) {
+////          appDocDirectory = await getApplicationDocumentsDirectory();
+////        } else {
+////          appDocDirectory = await getExternalStorageDirectory();
+////          print('PlatForM DETERMINED!!\n$appDocDirectory');
+////        }
+////    final directory = await getApplicationDocumentsDirectory();
+//
+//
+//        // can add extension like ".mp4" ".wav" ".m4a" ".aac"
+////        audioPath = directory.path +
+////            audioPath;
+//        print(audioPath);
+////            +
+////            DateTime.now().millisecondsSinceEpoch.toString();
+//
+//        // .wav <---> AudioFormat.WAV
+//        // .mp4 .m4a .aac <---> AudioFormat.AAC
+//        // AudioFormat is optional, if given value, will overwrite path extension when there is conflicts.
+//        _recorder =
+//            FlutterAudioRecorder(audioPath, audioFormat: AudioFormat.AAC);
+////        print(_recorder.recording.status);
+//        _recorder.initialized.then((value) => print('intialized!!!!>><><><><>'));
+//        // after initialization
+////        var current = await _recorder.current(channel: 0);
+////        print(current);
+//        // should be "Initialized", if all working fine
+////        setState(() {
+////          _current = current;
+////          _currentStatus = current.status;
+////          print(_currentStatus);
+////        });
+////      } else {
+////        Scaffold.of(context).showSnackBar(
+////            new SnackBar(content: new Text("You must accept permissions")));
+////      }
+////    } catch (e) {
+////      print('aUDIo ErrOR!! $e');
+////    }
+//    setState(() {
+//    });
+//  }
+
+//  _startAudio() async {
+//    print('audio STARTED');
+//    await _recorder.start();
+//    var recording = await _recorder.current(channel: 0);
+//    print('RECORDING AUDIO STARTED : :: : : ${recording.path}');
+//    try {
+//      await _recorder.start();
+//      var recording = await _recorder.current(channel: 0);
+//      print(recording.path);
+////      var recording = await _recorder.current(channel: 0);
+////      setState(() {
+////        _current = recording;
+////      });
+//
+////      const tick = const Duration(milliseconds: 50);
+////      new Timer.periodic(tick, (Timer t) async {
+////        if (_currentStatus == RecordingStatus.Stopped) {
+////          t.cancel();
+////        }
+////
+////        var current = await _recorder.current(channel: 0);
+//        // print(current.status);
+////        setState(() {
+////          _current = current;
+////          _currentStatus = _current.status;
+////        });
+////      });
+//    } catch (e) {
+//      print(e);
+//    }
+//    setState(() {
+//    });
+//  }
+
+//  _stopAudio() async {
+//    var result = await _recorder.stop();
+////    File file = localFileSystem.file(result.path);
+////    var result = await _recorder.stop();
+////    File file = localFileSystem.file(result.path);
+//    print('AUDIO Stopped');
+//    print("Stop recording: ${result.path}");
+//    print("Stop recording: ${result.duration}");
+//    print('AUDIO RECORDED PATH${result.path}');
+//    setState(() {
+//    });
+////    File file = widget.localFileSystem.file(result.path);
+////    print("File length: ${await file.length()}");
+////    setState(() {
+////      _current = result;
+////      _currentStatus = _current.status;
+////    });
+//  }
+
 }

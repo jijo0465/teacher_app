@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:teacher_app/components/attendance_table.dart';
+import 'package:teacher_app/components/digi_alert.dart';
 import 'package:teacher_app/components/digi_attendance_card.dart';
 import 'package:teacher_app/components/digicampus_appbar.dart';
+import 'package:teacher_app/components/icons.dart';
 
 class AttendanceScreen extends StatefulWidget {
   const AttendanceScreen({Key key}) : super(key: key);
@@ -70,12 +72,14 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
               ],
             ),
           ),
-          DigiCampusAppbar(
-            icon: Icons.close,
-            onDrawerTapped: () {
-              Navigator.of(context).pop();
-            },
-          ),
+//          DigiCampusAppbar(
+//            title: 'Check Attendance',
+//            icon: Icons.close,
+//            onDrawerTapped: () {
+//              Navigator.of(context).pop();
+//            },
+//          ),
+          DigiAlert(title: 'Attendance',text: 'Subscribe for the complete digital school experience',icon: DigiIcons.school_alt)
         ],
       ),
     );

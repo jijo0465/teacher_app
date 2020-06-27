@@ -37,7 +37,7 @@ class _UpdateHomeworkState extends State<UpdateHomework> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.0),
                           border: Border.all(
-                              color: Theme.of(context).primaryColor,
+                              color: Colors.blue,
                               style: BorderStyle.solid,
                               width: 0.80),
                         ),
@@ -46,7 +46,7 @@ class _UpdateHomeworkState extends State<UpdateHomework> {
                           child: DropdownButton(
                               icon: Icon(
                                 Icons.arrow_drop_down,
-                                color: Theme.of(context).primaryColor,
+                                color: Colors.blue,
                               ),
                               value: grade,
                               items: [
@@ -75,7 +75,7 @@ class _UpdateHomeworkState extends State<UpdateHomework> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.0),
                           border: Border.all(
-                              color: Theme.of(context).primaryColor,
+                              color: Colors.blue,
                               style: BorderStyle.solid,
                               width: 0.80),
                         ),
@@ -84,7 +84,7 @@ class _UpdateHomeworkState extends State<UpdateHomework> {
                           child: DropdownButton(
                               icon: Icon(
                                 Icons.arrow_drop_down,
-                                color: Theme.of(context).primaryColor,
+                                color: Colors.blue,
                               ),
                               value: division,
                               items: [
@@ -134,7 +134,7 @@ class _UpdateHomeworkState extends State<UpdateHomework> {
                               value = val;
                             });
                           },
-                          activeColor: Theme.of(context).primaryColor,
+                          activeColor: Colors.blue,
                         ),
                       )
                     ],
@@ -146,7 +146,7 @@ class _UpdateHomeworkState extends State<UpdateHomework> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     border: Border.all(
-                        color: Theme.of(context).primaryColor,
+                        color: Colors.blue,
                         style: BorderStyle.solid,
                         width: 0.80),
                   ),
@@ -155,7 +155,7 @@ class _UpdateHomeworkState extends State<UpdateHomework> {
                     child: DropdownButton(
                         icon: Icon(
                           Icons.arrow_drop_down,
-                          color: Theme.of(context).primaryColor,
+                          color: Colors.blue,
                         ),
                         value: work,
                         items: [

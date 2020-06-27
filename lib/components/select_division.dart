@@ -4,39 +4,34 @@ class SelectDivision extends StatelessWidget {
   final int division;
   final ValueChanged onchanged;
 
-  const SelectDivision({Key key, this.onchanged, this.division})
-      : super(key: key);
+  const SelectDivision({Key key, this.onchanged, this.division}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonHideUnderline(
       child: DropdownButton(
-          icon: Icon(
-            Icons.arrow_drop_down,
-            color: Theme.of(context).primaryColor,
-          ),
           value: division,
           items: [
             DropdownMenuItem(
-              child: Text('Div '),
+              child: Text('A '),
               value: 0,
             ),
-            DropdownMenuItem(
-              child: Text('A'),
-              value: 1,
-            ),
-            DropdownMenuItem(
-              child: Text('B'),
-              value: 2,
-            ),
-            DropdownMenuItem(
-              child: Text('C'),
-              value: 3,
-            ),
-            DropdownMenuItem(
-              child: Text('D'),
-              value: 4,
-            ),
+//            DropdownMenuItem(
+//              child: Text('A'),
+//              value: 1,
+//            ),
+//            DropdownMenuItem(
+//              child: Text('B'),
+//              value: 2,
+//            ),
+//            DropdownMenuItem(
+//              child: Text('C'),
+//              value: 3,
+//            ),
+//            DropdownMenuItem(
+//              child: Text('D'),
+//              value: 4,
+//            ),
           ],
           onChanged: onchanged),
     );
