@@ -107,8 +107,9 @@ flutter:
     - assets/images/1001.jpg
     - assets/images/raise_hand.png
     - assets/images/digi_campus_logo.png
-    - assets/images/school_logo.jpeg
     - assets/images/virtual.png
+
+
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
