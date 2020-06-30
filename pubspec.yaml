@@ -87,7 +87,6 @@ flutter:
     - assets/images/update_testpaper.png
     - assets/images/approve_leave.png
     - assets/images/leave_request.png
-    - assets/images/school_logo.jpeg
     - assets/images/school.jpg
     - assets/images/rachel.png
     - assets/images/sir.jpg
@@ -105,6 +104,7 @@ flutter:
     - assets/images/raise_hand.png
     - assets/images/digi_campus_logo.png
     - assets/images/virtual.png
+    - assets/images/logo.jpg
 
 
   #  - images/a_dot_ham.jpeg

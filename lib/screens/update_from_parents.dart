@@ -11,7 +11,7 @@ class UpdateFromParents extends StatelessWidget {
         children: <Widget>[
           Column(
             children: <Widget>[
-              SizedBox(height: 120),
+              SizedBox(height: 100),
               Container(
                 child: Container(
                   child: Text(
@@ -208,6 +208,7 @@ class UpdateFromParents extends StatelessWidget {
             ],
           ),
           DigiCampusAppbar(
+            title: 'Remarks',
             icon: Icons.close,
             onDrawerTapped: () {
               Navigator.of(context).pop();

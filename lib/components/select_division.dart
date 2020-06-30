@@ -13,21 +13,21 @@ class SelectDivision extends StatelessWidget {
           value: division,
           items: [
             DropdownMenuItem(
-              child: Text('A '),
+              child: Text('div '),
               value: 0,
             ),
-//            DropdownMenuItem(
-//              child: Text('A'),
-//              value: 1,
-//            ),
-//            DropdownMenuItem(
-//              child: Text('B'),
-//              value: 2,
-//            ),
-//            DropdownMenuItem(
-//              child: Text('C'),
-//              value: 3,
-//            ),
+            DropdownMenuItem(
+              child: Text('A'),
+              value: 1,
+            ),
+            DropdownMenuItem(
+              child: Text('B'),
+              value: 2,
+            ),
+            DropdownMenuItem(
+              child: Text('C'),
+              value: 3,
+            ),
 //            DropdownMenuItem(
 //              child: Text('D'),
 //              value: 4,

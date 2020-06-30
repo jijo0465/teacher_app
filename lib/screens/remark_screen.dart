@@ -27,7 +27,7 @@ class _RemarkScreenState extends State<RemarkScreen> {
         children: <Widget>[
           Column(
             children: <Widget>[
-              SizedBox(height: 120),
+              SizedBox(height: 100),
               Padding(
                 padding: const EdgeInsets.only(left: 12),
                 child: Row(
@@ -343,13 +343,14 @@ class _RemarkScreenState extends State<RemarkScreen> {
               )
             ]),
           ),
-//          DigiCampusAppbar(
-//            icon: Icons.close,
-//            onDrawerTapped: () {
-//              Navigator.of(context).pop();
-//            },
-//          ),
-          DigiAlert(title: 'Give Rewards',text: 'Subscribe for the complete digital school experience',icon: DigiIcons.school_alt)
+          DigiCampusAppbar(
+            title: 'Remarks',
+            icon: Icons.close,
+            onDrawerTapped: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          //DigiAlert(title: 'Give Rewards',text: 'Subscribe for the complete digital school experience',icon: DigiIcons.school_alt)
         ],
       ),
     );

@@ -29,6 +29,7 @@ class _Student360ScreenState extends State<Student360Screen> {
         children: <Widget>[
          Container(color: Theme.of(context).primaryColor.withOpacity(0.15)),
           DigiCampusAppbar(
+            title: 'Student 360',
             icon: Icons.close,
             onDrawerTapped: () {
               Navigator.of(context).pop();
@@ -36,7 +37,7 @@ class _Student360ScreenState extends State<Student360Screen> {
           ),
           Column(
             children: <Widget>[
-              SizedBox(height: 110),
+              SizedBox(height: 100),
               Padding(
                 padding: const EdgeInsets.only(left: 12),
                 child: Row(

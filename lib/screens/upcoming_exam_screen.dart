@@ -17,7 +17,7 @@ class _UpcomingExamsState extends State<UpcomingExams> {
         children: <Widget>[
           Column(
             children: <Widget>[
-              SizedBox(height: 120),
+              SizedBox(height: 100),
               Stack(
                 children: <Widget>[
                   Center(
@@ -147,6 +147,7 @@ class _UpcomingExamsState extends State<UpcomingExams> {
             ],
           ),
           DigiCampusAppbar(
+            title: 'upcoming exam',
             icon: Icons.close,
             onDrawerTapped: () {
               Navigator.of(context).pop();

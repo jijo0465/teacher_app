@@ -43,6 +43,7 @@ class _StudentResultState extends State<StudentResult> {
       body: Stack(
         children: <Widget>[
           DigiCampusAppbar(
+            title: 'Student report',
             icon: Icons.close,
             onDrawerTapped: () {
               Navigator.of(context).pop();

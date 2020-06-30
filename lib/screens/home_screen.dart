@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.initState();
     drawerController = HiddenDrawerController(
       initialPage: HomePage(
-        title: 'Santhinikethanam',
+        title: 'Demo School',
         onPressed: (){drawerController.open();},
       ),
       items: [

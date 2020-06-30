@@ -28,7 +28,7 @@ class _UpdateHomeworkState extends State<UpdateHomework> {
           SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                SizedBox(height: 110),
+                SizedBox(height: 100),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
@@ -212,6 +212,7 @@ class _UpdateHomeworkState extends State<UpdateHomework> {
             ),
           ),
           DigiCampusAppbar(
+            title: 'Homework',
             icon: Icons.close,
             onDrawerTapped: () {
               Navigator.of(context).pop();

@@ -22,7 +22,7 @@ class _LeaveRequestState extends State<LeaveRequest> {
         Center(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 140),
+              SizedBox(height: 100),
               Container(
                   width: 300,
                   child: Row(
@@ -231,6 +231,7 @@ class _LeaveRequestState extends State<LeaveRequest> {
           ]),
         ),
         DigiCampusAppbar(
+          title: 'Leave request',
           icon: Icons.close,
           onDrawerTapped: () {
             Navigator.of(context).pop();

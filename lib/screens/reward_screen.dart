@@ -26,7 +26,7 @@ class _RewardScreenState extends State<RewardScreen> {
         children: <Widget>[
           SingleChildScrollView(
             child: Column(children: <Widget>[
-              SizedBox(height: 120),
+              SizedBox(height: 100),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -139,7 +139,7 @@ class _RewardScreenState extends State<RewardScreen> {
                                 onPressed: () {
                                   _listKey.currentState.insertItem(listIndex,
                                       duration: const Duration(milliseconds: 500));
-                                  listIndex = listIndex + 1;
+                                  listIndex = listIndex ++;
                                 },
                               ),
                             ),
@@ -150,12 +150,13 @@ class _RewardScreenState extends State<RewardScreen> {
             ]),
           ),
           DigiCampusAppbar(
+            title: 'Rewards',
               icon: Icons.close,
               onDrawerTapped: () {
                 Navigator.of(context).pop();
               },
             ),
-          DigiAlert(title: 'Give Rewards',text: 'Subscribe for the complete digital school experience',icon: DigiIcons.school_alt)
+          //DigiAlert(title: 'Give Rewards',text: 'Subscribe for the complete digital school experience',icon: DigiIcons.school_alt)
         ],
       ),
     );

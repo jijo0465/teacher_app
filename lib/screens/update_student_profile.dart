@@ -35,7 +35,7 @@ class _UpdateStudentProfileState extends State<UpdateStudentProfile> {
             child: Column(
               children: <Widget>[
                 SizedBox(
-                  height: 120,
+                  height: 100,
                 ),
                 Row(
                   children: <Widget>[
@@ -372,6 +372,7 @@ class _UpdateStudentProfileState extends State<UpdateStudentProfile> {
             ),
           ),
           DigiCampusAppbar(
+            title: 'Student profile',
             icon: Icons.close,
             onDrawerTapped: () {
               Navigator.of(context).pop();

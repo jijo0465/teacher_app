@@ -20,7 +20,7 @@ class _ApproveLeaveRequestState extends State<ApproveLeaveRequest> {
         Column(
           children: <Widget>[
            
-            SizedBox(height: 120),
+            SizedBox(height: 100),
             Padding(
               padding: const EdgeInsets.only(left: 12, right: 12),
               child: Container(
@@ -286,6 +286,7 @@ class _ApproveLeaveRequestState extends State<ApproveLeaveRequest> {
           ]),
         ),
         DigiCampusAppbar(
+          title: 'Approve Leave',
           icon: Icons.close,
           onDrawerTapped: () {
             Navigator.of(context).pop();

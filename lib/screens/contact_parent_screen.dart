@@ -24,7 +24,7 @@ class _ContactParentScreenState extends State<ContactParentScreen> {
             child: Column(
               children: <Widget>[
                 SizedBox(
-                  height: 120,
+                  height: 100,
                 ),
                 Container(
                   padding: EdgeInsets.only(left: 50),
@@ -341,6 +341,7 @@ class _ContactParentScreenState extends State<ContactParentScreen> {
           ),
         ),
         DigiCampusAppbar(
+          title: 'Contact Parents',
           icon: Icons.close,
           onDrawerTapped: () {
             Navigator.of(context).pop();

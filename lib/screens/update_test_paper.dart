@@ -19,7 +19,7 @@ class _UpdateTestPaperState extends State<UpdateTestPaper> {
         children: <Widget>[
           Column(
             children: <Widget>[
-              SizedBox(height: 110),
+              SizedBox(height: 100),
               Expanded(
                   child: AnimatedList(
                 key: _listKey,
@@ -72,6 +72,7 @@ class _UpdateTestPaperState extends State<UpdateTestPaper> {
             ],
           ),
           DigiCampusAppbar(
+            title: 'Testpaper',
             icon: Icons.close,
             onDrawerTapped: () {
               Navigator.of(context).pop();
