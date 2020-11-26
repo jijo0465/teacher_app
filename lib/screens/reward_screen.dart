@@ -125,6 +125,7 @@ class _RewardScreenState extends State<RewardScreen> {
                             );
                           },
                         ),
+                        //SizedBox(height: 10,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
@@ -139,7 +140,7 @@ class _RewardScreenState extends State<RewardScreen> {
                                 onPressed: () {
                                   _listKey.currentState.insertItem(listIndex,
                                       duration: const Duration(milliseconds: 500));
-                                  listIndex = listIndex ++;
+                                  listIndex = listIndex + 1;
                                 },
                               ),
                             ),
